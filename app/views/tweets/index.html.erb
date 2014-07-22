@@ -1,12 +1,10 @@
-<h1>Listing tweets</h1>
+<h2>Listing tweets</h2>
 
-<table>
+<table class="table">
   <thead>
     <tr>
-      <th>Company</th>
       <th>Text</th>
       <th>Username</th>
-      <th>Useful</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -14,13 +12,11 @@
   <tbody>
     <% @tweets.each do |tweet| %>
       <tr>
-        <td><%= tweet.company_id %></td>
         <td><%= tweet.text %></td>
         <td><%= tweet.username %></td>
-        <td><%= tweet.useful %></td>
-        <td><%= link_to 'Show', tweet %></td>
-        <td><%= link_to 'Edit', edit_tweet_path(tweet) %></td>
-        <td><%= link_to 'Destroy', tweet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Useful', tweet %></td>
+        <td><%= link_to 'Unuseful', edit_tweet_path(tweet) %></td>
+        <td><%= link_to 'Del', tweet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -28,4 +24,3 @@
 
 <br>
 
-<%= link_to 'New Tweet', new_tweet_path %>
