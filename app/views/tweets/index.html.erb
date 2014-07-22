@@ -1,4 +1,4 @@
-<h2>Listing tweets</h2>
+
 
 <table class="table">
   <thead>
@@ -14,9 +14,27 @@
       <tr>
         <td><%= tweet.text %></td>
         <td><%= tweet.username %></td>
-        <td><%= link_to 'Useful', tweet %></td>
-        <td><%= link_to 'Unuseful', edit_tweet_path(tweet) %></td>
-        <td><%= link_to 'Del', tweet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+	<td>
+	  <% if tweet.useful == true %>
+	  Useful
+	  <% else %>
+	  <%= form_for(tweet) do |f| %>
+	  <%= f.hidden_field :useful, value: 1 %>
+	  <%= f.submit "Useful", class: "btn btn-default btn-xs" %>
+	  <% end %>
+	  <% end %>
+	</td>
+	<td>
+	  <% if tweet.useful == false %>
+	  Unuseful
+	  <% else %>
+	  <%= form_for(tweet) do |f| %>
+	  <%= f.hidden_field :useful, value: 0 %>
+	  <%= f.submit "Unuseful", class: "btn btn-default btn-xs" %>
+	  <% end %>
+	  <% end %>
+	</td>
+        <td><%= link_to 'Del', tweet, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-default btn-xs" %></td>
       </tr>
     <% end %>
   </tbody>

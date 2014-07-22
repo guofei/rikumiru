@@ -4,7 +4,11 @@ class TweetsController < ApplicationController
   # GET /tweets
   # GET /tweets.json
   def index
-    @tweets = Tweet.where(useful: nil).take(100)
+    if(params[:d] == "1")
+      @tweets = Tweet.where.not(useful: nil).take(100)
+    else
+      @tweets = Tweet.where(useful: nil).take(100)
+    end
   end
 
   # GET /tweets/1
@@ -42,7 +46,7 @@ class TweetsController < ApplicationController
   def update
     respond_to do |format|
       if @tweet.update(tweet_params)
-        format.html { redirect_to @tweet, notice: 'Tweet was successfully updated.' }
+        format.html { redirect_to tweets_url, notice: 'Tweet was successfully updated.' }
         format.json { render :show, status: :ok, location: @tweet }
       else
         format.html { render :edit }
