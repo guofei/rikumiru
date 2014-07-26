@@ -1,0 +1,13 @@
+<% @keywords.each do |keyword| %>
+  <% keyword.tweets.each do |t| %>
+    <%= t.text %>
+  <% end %>
+<% end %>
+
+<br>
+--
+<br>
+
+<% @tweet.keywords.each do |k| %>
+  <%= k.name %>
+<% end %>
