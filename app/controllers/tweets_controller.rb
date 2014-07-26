@@ -4,10 +4,12 @@ class TweetsController < ApplicationController
   # GET /tweets
   # GET /tweets.json
   def index
-    if(params[:d] == "1")
-      @tweets = Tweet.where.not(useful: nil).take(100)
+    if(params[:useful] == "1")
+      @tweets = Tweet.where(useful: true).page params[:page]
+    elsif(params[:useful] == "0")
+      @tweets = Tweet.where(useful: false).page params[:page]
     else
-      @tweets = Tweet.where(useful: nil).take(100)
+      @tweets = Tweet.where(useful: nil).page params[:page]
     end
   end
 

@@ -3,6 +3,7 @@
 <table class="table">
   <thead>
     <tr>
+      <th>Company<th>
       <th>Text</th>
       <th>Username</th>
       <th colspan="3"></th>
@@ -12,6 +13,7 @@
   <tbody>
     <% @tweets.each do |tweet| %>
       <tr>
+        <td><%= tweet.company.name %></td>
         <td><%= tweet.text %></td>
         <td><%= tweet.username %></td>
 	<td>
@@ -39,6 +41,8 @@
     <% end %>
   </tbody>
 </table>
+
+<%= paginate @tweets %>
 
 <br>
 
