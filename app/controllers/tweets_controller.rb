@@ -52,17 +52,9 @@ class TweetsController < ApplicationController
   # PATCH/PUT /tweets/1
   # PATCH/PUT /tweets/1.json
   def update
-    useful = cookies[:useful]
-    para = ""
-    if useful == "yes"
-      para = "?useful=1"
-    elsif useful == "no"
-      para = "?useful=0"
-    end
-
     respond_to do |format|
       if @tweet.update(tweet_params)
-        format.html { redirect_to tweets_url + para, notice: 'Tweet was successfully updated.' }
+        format.html { redirect_to tweets_url + get_cookie, notice: 'Tweet was successfully updated.' }
         format.json { render :show, status: :ok, location: @tweet }
       else
         format.html { render :edit }
@@ -76,7 +68,7 @@ class TweetsController < ApplicationController
   def destroy
     @tweet.destroy
     respond_to do |format|
-      format.html { redirect_to tweets_url, notice: 'Tweet was successfully destroyed.' }
+      format.html { redirect_to tweets_url + get_cookie, notice: 'Tweet was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -91,4 +83,15 @@ class TweetsController < ApplicationController
     def tweet_params
       params.require(:tweet).permit(:company_id, :text, :username, :useful)
     end
-end
+
+    def get_cookie
+      useful = cookies[:useful]
+      if useful == "yes"
+        "?useful=1"
+      elsif useful == "no"
+        "?useful=0"
+      else
+        ""
+      end
+    end
+  end
