@@ -1,13 +1,25 @@
-<% @keywords.each do |keyword| %>
-  <% keyword.tweets.each do |t| %>
-    <%= t.text %>
-  <% end %>
-<% end %>
+<h1>Listing keywords</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @keywords.each do |keyword| %>
+      <tr>
+        <td><%= keyword.name %></td>
+        <td><%= link_to 'Show', keyword %></td>
+        <td><%= link_to 'Edit', edit_keyword_path(keyword) %></td>
+        <td><%= link_to 'Destroy', keyword, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
 <br>
---
-<br>
 
-<% @tweet.keywords.each do |k| %>
-  <%= k.name %>
-<% end %>
+<%= link_to 'New Keyword', new_keyword_path %>
