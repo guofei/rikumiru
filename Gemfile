@@ -38,5 +38,5 @@ gem 'spring',        group: :development
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
-gem 'bootstrap-sass'
-gem 'kaminari'
+gem 'bootstrap-sass', '~> 3.2.0.1'
+gem 'kaminari', '~> 0.16.1'
