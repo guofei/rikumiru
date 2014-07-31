@@ -37,6 +37,25 @@ gem 'spring',        group: :development
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+group :development, :test do
+  gem 'byebug'
+
+  gem 'rspec-rails', '~> 3.0.2'
+  gem 'factory_girl_rails', '~> 4.4.1'
+end
+
+group :development do
+  gem 'guard'
+  gem 'guard-rspec', require: false
+end
+
+group :test do
+  gem 'sqlite3'
+  gem 'database_cleaner', '~> 1.3.0'
+end
+
 
 gem 'bootstrap-sass', '~> 3.2.0.1'
 gem 'kaminari', '~> 0.16.1'
+
+
