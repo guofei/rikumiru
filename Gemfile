@@ -54,8 +54,7 @@ group :test do
   gem 'database_cleaner', '~> 1.3.0'
 end
 
+gem 'rails_12factor', group: :production
 
 gem 'bootstrap-sass', '~> 3.2.0.1'
 gem 'kaminari', '~> 0.16.1'
-
-
