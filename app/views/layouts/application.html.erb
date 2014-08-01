@@ -29,31 +29,15 @@
       </div>
     </div>
 
-    <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="jumbotron">
-      <div class="container">
-        <h1>Twitter</h1>
-	<p>Twitter..........</p>
-      </div>
-    </div>
-
     <div class="container">
-      <% if notice %>
-	<p class="alert alert-info"><%= notice %></p>
-      <% end %>
-      <% if alert %>
-	<p class="alert alert-danger"><%= alert %></p>
-      <% end %>
 
       <%= yield %>
 
       <hr>
       <footer>
-	<p>
-	  &copy; rikumiru.com 2014
-	</p>
+	<p>&copy; Company 2014</p>
       </footer>
-    </div>
+    </div><!--/.container-->
 
   </body>
 </html>
