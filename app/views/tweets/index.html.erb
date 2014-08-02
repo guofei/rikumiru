@@ -5,7 +5,7 @@ count: <%= @count %>
     <tr>
       <th>Company<th>
       <th>Text</th>
-      <th>Username</th>
+      <th>updated</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -15,10 +15,10 @@ count: <%= @count %>
       <tr>
         <td><%= tweet.company.name %></td>
         <td><%= tweet.text %></td>
-        <td><%= tweet.username %></td>
+        <td><%= tweet.updated_at %></td>
 	<td>
 	  <% if tweet.useful == true %>
-	  Useful
+	  Real
 	  <% else %>
 	  <%= form_for(tweet) do |f| %>
 	  <%= f.hidden_field :useful, value: 1 %>
@@ -28,7 +28,7 @@ count: <%= @count %>
 	</td>
 	<td>
 	  <% if tweet.useful == false %>
-	  Unuseful
+	  Spam
 	  <% else %>
 	  <%= form_for(tweet) do |f| %>
 	  <%= f.hidden_field :useful, value: 0 %>
