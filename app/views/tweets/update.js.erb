@@ -1,0 +1,2 @@
+$('.<%= @tweet.id %>-real').html("<%=j render partial: 'tweet_real', locals: { tweet: @tweet } %>");
+$('.<%= @tweet.id %>-spam').html("<%=j render partial: 'tweet_spam', locals: { tweet: @tweet } %>");

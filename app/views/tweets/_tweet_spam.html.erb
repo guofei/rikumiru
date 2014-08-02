@@ -1,0 +1,10 @@
+<td>
+  <% if tweet.useful == false %>
+    Spam
+  <% else %>
+    <%= form_for(tweet, html: {multipart: :true}, remote: true) do |f| %>
+      <%= f.hidden_field :useful, value: 0 %>
+      <%= f.submit "Unuseful", class: "btn btn-default btn-xs" %>
+    <% end %>
+  <% end %>
+</td>

@@ -59,6 +59,7 @@ class TweetsController < ApplicationController
   def update
     respond_to do |format|
       if @tweet.update(tweet_params)
+        format.js
         format.html { redirect_to tweets_url + get_cookie, notice: 'Tweet was successfully updated.' }
         format.json { render :show, status: :ok, location: @tweet }
       else
@@ -73,6 +74,7 @@ class TweetsController < ApplicationController
   def destroy
     @tweet.destroy
     respond_to do |format|
+      format.js
       format.html { redirect_to tweets_url + get_cookie, notice: 'Tweet was successfully destroyed.' }
       format.json { head :no_content }
     end

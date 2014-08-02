@@ -12,31 +12,35 @@ count: <%= @count %>
 
   <tbody>
     <% @tweets.each do |tweet| %>
-      <tr>
+      <tr class="<%= tweet.id %>">
         <td><%= tweet.company.name %></td>
         <td><%= tweet.text %></td>
         <td><%= tweet.updated_at %></td>
 	<td>
-	  <% if tweet.useful == true %>
-	  Real
-	  <% else %>
-	  <%= form_for(tweet) do |f| %>
-	  <%= f.hidden_field :useful, value: 1 %>
-	  <%= f.submit "Useful", class: "btn btn-default btn-xs" %>
-	  <% end %>
-	  <% end %>
+	  <div class="<%= tweet.id %>-real">
+	    <% if tweet.useful == true %>
+	      Real
+	    <% else %>
+	      <%= form_for(tweet, html: {multipart: :true}, remote: true) do |f| %>
+		<%= f.hidden_field :useful, value: 1 %>
+		<%= f.submit "Useful", class: "btn btn-default btn-xs" %>
+	      <% end %>
+	    <% end %>
+	  </div>
 	</td>
 	<td>
-	  <% if tweet.useful == false %>
-	  Spam
-	  <% else %>
-	  <%= form_for(tweet) do |f| %>
-	  <%= f.hidden_field :useful, value: 0 %>
-	  <%= f.submit "Unuseful", class: "btn btn-default btn-xs" %>
-	  <% end %>
-	  <% end %>
+	  <div class="<%= tweet.id %>-spam">
+	    <% if tweet.useful == false %>
+	      Spam
+	    <% else %>
+	      <%= form_for(tweet, html: {multipart: :true}, remote: true) do |f| %>
+		<%= f.hidden_field :useful, value: 0 %>
+		<%= f.submit "Unuseful", class: "btn btn-default btn-xs" %>
+	      <% end %>
+	    <% end %>
+	  </div>
 	</td>
-        <td><%= link_to 'Del', tweet, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-default btn-xs" %></td>
+        <td><%= link_to 'Del', tweet, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-default btn-xs", remote: true %></td>
       </tr>
     <% end %>
   </tbody>
