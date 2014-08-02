@@ -39,9 +39,20 @@
 	<div class="panel panel-default">
 	  <div class="panel-heading">最新情報Twitter</div>
 	  <div class="panel-body">
-	    <% @tweets.each do |tweet| -%>
-	      <p><%= tweet.username -%> : <%= tweet.text -%></p>
-	    <% end -%>
+	    <table class="table table-hover">
+	      <tbody>
+		<% @tweets.each do |tweet| -%>
+		  <tr>
+		    <div class="media">
+		      <div class="media-body">
+			<h4 class="media-heading">@<%= tweet.username -%></h4>
+			<%= tweet.text -%>
+		      </div>
+		    </div>
+		  </tr>
+		<% end -%>
+	      </tbody>
+	    </table>
 	  </div>
 	</div>
       </div>
