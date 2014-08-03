@@ -30,7 +30,7 @@
 		    <td>
 		      <div class="media">
 			<div class="media-body">
-			  <div class="media-heading">@<%= tweet.username -%></div>
+			  <div class="media-heading help-block">@<%= tweet.username -%> <small><%= time_ago_in_words tweet.created_at %></small></div>
 			  <%= tweet.text -%>
 			</div>
 		      </div>
