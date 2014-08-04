@@ -3,4 +3,4 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $(document).on 'page:change', ->
-	$(".tweets").marquee({direction: "down", duration: 5000, pauseOnHover: true})
+	$(".tweets").marquee({direction: "down", duration: 15000, pauseOnHover: true})
