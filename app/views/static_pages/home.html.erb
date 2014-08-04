@@ -10,10 +10,9 @@
     <div class="panel panel-primary">
       <div class="panel-heading">就職の話題</div>
       <div class="panel-body">
-	<p>
-	  google<br />
-	  yahoo<br />
-	</p>
+	<% @keywords.each do |keyword| -%>
+	  <p><%= keyword.name -%>: <%= keyword.tweets.where(useful: true).count -%></p>
+	<% end -%>
       </div>
     </div>
   </div>
