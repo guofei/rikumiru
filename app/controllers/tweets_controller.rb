@@ -5,20 +5,20 @@ class TweetsController < ApplicationController
   # GET /tweets.json
   def index
     if(params[:useful] == "1")
-      @tweets = Tweet.where(useful: true).order("updated_at desc").page params[:page]
+      @tweets = Tweet.where(useful: true).reorder("updated_at desc").page params[:page]
       @count = Tweet.where(useful: true).count
       cookies[:useful] = "yes"
     elsif(params[:useful] == "0")
-      @tweets = Tweet.where(useful: false).order("updated_at desc").page params[:page]
+      @tweets = Tweet.where(useful: false).reorder("updated_at desc").page params[:page]
       @count = Tweet.where(useful: false).count
       cookies[:useful] = "no"
     elsif(params[:useful] == "null")
-      @tweets = Tweet.where(useful: nil).order("updated_at desc").page params[:page]
+      @tweets = Tweet.where(useful: nil).reorder("updated_at desc").page params[:page]
       @count = Tweet.where(useful: nil).count
       cookies[:useful] = "null"
     else
       # @tweets = Tweet.where(useful: nil).order('company_id').page params[:page]
-      @tweets = Tweet.order("updated_at desc").page params[:page]
+      @tweets = Tweet.reorder("updated_at desc").page params[:page]
       @count = Tweet.count
       cookies[:useful] = "disappear"
     end
