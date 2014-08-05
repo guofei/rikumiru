@@ -11,15 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140726131820) do
-
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+ActiveRecord::Schema.define(version: 20140805150558) do
 
   create_table "companies", force: true do |t|
     t.string   "name"
     t.string   "alice_name"
-    t.integer  "tweet_id",   limit: 8
+    t.integer  "tweet_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -28,9 +25,11 @@ ActiveRecord::Schema.define(version: 20140726131820) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "tweet_count"
   end
 
-  create_table "tweets", force: true do |t|
+  create_table "tweets", id: false, force: true do |t|
+    t.integer  "id"
     t.integer  "company_id"
     t.string   "text"
     t.string   "username"
@@ -41,7 +40,7 @@ ActiveRecord::Schema.define(version: 20140726131820) do
   end
 
   create_table "tweets_keywords", id: false, force: true do |t|
-    t.integer "tweet_id",   limit: 8
+    t.integer "tweet_id"
     t.integer "keyword_id"
   end
 
