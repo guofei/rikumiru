@@ -7,17 +7,34 @@ class Tweet < ActiveRecord::Base
     decrement_tweet_count
   end
 
-  before_save :increment_tweet_count
+  before_create :increment_tweet_count_before_create
+  before_update :increment_tweet_count_before_update
 
-  def increment_tweet_count
+  def increment_tweet_count_before_create
     self.keywords.each do |k|
-      k.increment!(:tweet_count)
+      if useful == true
+        k.increment!(:tweet_count)
+      end
+    end
+  end
+
+  def increment_tweet_count_before_update
+    self.keywords.each do |k|
+      if useful_changed?
+        if useful == true
+          k.increment!(:tweet_count)
+        elsif useful == false
+          k.decrement!(:tweet_count)
+        end
+      end
     end
   end
 
   def decrement_tweet_count
     self.keywords.each do |k|
-      k.decrement!(:tweet_count)
+      if useful == true
+        k.decrement!(:tweet_count)
+      end
     end
   end
 end
