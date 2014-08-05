@@ -11,7 +11,7 @@
       <div class="panel-heading">就職の話題</div>
       <div class="panel-body">
 	<% @keywords.each do |keyword| -%>
-	  <p><%= keyword.name -%>: <%= keyword.tweets.where(useful: true).count -%></p>
+	  <p><%= keyword.name -%>: <%= keyword.tweet_count -%></p>
 	<% end -%>
       </div>
     </div>
