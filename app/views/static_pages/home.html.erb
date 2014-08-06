@@ -43,7 +43,7 @@
 	  <div class="panel-heading">Company</div>
 	  <div class="panel-body">
 	    <% @companies.each do |c| -%>
-	      <p><%= c.name -%>: <%= c.tweets.where(useful: true) -%></p>
+	      <p><%= c.name -%>: <%= c.tweets.where(useful: true).count -%></p>
 	    <% end -%>
 	  </div>
 	</div>
