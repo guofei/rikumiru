@@ -42,8 +42,9 @@
 	<div class="panel panel-primary">
 	  <div class="panel-heading">Company</div>
 	  <div class="panel-body">
-	    <p>Google : 100</p>
-	    <p>Yahoo : 90</p>
+	    <% @companies.each do |c| -%>
+	      <p><%= c.name -%>: <%= c.tweets.where(useful: true) -%></p>
+	    <% end -%>
 	  </div>
 	</div>
       </div>
