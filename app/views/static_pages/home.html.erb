@@ -2,7 +2,7 @@
 <div class="page-header">
   <h2>
     Twitter上の就職話題度をチェック
-    <div class="pull-right"><small>就職の話題: 33234234235件</small></div>
+    <div class="pull-right"><small>就職話題数: <%= Tweet.count %>件</small></div>
   </h2>
 </div>
 <div class="row">
@@ -40,7 +40,7 @@
       </div>
       <div class="col-xs-12 col-sm-4">
 	<div class="panel panel-primary">
-	  <div class="panel-heading">Company</div>
+	  <div class="panel-heading">会社</div>
 	  <div class="panel-body">
 	    <% @companies.each do |c| -%>
 	      <p><%= c.name -%>: <%= c.tweet_count -%></p>
