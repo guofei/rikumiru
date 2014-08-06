@@ -5,8 +5,11 @@
 #$(document).on 'page:change', ->
 #	$(".tweets").marquee({direction: "down", duration: 15000, pauseOnHover: true})
 
-$(document).on 'page:change', ->
-        $('.tweets').newsTicker({
-                row_height: 80,
-                max_rows: 3,
-                duration: 4000})
+#$(document).on 'page:change', ->
+#        $('.tweets').newsTicker({
+#                row_height: 60,
+#                max_rows: 10,
+#                duration: 2000,
+#                prevButton: $('.tweet-prev'),
+#                nextButton: $('.tweet-next')
+#        })
