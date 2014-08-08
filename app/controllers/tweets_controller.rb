@@ -5,22 +5,37 @@ class TweetsController < ApplicationController
   # GET /tweets.json
   def index
     if(params[:useful] == "1")
-      @tweets = Tweet.where(useful: true).reorder("updated_at desc").page params[:page]
-      @count = Tweet.where(useful: true).count
-      cookies[:useful] = "yes"
+      if params[:keyword]
+        @tweets = Tweet.where(useful: true).where("text like '%#{params[:keyword]}%'").reorder("updated_at desc").page params[:page]
+        @count = Tweet.where(useful: true).where("text like '%#{params[:keyword]}%'").count
+      else
+        @tweets = Tweet.where(useful: true).reorder("updated_at desc").page params[:page]
+        @count = Tweet.where(useful: true).count
+      end
     elsif(params[:useful] == "0")
-      @tweets = Tweet.where(useful: false).reorder("updated_at desc").page params[:page]
-      @count = Tweet.where(useful: false).count
-      cookies[:useful] = "no"
+      if params[:keyword]
+        @tweets = Tweet.where(useful: false).where("text like '%#{params[:keyword]}%'").reorder("updated_at desc").page params[:page]
+        @count = Tweet.where(useful: false).where("text like '%#{params[:keyword]}%'").count
+      else
+        @tweets = Tweet.where(useful: false).reorder("updated_at desc").page params[:page]
+        @count = Tweet.where(useful: false).count
+      end
     elsif(params[:useful] == "null")
-      @tweets = Tweet.where(useful: nil).reorder("updated_at desc").page params[:page]
-      @count = Tweet.where(useful: nil).count
-      cookies[:useful] = "null"
+      if params[:keyword]
+        @tweets = Tweet.where(useful: nil).where("text like '%#{params[:keyword]}%'").reorder("updated_at desc").page params[:page]
+        @count = Tweet.where(useful: nil).where("text like '%#{params[:keyword]}%'").count
+      else
+        @tweets = Tweet.where(useful: nil).reorder("updated_at desc").page params[:page]
+        @count = Tweet.where(useful: nil).count
+      end
     else
-      # @tweets = Tweet.where(useful: nil).order('company_id').page params[:page]
-      @tweets = Tweet.reorder("updated_at desc").page params[:page]
-      @count = Tweet.count
-      cookies[:useful] = "disappear"
+      if params[:keyword]
+        @tweets = Tweet.where("text like '%#{params[:keyword]}%'").reorder("updated_at desc").page params[:page]
+        @count = Tweet.where("text like '%#{params[:keyword]}%'").count
+      else
+        @tweets = Tweet.reorder("updated_at desc").page params[:page]
+        @count = Tweet.count
+      end
     end
   end
 
@@ -60,7 +75,7 @@ class TweetsController < ApplicationController
     respond_to do |format|
       if @tweet.update(tweet_params)
         format.js
-        format.html { redirect_to tweets_url + get_cookie, notice: 'Tweet was successfully updated.' }
+        format.html { redirect_to tweets_url, notice: 'Tweet was successfully updated.' }
         format.json { render :show, status: :ok, location: @tweet }
       else
         format.html { render :edit }
@@ -75,7 +90,7 @@ class TweetsController < ApplicationController
     @tweet.destroy
     respond_to do |format|
       format.js
-      format.html { redirect_to tweets_url + get_cookie, notice: 'Tweet was successfully destroyed.' }
+      format.html { redirect_to tweets_url, notice: 'Tweet was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -89,18 +104,5 @@ class TweetsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def tweet_params
       params.require(:tweet).permit(:company_id, :text, :username, :useful)
-    end
-
-    def get_cookie
-      useful = cookies[:useful]
-      if useful == "yes"
-        "?useful=1"
-      elsif useful == "no"
-        "?useful=0"
-      elsif useful == "null"
-        "?useful=null"
-      else
-        ""
-      end
     end
   end
