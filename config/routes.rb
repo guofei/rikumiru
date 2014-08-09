@@ -1,13 +1,15 @@
 Rails.application.routes.draw do
-  resources :categories
+  devise_for :users
 
-  get 'static_pages/home'
+  resources :categories
 
   resources :companies
 
   resources :tweets
 
   resources :keywords
+
+  get 'static_pages/home'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

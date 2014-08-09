@@ -60,3 +60,6 @@ gem 'bootstrap-sass', '~> 3.2.0.1'
 gem 'kaminari', '~> 0.16.1'
 
 gem 'rails-i18n', '~> 4.0.2'
+
+gem 'devise', '~> 3.2.4'
+gem 'cancancan', '~> 1.9.2'
