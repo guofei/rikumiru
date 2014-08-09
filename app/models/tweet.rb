@@ -26,7 +26,7 @@ class Tweet < ActiveRecord::Base
       if useful_changed?
         if useful == true
           k.increment!(:tweet_count)
-        elsif useful == false
+        elsif useful == false && useful_was == true
           k.decrement!(:tweet_count)
         end
       end
@@ -34,7 +34,7 @@ class Tweet < ActiveRecord::Base
     if useful_changed?
       if useful == true
         company.increment!(:tweet_count)
-      elsif useful == false
+      elsif useful == false && useful_was == true
         company.decrement!(:tweet_count)
       end
     end
