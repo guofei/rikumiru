@@ -1,24 +1,30 @@
-<h3>keywords</h3>
+<% if can? :admin, current_user -%>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th colspan="2"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @keywords.each do |keyword| %>
+  <table>
+    <thead>
       <tr>
-        <td><%= keyword.name %></td>
-        <td><%= link_to 'Edit', edit_keyword_path(keyword) %></td>
-        <td><%= link_to 'Destroy', keyword, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+	<th>Name</th>
+	<th colspan="2"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @keywords.each do |keyword| %>
+	<tr>
+          <td><%= keyword.name %></td>
+          <td><%= link_to 'Edit', edit_keyword_path(keyword) %></td>
+          <td><%= link_to 'Destroy', keyword, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+	</tr>
+      <% end %>
+    </tbody>
+  </table>
 
-<br>
+  <br>
 
-<%= link_to 'New Keyword', new_keyword_path %>
+  <%= link_to 'New Keyword', new_keyword_path %>
+
+<% else -%>
+  <% @keywords.each do |keyword| -%>
+    <p><%= keyword.name -%>: <%= keyword.tweet_count -%></p>
+  <% end -%>
+<% end -%>
+

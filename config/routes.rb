@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   resources :tweets
 
-  resources :keywords
+  resources :keywords, path: 'topics'
 
   get 'static_pages/home'
 

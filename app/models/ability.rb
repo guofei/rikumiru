@@ -2,10 +2,13 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
+    user ||= User.new(role: 'guest')
     if user.role == "admin"
       can :admin, :all
     elsif user.role = "number"
       can :member, :all
+    elsif user.role = "guest"
+      can :guest, :all
     end
     # Define abilities for the passed in user here. For example:
     #
