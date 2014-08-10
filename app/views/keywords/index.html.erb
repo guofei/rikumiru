@@ -1,5 +1,4 @@
 <% if can? :admin, current_user -%>
-
   <table>
     <thead>
       <tr>
@@ -17,11 +16,8 @@
       <% end %>
     </tbody>
   </table>
-
   <br>
-
   <%= link_to 'New Keyword', new_keyword_path %>
-
 <% else -%>
   <% @keywords.each do |keyword| -%>
     <p><%= keyword.name -%>: <%= keyword.tweet_count -%></p>
