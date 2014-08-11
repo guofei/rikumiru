@@ -35,7 +35,7 @@
 	      <li class="list-group-item">
 		<div class="media">
 		  <div class="media-body">
-		    <div class="media-heading help-block"><%= link_to "@#{tweet.username}", "https://twitter.com/#{tweet.username}/status/#{tweet.id}", class: "btn-link" -%> <small><%= time_ago_in_words tweet.created_at %></small></div>
+		    <div class="media-heading help-block"><%= link_to "@#{tweet.username}", "https://twitter.com/#{tweet.username}/status/#{tweet.id}" -%> <small><%= time_ago_in_words tweet.created_at %></small></div>
 		    <%= tweet.text -%>
 		  </div>
 		</div>
