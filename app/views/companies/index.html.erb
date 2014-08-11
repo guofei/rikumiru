@@ -1,5 +1,4 @@
-<h1>Listing companies</h1>
-
+<% if can? :admin, current_user -%>
 <table>
   <thead>
     <tr>
@@ -9,7 +8,6 @@
       <th colspan="3"></th>
     </tr>
   </thead>
-
   <tbody>
     <% @companies.each do |company| %>
       <tr>
@@ -23,7 +21,10 @@
     <% end %>
   </tbody>
 </table>
-
 <br>
-
 <%= link_to 'New Company', new_company_path %>
+<% else -%>
+  <% @companies.each do |company| -%>
+    <p><%= company.name -%>: <%= company.tweet_count -%></p>
+  <% end -%>
+<% end -%>

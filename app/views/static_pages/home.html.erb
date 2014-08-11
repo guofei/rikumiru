@@ -10,7 +10,9 @@
     <div class="panel panel-primary">
       <div class="panel-heading">
 	<h4 class="panel-title">
-	  <%= link_to "就職の話題（件）", keywords_path -%>
+	  <%= link_to keywords_path do -%>
+	    <%= fa_icon "external-link", text: "就職の話題（件）", right: true -%>
+	  <% end -%>
 	</h4>
       </div>
       <div class="panel-body">
@@ -21,42 +23,41 @@
     </div>
   </div>
 
-  <div class="col-xs-12 col-sm-9">
-    <div class="row">
-      <div class="col-xs-12 col-sm-8">
-	<div class="panel panel-primary">
-	  <div class="panel-heading">
-	    <h4 class="panel-title">
-	      最新ツイート
-	    </h4>
-	  </div>
-	  <ul class="tweets list-group">
-	    <% @tweets.each_with_index do |tweet, i| -%>
-	      <li class="list-group-item">
-		<div class="media">
-		  <div class="media-body">
-		    <div class="media-heading help-block"><%= link_to "@#{tweet.username}", "https://twitter.com/#{tweet.username}/status/#{tweet.id}" -%> <small><%= time_ago_in_words tweet.created_at %></small></div>
-		    <%= tweet.text -%>
-		  </div>
-		</div>
-	      </li>
-	    <% end -%>
-	  </ul>
-	</div>
+  <div class="col-xs-12 col-sm-6">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+	<h4 class="panel-title">
+	  <%= fa_icon "twitter", text: "最新ツイート", right: true -%>
+	</h4>
       </div>
-      <div class="col-xs-12 col-sm-4">
-	<div class="panel panel-primary">
-	  <div class="panel-heading">
-	    <h4 class="panel-title">
-	    企業（話題数）
-	    </h4>
-	  </div>
-	  <div class="panel-body">
-	    <% @companies.each do |c| -%>
-	      <p><%= c.name -%>: <%= c.tweet_count -%></p>
-	    <% end -%>
-	  </div>
-	</div>
+      <ul class="tweets list-group">
+	<% @tweets.each_with_index do |tweet, i| -%>
+	  <li class="list-group-item">
+	    <div class="media">
+	      <div class="media-body">
+		<div class="media-heading help-block"><%= link_to "@#{tweet.username}", "https://twitter.com/#{tweet.username}/status/#{tweet.id}" -%> <small><%= time_ago_in_words tweet.created_at %></small></div>
+		<%= tweet.text -%>
+	      </div>
+	    </div>
+	  </li>
+	<% end -%>
+      </ul>
+    </div>
+  </div>
+
+  <div class="col-xs-12 col-sm-3">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+	<h4 class="panel-title">
+	  <%= link_to companies_path do -%>
+	    <%= fa_icon "external-link", text: "企業（話題数）", right: true -%>
+	  <% end -%>
+	</h4>
+      </div>
+      <div class="panel-body">
+	<% @companies.each do |c| -%>
+	  <p><%= c.name -%>: <%= c.tweet_count -%></p>
+	<% end -%>
       </div>
     </div>
   </div>
