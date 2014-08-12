@@ -21,10 +21,12 @@
     <% end %>
   </tbody>
 </table>
+<%= paginate @companies %>
 <br>
 <%= link_to 'New Company', new_company_path %>
 <% else -%>
   <% @companies.each do |company| -%>
     <p><%= company.name -%>: <%= company.tweet_count -%></p>
   <% end -%>
+  <%= paginate @companies %>
 <% end -%>

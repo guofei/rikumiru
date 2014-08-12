@@ -16,11 +16,13 @@
       <% end %>
     </tbody>
   </table>
+  <%= paginate @keywords %>
   <br>
   <%= link_to 'New Keyword', new_keyword_path %>
 <% else -%>
   <% @keywords.each do |keyword| -%>
     <p><%= keyword.name -%>: <%= keyword.tweet_count -%></p>
   <% end -%>
+  <%= paginate @keywords %>
 <% end -%>
 
