@@ -3,6 +3,8 @@ class Keyword < ActiveRecord::Base
   before_destroy { tweets.clear }
   scope :rank, -> { order("tweet_count desc") }
 
+  paginates_per 25
+
   def self.reset_tweet_count
     self.all.each do |k|
       count = k.tweets.where(useful: true).count
