@@ -4,12 +4,13 @@ class KeywordsController < ApplicationController
   # GET /keywords
   # GET /keywords.json
   def index
-    @keywords = Keyword.page params[:page]
+    @keywords = Keyword.rank.page params[:page]
   end
 
   # GET /keywords/1
   # GET /keywords/1.json
   def show
+    @tweets = @keyword.tweets.where(useful: true).page params[:page]
   end
 
   # GET /keywords/new

@@ -4,12 +4,13 @@ class CompaniesController < ApplicationController
   # GET /companies
   # GET /companies.json
   def index
-    @companies = Company.page params[:page]
+    @companies = Company.rank.page params[:page]
   end
 
   # GET /companies/1
   # GET /companies/1.json
   def show
+    @tweets = @company.tweets.where(useful: true).page params[:page]
   end
 
   # GET /companies/new

@@ -30,7 +30,7 @@
           <ul class="nav navbar-nav">
             <li class="active"><a href="/">Home</a></li>
             <li><%= link_to "話題", keywords_path -%></li>
-            <li><a href="#contact">企業</a></li>
+            <li><%= link_to "企業", companies_path -%></li>
           </ul>
 	  <% if user_signed_in? -%>
 	    <ul class="nav navbar-nav navbar-right">

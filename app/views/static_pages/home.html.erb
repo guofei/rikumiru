@@ -17,7 +17,7 @@
       </div>
       <div class="panel-body">
 	<% @keywords.each do |keyword| -%>
-	  <p><%= keyword.name -%>: <%= keyword.tweet_count -%></p>
+	  <p><%= keyword.name -%>: <%= link_to "#{keyword.tweet_count}", keyword_path(keyword) -%></p>
 	<% end -%>
       </div>
     </div>
@@ -56,7 +56,7 @@
       </div>
       <div class="panel-body">
 	<% @companies.each do |c| -%>
-	  <p><%= c.name -%>: <%= c.tweet_count -%></p>
+	  <p><%= c.name -%>: <%= link_to "#{c.tweet_count}", company_path(c) -%></p>
 	<% end -%>
       </div>
     </div>

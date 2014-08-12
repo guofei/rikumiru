@@ -1,9 +1,49 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Name:</strong>
-  <%= @keyword.name %>
+  <strong><%= @keyword.name %></strong>
 </p>
 
-<%= link_to 'Edit', edit_keyword_path(@keyword) %> |
-<%= link_to 'Back', keywords_path %>
+<p>話題数：<%= @keyword.tweet_count %></p>
+
+<p>
+  <% @tweets.each do |tweet| -%>
+    <p class="<%= tweet.id %>">
+      @<%= tweet.username -%> <%= time_ago_in_words tweet.created_at %><br />
+      <%= tweet.text -%>
+      <% if can? :admin, current_user -%>
+	<ul class="list-inline">
+	  <li>
+	  <div class="<%= tweet.id %>-real">
+	    <% if tweet.useful == true %>
+	      Real
+	    <% else %>
+	      <%= form_for(tweet, html: {multipart: :true}, remote: true) do |f| %>
+		<%= f.hidden_field :useful, value: 1 %>
+		<%= f.submit "Useful", class: "btn btn-default btn-xs" %>
+	      <% end %>
+	    <% end %>
+	  </div>
+	  </li>
+	  <li>
+	  <div class="<%= tweet.id %>-spam">
+	    <% if tweet.useful == false %>
+	      Spam
+	    <% else %>
+	      <%= form_for(tweet, html: {multipart: :true}, remote: true) do |f| %>
+		<%= f.hidden_field :useful, value: 0 %>
+		<%= f.submit "Unuseful", class: "btn btn-default btn-xs" %>
+	      <% end %>
+	    <% end %>
+	  </div>
+	  </li>
+	  <li>
+          <%= link_to 'Del', tweet, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-default btn-xs", remote: true %>
+	  </li>
+	</ul>
+      <% end -%>
+    </p>
+  <% end -%>
+  <%= paginate @tweets %>
+</p>
+

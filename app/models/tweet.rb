@@ -10,6 +10,8 @@ class Tweet < ActiveRecord::Base
   before_create :increment_tweet_count_before_create
   before_update :increment_tweet_count_before_update
 
+  paginates_per 100
+
   def increment_tweet_count_before_create
     keywords.each do |k|
       if useful == true
