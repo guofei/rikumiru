@@ -26,7 +26,7 @@
 <%= link_to 'New Company', new_company_path %>
 <% else -%>
   <% @companies.each do |company| -%>
-    <p><%= company.name -%>: <%= company.tweet_count -%></p>
+    <p><%= company.name -%>: <%= link_to "#{company.tweet_count}", company_path(company) -%></p>
   <% end -%>
   <%= paginate @companies %>
 <% end -%>

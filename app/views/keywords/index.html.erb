@@ -21,7 +21,7 @@
   <%= link_to 'New Keyword', new_keyword_path %>
 <% else -%>
   <% @keywords.each do |keyword| -%>
-    <p><%= keyword.name -%>: <%= keyword.tweet_count -%></p>
+    <p><%= keyword.name -%>: <%= link_to "#{keyword.tweet_count}", keyword_path(keyword) -%></p>
   <% end -%>
   <%= paginate @keywords %>
 <% end -%>
