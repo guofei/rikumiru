@@ -17,7 +17,12 @@
       </div>
       <div class="panel-body">
 	<% @keywords.each do |keyword| -%>
-	  <p><%= keyword.name -%>: <%= link_to "#{keyword.tweet_count}", keyword_path(keyword) -%></p>
+	  <p>
+	    <%= keyword.name -%>
+	    <strong>
+	      <%= link_to keyword.tweet_count, keyword_path(keyword), class: "pull-right" -%>
+	    </strong>
+	  </p>
 	<% end -%>
       </div>
     </div>
@@ -37,37 +42,7 @@
 	      <div class="media-body">
 		<div class="media-heading help-block"><%= link_to "@#{tweet.username}", "https://twitter.com/#{tweet.username}/status/#{tweet.id}" -%> <small><%= time_ago_in_words tweet.created_at %></small></div>
 		<%= tweet.text -%>
-		<% if can? :admin, current_user -%>
-		  <ul class="list-inline">
-		    <li>
-		      <div class="<%= tweet.id %>-real">
-			<% if tweet.useful == true %>
-			  Real
-			<% else %>
-			  <%= form_for(tweet, html: {multipart: :true}, remote: true) do |f| %>
-			    <%= f.hidden_field :useful, value: 1 %>
-			    <%= f.submit "Useful", class: "btn btn-default btn-xs" %>
-			  <% end %>
-			<% end %>
-		      </div>
-		    </li>
-		    <li>
-		      <div class="<%= tweet.id %>-spam">
-			<% if tweet.useful == false %>
-			  Spam
-			<% else %>
-			  <%= form_for(tweet, html: {multipart: :true}, remote: true) do |f| %>
-			    <%= f.hidden_field :useful, value: 0 %>
-			    <%= f.submit "Unuseful", class: "btn btn-default btn-xs" %>
-			  <% end %>
-			<% end %>
-		      </div>
-		    </li>
-		    <li>
-		      <%= link_to 'Del', tweet, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-default btn-xs", remote: true %>
-		    </li>
-		  </ul>
-		<% end -%>
+		<%= render partial: 'tweets/admin', locals: { tweet: tweet } -%>
 	      </div>
 	    </div>
 	  </li>
@@ -87,7 +62,12 @@
       </div>
       <div class="panel-body">
 	<% @companies.each do |c| -%>
-	  <p><%= c.name -%>: <%= link_to "#{c.tweet_count}", company_path(c) -%></p>
+	  <p>
+	    <%= c.name -%>
+	    <strong>
+	      <%= link_to c.tweet_count, company_path(c), class: "pull-right" -%>
+	    </strong>
+	  </p>
 	<% end -%>
       </div>
     </div>
