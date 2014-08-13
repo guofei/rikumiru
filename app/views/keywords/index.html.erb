@@ -9,7 +9,7 @@
     <tbody>
       <% @keywords.each do |keyword| %>
 	<tr>
-          <td><%= keyword.name %></td>
+          <td><%= keyword.name %> <%= link_to "#{keyword.tweet_count}", keyword_path(keyword) -%></td>
           <td><%= link_to 'Edit', edit_keyword_path(keyword) %></td>
           <td><%= link_to 'Destroy', keyword, method: :delete, data: { confirm: 'Are you sure?' } %></td>
 	</tr>
