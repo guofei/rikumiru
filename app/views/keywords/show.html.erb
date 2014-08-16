@@ -1,19 +1,20 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong><%= @keyword.name %></strong>
-</p>
+<div class="pull-right">Facebook, Twitter, Googl+</div>
+<div class="page-header">
+  <h2>
+    <%= @keyword.name %>
+    <small>題数: <%= @keyword.tweet_count %>件</small>
+  </h2>
+</div>
 
-<p>話題数：<%= @keyword.tweet_count %></p>
+<% @tweets.each do |tweet| -%>
+  <p class="<%= tweet.id %>">
+    @<%= tweet.username -%> <%= time_ago_in_words tweet.created_at %><br />
+    <%= tweet.text -%>
+    <%= render partial: 'tweets/admin', locals: { tweet: tweet } -%>
+  </p>
+<% end -%>
 
-<p>
-  <% @tweets.each do |tweet| -%>
-    <p class="<%= tweet.id %>">
-      @<%= tweet.username -%> <%= time_ago_in_words tweet.created_at %><br />
-      <%= tweet.text -%>
-      <%= render partial: 'tweets/admin', locals: { tweet: tweet } -%>
-    </p>
-  <% end -%>
-  <%= paginate @tweets %>
-</p>
+<%= paginate @tweets %>
 
