@@ -4,16 +4,17 @@
 <div class="page-header">
   <h2>
     <%= @company.name %>
-    <small>題数: <%= @company.tweet_count %>件</small>
+    <small>話題数: <%= @company.tweet_count %>件</small>
   </h2>
 </div>
 
 <% @tweets.each do |tweet| -%>
   <p class="<%= tweet.id %>">
-    @<%= tweet.username -%> <%= time_ago_in_words tweet.created_at %><br />
+    <%= link_to "@#{tweet.username}", "https://twitter.com/#{tweet.username}/status/#{tweet.id}" -%> <small><%= time_ago_in_words tweet.created_at %></small><br />
     <%= tweet.text -%>
     <%= render partial: 'tweets/admin', locals: { tweet: tweet } -%>
   </p>
+  <hr class="hr-point" />
 <% end -%>
 
 <%= paginate @tweets %>
