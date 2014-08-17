@@ -10,7 +10,13 @@ class CompaniesController < ApplicationController
   # GET /companies/1
   # GET /companies/1.json
   def show
-    @tweets = @company.tweets.where(useful: true).page params[:page]
+    if params[:k]
+      keyword = Keyword.find(params[:k])
+      @tweets = keyword.tweets.where(company: @company).page params[:page]
+    else
+      @tweets = @company.tweets.where(useful: true).page params[:page]
+    end
+    @keywords = @company.keywords
   end
 
   # GET /companies/new
