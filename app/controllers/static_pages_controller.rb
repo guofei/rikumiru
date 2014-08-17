@@ -1,6 +1,6 @@
 class StaticPagesController < ApplicationController
   def home
-    @tweets = Tweet.where(useful: true).take(100)
+    @tweets = Tweet.where(useful: true).includes(:company).take(100)
     @keywords = Keyword.rank.take(20)
     @companies = Company.rank.take(20)
   end

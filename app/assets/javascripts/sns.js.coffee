@@ -4,8 +4,8 @@ loadsns = ->
         bindFacebookEvents() unless fb_events_bound
 
         # Google
-        loadGoogleSDK()
-        gapi.plusone.go()
+        #loadGoogleSDK()
+        #gapi.plusone.go()
 
         # Twitter
         loadTwitterSDK()
