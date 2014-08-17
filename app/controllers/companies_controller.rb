@@ -12,7 +12,7 @@ class CompaniesController < ApplicationController
   def show
     if params[:k]
       keyword = Keyword.find(params[:k])
-      @tweets = keyword.tweets.where(company: @company).page params[:page]
+      @tweets = keyword.tweets.where(useful: true).where(company: @company).page params[:page]
     else
       @tweets = @company.tweets.where(useful: true).page params[:page]
     end
