@@ -1,0 +1,54 @@
+<div class="social clearfix">
+
+  <!-- Facebook -->
+  <div class="button facebook">
+    <div id="fb-root"></div>
+    <div class="fb-like"
+         data-href="<%= request.original_url %>"
+         data-layout="button_count"
+         data-send="false"
+	 data-share="true"
+         data-show-faces="false">
+    </div>
+  </div>
+
+  <!-- Twitter -->
+  <div class="button twitter">
+    <a href="https://twitter.com/share" class="twitter-share-button"
+       data-lang="en"
+       data-url="<%= request.original_url %>"
+       data-text="<%= content_for :title %>"
+       >Tweet</a>
+  </div>
+
+  <!-- Pocket -->
+  <div class="button pocket">
+    <a href="https://getpocket.com/save" class="pocket-btn"
+       data-lang="en"
+       data-save-url="<%= request.original_url %>"
+       data-pocket-count="horizontal"
+       data-pocket-align="left"
+       >Pocket</a>
+  </div>
+
+  <!-- Google plusone -->
+  <div class="button google">
+    <div class="g-plusone"
+         data-size="medium"
+         data-href="<%= request.original_url %>">
+    </div>
+  </div>
+
+  <!-- Hatena -->
+  <div class="button hatena">
+    <a href="http://b.hatena.ne.jp/entry/<%= request.original_url %>"
+       class="hatena-bookmark-button"
+       data-hatena-bookmark-layout="standard"
+       data-hatena-bookmark-lang="ja"
+       title="このエントリーをはてなブックマークに追加">
+      <img src="http://b.st-hatena.com/images/entry-button/button-only.gif"
+           alt="このエントリーをはてなブックマークに追加" width="20" height="20"
+           style="border: none">
+    </a>
+  </div>
+</div>

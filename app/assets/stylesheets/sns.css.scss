@@ -1,0 +1,23 @@
+.social {
+    .button {
+        float: left;
+        overflow: hidden;
+        margin-right: 5px;
+        margin-bottom: 4px;
+        &.facebook {
+            margin-right: 17px;
+        }
+        &.twitter {
+            width: 90px;
+        }
+        &.pocket {
+            width: 100px;
+        }
+        &.google {
+            width: 70px;
+        }
+        &.hatena {
+            margin-right: 17px;
+        }
+    }
+}
