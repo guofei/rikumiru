@@ -7,6 +7,15 @@
   </h2>
 </div>
 
+<%= link_to "全て", keyword_path(@keyword), class: "btn btn-default btn-sm" %>
+<% @companies.each do |c| -%>
+  <% count = @keyword.tweets.where(useful: true).where(company: c).count -%>
+  <% if count > 0 -%>
+    <%= link_to "#{c.name}(#{count}件)", keyword_path(@keyword) + "?c=#{c.id}", class: "btn btn-default btn-sm" -%>
+  <% end -%>
+<% end -%>
+<hr />
+
 <% @tweets.each do |tweet| -%>
   <p class="<%= tweet.id %>">
     <%= link_to "@#{tweet.username}", "https://twitter.com/#{tweet.username}/status/#{tweet.id}" -%> <small><%= time_ago_in_words tweet.created_at %></small><br />

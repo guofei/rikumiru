@@ -10,7 +10,13 @@ class KeywordsController < ApplicationController
   # GET /keywords/1
   # GET /keywords/1.json
   def show
-    @tweets = @keyword.tweets.where(useful: true).page params[:page]
+    if params[:c]
+      company = Company.find(params[:c])
+      @tweets = @keyword.tweets.where(useful: true).where(company: company).page params[:page]
+    else
+      @tweets = @keyword.tweets.where(useful: true).page params[:page]
+    end
+    @companies = @keyword.companies.reorder("tweet_count desc").take(50)
   end
 
   # GET /keywords/new

@@ -1,4 +1,4 @@
-ready = ->
+loadsns = ->
         # Facebook
         loadFacebookSDK()
         bindFacebookEvents() unless fb_events_bound
@@ -17,13 +17,12 @@ ready = ->
         # Pocket
         loadPocketSDK()
 # For turbolinks
-$(document).ready(ready)
-$(document).on('page:load', ready)
+$(document).ready(loadsns)
+$(document).on('page:load', loadsns)
 
 # ----------------------------------------- #
 # Facebook
 # ----------------------------------------- #
-
 fb_root = null
 fb_events_bound = false
 
