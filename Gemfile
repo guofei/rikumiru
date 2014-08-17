@@ -45,6 +45,10 @@ group :development, :test do
 end
 
 group :development do
+  # Be sure to require rack_mini_profiler below the pg and mysql gems in your Gemfile.
+  gem 'rack-mini-profiler'
+  # N+1 queries
+  gem "bullet"
   gem 'guard'
   gem 'guard-rspec', require: false
 end
