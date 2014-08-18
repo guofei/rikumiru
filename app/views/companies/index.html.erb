@@ -1,32 +1,39 @@
 <% if can? :admin, current_user -%>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Alice name</th>
-      <th>Tweet</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @companies.each do |company| %>
+  <table>
+    <thead>
       <tr>
-        <td><%= company.name %> <%= link_to "#{company.tweet_count}", company_path(company) -%></td>
-        <td><%= company.alice_name %></td>
-        <td><%= company.tweet_id %></td>
-        <td><%= link_to 'Show', company %></td>
-        <td><%= link_to 'Edit', edit_company_path(company) %></td>
-        <td><%= link_to 'Destroy', company, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+	<th>Name</th>
+	<th>Alice name</th>
+	<th>Tweet</th>
+	<th colspan="3"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
-<%= paginate @companies %>
-<br>
-<%= link_to 'New Company', new_company_path %>
+    </thead>
+    <tbody>
+      <% @companies.each do |company| %>
+	<tr>
+          <td><%= company.name %> <%= link_to "#{company.tweet_count}", company_path(company) -%></td>
+          <td><%= company.alice_name %></td>
+          <td><%= company.tweet_id %></td>
+          <td><%= link_to 'Show', company %></td>
+          <td><%= link_to 'Edit', edit_company_path(company) %></td>
+          <td><%= link_to 'Destroy', company, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+	</tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= paginate @companies %>
+  <br>
+  <%= link_to 'New Company', new_company_path %>
 <% else -%>
-  <% @companies.each do |company| -%>
-    <p><%= company.name -%>: <%= link_to "#{company.tweet_count}", company_path(company) -%></p>
-  <% end -%>
+  <div class="page-header">
+    <h2>
+      企業一覧
+    </h2>
+  </div>
+  <div>
+    <% @companies.each do |company| -%>
+      <%= link_to "#{company.name} #{company.tweet_count}件", company_path(company), class: "btn btn-default" -%>
+    <% end -%>
+  </div>
   <%= paginate @companies %>
 <% end -%>

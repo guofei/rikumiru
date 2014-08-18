@@ -20,9 +20,16 @@
   <br>
   <%= link_to 'New Keyword', new_keyword_path %>
 <% else -%>
-  <% @keywords.each do |keyword| -%>
-    <p><%= keyword.name -%>: <%= link_to "#{keyword.tweet_count}", keyword_path(keyword) -%></p>
-  <% end -%>
+  <div class="page-header">
+    <h2>
+      話題一覧
+    </h2>
+  </div>
+  <div>
+    <% @keywords.each do |keyword| -%>
+      <%= link_to "#{keyword.name} #{keyword.tweet_count}件", keyword_path(keyword), class: "btn btn-default" -%>
+    <% end -%>
+  </div>
   <%= paginate @keywords %>
 <% end -%>
 

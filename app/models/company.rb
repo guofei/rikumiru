@@ -2,6 +2,8 @@ class Company < ActiveRecord::Base
   has_many :tweets
   has_many :keywords, -> { uniq }, through: :tweets
 
+  paginates_per 100
+
   scope :sorted_by_name, -> { where("id < 201").order("name") }
   scope :rank, -> { order("tweet_count desc") }
 
