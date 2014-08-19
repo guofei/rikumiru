@@ -1,35 +1,26 @@
-<% if can? :admin, current_user -%>
-  <table>
-    <thead>
-      <tr>
-	<th>Name</th>
-	<th colspan="2"></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @keywords.each do |keyword| %>
-	<tr>
-          <td><%= keyword.name %> <%= link_to "#{keyword.tweet_count}", keyword_path(keyword) -%></td>
-          <td><%= link_to 'Edit', edit_keyword_path(keyword) %></td>
-          <td><%= link_to 'Destroy', keyword, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-	</tr>
-      <% end %>
-    </tbody>
-  </table>
-  <%= paginate @keywords %>
-  <br>
-  <%= link_to 'New Keyword', new_keyword_path %>
-<% else -%>
-  <div class="page-header">
-    <h2>
-      話題一覧
-    </h2>
-  </div>
-  <div>
-    <% @keywords.each do |keyword| -%>
-      <%= link_to "#{keyword.name} #{keyword.tweet_count}件", keyword_path(keyword), class: "btn btn-default" -%>
+<div class="page-header">
+  <h2>
+    話題一覧
+  </h2>
+</div>
+<div>
+  <% @keywords.each do |keyword| -%>
+    <%= link_to "#{keyword.name} #{keyword.tweet_count}件", keyword_path(keyword), class: "btn btn-default" -%>
+    <% if can?(:admin, current_user) && params[:admin] == "1" -%>
+      <%= link_to 'Edit', edit_keyword_path(keyword) %>
+      <%= link_to 'Destroy', keyword, method: :delete, data: { confirm: 'Are you sure?' } %>
     <% end -%>
-  </div>
-  <%= paginate @keywords %>
+  <% end -%>
+</div>
+<%= paginate @keywords %>
+
+<% if can?(:admin, current_user) && params[:admin] == "1" -%>
+  <br />
+  <%= link_to 'New Keyword', new_keyword_path %>
 <% end -%>
 
+<% if can? :admin, current_user -%>
+  <br />
+  <%= link_to "Admin", keywords_path + "?admin=1" -%>
+  <%= link_to "User", keywords_path -%>
+<% end -%>
