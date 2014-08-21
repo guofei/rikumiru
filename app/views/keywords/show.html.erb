@@ -9,9 +9,9 @@
 
 <%= link_to "全て", keyword_path(@keyword), class: "btn btn-default btn-sm" %>
 <% @companies.each do |c| -%>
-  <% count = @keyword.tweets.where(useful: true).where(company: c).count -%>
-  <% if count > 0 -%>
-    <%= link_to "#{c.name}(#{count}件)", keyword_path(@keyword) + "?c=#{c.id}", class: "btn btn-default btn-sm" -%>
+  <% n = @keyword.tweets_count_with_company(c) -%>
+  <% if n > 0 -%>
+    <%= link_to "#{c.name}(#{n}件)", keyword_path(@keyword) + "?c=#{c.id}", class: "btn btn-default btn-sm" -%>
   <% end -%>
 <% end -%>
 <hr />

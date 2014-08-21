@@ -13,4 +13,16 @@ class Keyword < ActiveRecord::Base
       k.update_attributes(:tweet_count => count)
     end
   end
+
+  def tweets_with_company(company)
+    Rails.cache.fetch("#{cache_key}/#{company.id}/tweets_count_with_company", expires_in: 12.hours) do
+      tweets.where(useful: true).where(company: company).count
+    end
+  end
+
+  def tweets_count_with_company(company)
+    Rails.cache.fetch("#{cache_key}/#{company.id}/tweets_count_with_company", expires_in: 12.hours) do
+      tweets.where(useful: true).where(company: company).count
+    end
+  end
 end
