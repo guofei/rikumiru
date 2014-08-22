@@ -34,8 +34,8 @@
             <li><%= link_to "話題", keywords_path -%></li>
             <li><%= link_to "企業", companies_path -%></li>
           </ul>
-	  <% if user_signed_in? -%>
-	    <ul class="nav navbar-nav navbar-right">
+          <ul class="nav navbar-nav navbar-right">
+	    <% if user_signed_in? -%>
               <li class="dropdown">
 		<a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= current_user.email -%> <b class="caret"></b></a>
 		<ul class="dropdown-menu" role="menu">
@@ -44,8 +44,11 @@
 		  </li>
 		</ul>
               </li>
-            </ul>
-	  <% end -%>
+	    <% end -%>
+          </ul>
+          <form class="navbar-form navbar-right">
+            <input type="text" class="form-control" placeholder="企業検索..">
+          </form>
         </div><!--/.nav-collapse -->
       </div>
     </div>
