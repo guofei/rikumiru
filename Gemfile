@@ -73,3 +73,5 @@ gem 'devise-i18n', '~> 0.10.4'
 gem 'cancancan', '~> 1.9.2'
 
 gem 'google-analytics-turbolinks'
+
+gem 'ransack', '~> 1.2.3'

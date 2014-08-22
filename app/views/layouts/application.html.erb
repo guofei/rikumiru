@@ -46,9 +46,9 @@
               </li>
 	    <% end -%>
           </ul>
-          <form class="navbar-form navbar-right">
-            <input type="text" class="form-control" placeholder="企業検索..">
-          </form>
+	  <%= form_tag searches_path, class: "navbar-form navbar-right", method: "get" do -%>
+	    <%= text_field_tag "company", "", class: "form-control", placeholder: "企業検索.." -%>
+	  <% end -%>
         </div><!--/.nav-collapse -->
       </div>
     </div>

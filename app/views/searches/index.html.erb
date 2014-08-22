@@ -1,0 +1,15 @@
+<div class="page-header">
+  <h2>
+    企業検索
+  </h2>
+</div>
+
+<% if @companies.count > 1 -%>
+  <% @companies.each do |c| -%>
+    <p>
+      <%= link_to "#{c.name} #{c.tweet_count}件", company_path(c) -%>
+    </p>
+  <% end -%>
+<% else -%>
+  ご指定の検索条件に合う企業がありませんでした。他のキーワードでもう一度検索してみてください。
+<% end -%>

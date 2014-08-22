@@ -9,6 +9,8 @@ Rails.application.routes.draw do
 
   resources :keywords, path: 'topics'
 
+  resources :searches, only: [:index], path: 'search'
+
   get 'static_pages/home'
 
   # The priority is based upon order of creation: first created -> highest priority.
