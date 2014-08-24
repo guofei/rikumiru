@@ -5,6 +5,8 @@ Rails.application.routes.draw do
 
   resources :companies
 
+  resources :comments
+
   resources :tweets
 
   resources :keywords, path: 'topics'

@@ -1,4 +1,5 @@
 class Company < ActiveRecord::Base
+  acts_as_commentable
   has_many :tweets
   has_many :keywords, -> { uniq }, through: :tweets
 
