@@ -39,8 +39,8 @@
 	  <li class="list-group-item">
 	    <div class="media">
 	      <div class="media-body">
-		<div class="media-heading help-block"><%= link_to "@#{tweet.username}", "https://twitter.com/#{tweet.username}/status/#{tweet.id}" -%> <small><%= time_ago_in_words tweet.created_at %></small></div>
-		<%= tweet.text -%> <%= link_to "開く", company_path(tweet.company) -%>
+		<div class="media-heading help-block"><%= link_to "@#{tweet.username}", "https://twitter.com/#{tweet.username}/status/#{tweet.id}" -%> <small><%= time_ago_in_words tweet.created_at %> <%= link_to tweet.company.name, company_path(tweet.company) -%></small></div>
+		<%= tweet.text -%>
 		<%= render partial: 'tweets/admin', locals: { tweet: tweet } -%>
 	      </div>
 	    </div>

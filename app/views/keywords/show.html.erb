@@ -26,7 +26,7 @@
 
 <% @tweets.each do |tweet| -%>
   <p class="<%= tweet.id %>">
-    <%= link_to "@#{tweet.username}", "https://twitter.com/#{tweet.username}/status/#{tweet.id}" -%> <small><%= time_ago_in_words tweet.created_at %></small><br />
+    <%= link_to "@#{tweet.username}", "https://twitter.com/#{tweet.username}/status/#{tweet.id}" -%> <small><%= time_ago_in_words tweet.created_at %> <%= link_to tweet.company.name, company_path(tweet.company) %></small><br />
     <%= tweet.text -%>
     <%= render partial: 'tweets/admin', locals: { tweet: tweet } -%>
   </p>
