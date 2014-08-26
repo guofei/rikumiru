@@ -79,3 +79,6 @@ gem 'ransack', '~> 1.2.3'
 gem 'acts_as_commentable'
 
 gem 'simple_form', '~> 3.1.0.rc2'
+
+gem 'redis-store'
+gem 'redis-rails'
