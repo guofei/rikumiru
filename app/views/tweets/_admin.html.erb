@@ -1,4 +1,4 @@
-<% if can? :admin, current_user -%>
+<% if can?(:admin, current_user) && params[:admin] == "1" -%>
   <ul class="list-inline">
     <li>
       <div class="<%= tweet.id %>-real">

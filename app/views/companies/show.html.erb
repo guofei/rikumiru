@@ -79,3 +79,9 @@
 </div>
 
 <%= paginate @tweets %>
+
+<% if can? :admin, current_user -%>
+  <br />
+  <%= link_to "Admin", company_path(@company) + "?admin=1" -%>
+  <%= link_to "User", company_path(@company) -%>
+<% end -%>
