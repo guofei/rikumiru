@@ -6,7 +6,7 @@
     <small>Twitter上の就職話題度をチェック</small>
   </h2>
 </div>
-<div>
+<div style="line-height: 300%">
   <% @keywords.each do |keyword| -%>
     <%= link_to "#{keyword.name} #{keyword.tweet_count}件", keyword_path(keyword), class: "btn btn-default" -%>
     <% if can?(:admin, current_user) && params[:admin] == "1" -%>

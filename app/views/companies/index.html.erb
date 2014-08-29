@@ -6,7 +6,7 @@
     <small>Twitter上の就職話題度をチェック</small>
   </h2>
 </div>
-<div>
+<div style="line-height: 300%">
   <% @companies.each do |company| -%>
     <%= link_to "#{company.name} #{company.tweet_count}件", company_path(company), class: "btn btn-default" -%>
     <% if can?(:admin, current_user) && params[:admin] == "1" -%>
