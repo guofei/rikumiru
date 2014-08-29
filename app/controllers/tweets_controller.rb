@@ -1,5 +1,6 @@
 class TweetsController < ApplicationController
   before_action :authenticate_user!
+  before_action :admin_check
   before_action :set_tweet, only: [:show, :edit, :update, :destroy]
 
   # GET /tweets
