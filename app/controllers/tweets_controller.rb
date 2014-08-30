@@ -21,9 +21,9 @@ class TweetsController < ApplicationController
       else
         if params[:bayesfilter] == "1"
           @tweets = Tweet.where(useful: true).includes(:company).where(bayesfilter: true).reorder("updated_at desc").page params[:page]
-          @count = Tweet.where(useful: true).where(bayesfilter: false).count
+          @count = Tweet.where(useful: true).where(bayesfilter: true).count
         elsif params[:bayesfilter] == "0"
-          @tweets = Tweet.where(useful: true).includes(:company).where(bayesfilter: true).reorder("updated_at desc").page params[:page]
+          @tweets = Tweet.where(useful: true).includes(:company).where(bayesfilter: false).reorder("updated_at desc").page params[:page]
           @count = Tweet.where(useful: true).where(bayesfilter: false).count
         else
           @tweets = Tweet.where(useful: true).includes(:company).reorder("updated_at desc").page params[:page]
@@ -61,9 +61,9 @@ class TweetsController < ApplicationController
       else
         if params[:bayesfilter] == "1"
           @tweets = Tweet.reorder("updated_at desc").where(bayesfilter: true).includes(:company).page params[:page]
-          @count = Tweet.where(bayesfilter: false).count
+          @count = Tweet.where(bayesfilter: true).count
         elsif params[:bayesfilter] == "0"
-          @tweets = Tweet.reorder("updated_at desc").where(bayesfilter: true).includes(:company).page params[:page]
+          @tweets = Tweet.reorder("updated_at desc").where(bayesfilter: false).includes(:company).page params[:page]
           @count = Tweet.where(bayesfilter: false).count
         else
           @tweets = Tweet.reorder("updated_at desc").includes(:company).page params[:page]
