@@ -34,6 +34,7 @@ class KeywordsController < ApplicationController
   # POST /keywords.json
   def create
     @keyword = Keyword.new(keyword_params)
+    @keyword.tweet_count = 0
 
     respond_to do |format|
       if @keyword.save

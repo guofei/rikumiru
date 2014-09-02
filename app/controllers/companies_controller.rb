@@ -34,6 +34,7 @@ class CompaniesController < ApplicationController
   # POST /companies.json
   def create
     @company = Company.new(company_params)
+    @company.tweet_count = 0
 
     respond_to do |format|
       if @company.save
