@@ -104,6 +104,19 @@ class TweetsController < ApplicationController
     end
   end
 
+  def bayesfilter
+    tweet_ids = params[:tweets]
+    tweet_ids.each do |tweet_id|
+      tweet = Tweet.find(tweet_id)
+      next if tweet.bayesfilter == true || tweet.bayesfilter == nil
+      tweet.bayesfilter = false
+      tweet.save
+    end
+    respond_to do |format|
+      format.js
+    end
+  end
+
   def vote
     @tweet.user_vote = 0 if @tweet.user_vote == nil
     if params[:up]

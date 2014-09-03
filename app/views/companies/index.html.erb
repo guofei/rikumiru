@@ -8,7 +8,7 @@
 </div>
 <div class="link-buttons">
   <% @companies.each do |company| -%>
-    <%= link_to "#{company.name} #{company.tweet_count}件", company_path(company), class: "btn btn-default" -%>
+    <%= link_to "#{company.name} #{company.tweet_count}件", company_path(company), class: "btn btn-info" -%>
     <% if can?(:admin, current_user) && params[:admin] == "1" -%>
       <%= link_to 'Edit', edit_company_path(company) %>
       <%= link_to 'Destroy', company, method: :delete, data: { confirm: 'Are you sure?' } %>

@@ -11,18 +11,18 @@
 
 <div class="small-link-buttons">
   <% if params[:k] -%>
-    <%= link_to "全て", company_path(@company), class: "btn btn-default btn-sm" %>
+    <%= link_to "全て", company_path(@company), class: "btn btn-info btn-sm" %>
   <% else -%>
-    <%= link_to "全て", company_path(@company), class: "btn btn-default btn-sm active" %>
+    <%= link_to "全て", company_path(@company), class: "btn btn-info btn-sm active" %>
   <% end -%>
 
   <% @keywords.each do |keyword| -%>
     <% count = keyword.tweets_count_with_company(@company) -%>
     <% if count > 0 -%>
       <% if params[:k].to_i == keyword.id -%>
-	<%= link_to "#{keyword.name}(#{count}件)", company_path(@company) + "?k=#{keyword.id}", class: "btn btn-default btn-sm active" -%>
+	<%= link_to "#{keyword.name}(#{count}件)", company_path(@company) + "?k=#{keyword.id}", class: "btn btn-info btn-sm active" -%>
       <% else -%>
-	<%= link_to "#{keyword.name}(#{count}件)", company_path(@company) + "?k=#{keyword.id}", class: "btn btn-default btn-sm" -%>
+	<%= link_to "#{keyword.name}(#{count}件)", company_path(@company) + "?k=#{keyword.id}", class: "btn btn-info btn-sm" -%>
       <% end -%>
     <% end -%>
   <% end -%>

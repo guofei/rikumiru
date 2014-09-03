@@ -50,5 +50,19 @@ count: <%= @count %>
 
 <%= paginate @tweets %>
 
+<div class="bayes">
+  <div class="progress">
+    <div class="progress-bar progress-bar-striped active"  role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%">
+      <span class="sr-only">45% Complete</span>
+    </div>
+  </div>
+  <%= form_tag bayesfilter_tweets_path, data: { remote: true } do -%>
+    <% @tweets.each do |tweet| -%>
+      <%= hidden_field_tag "tweets[]", tweet.id -%>
+    <% end -%>
+    <%= submit_tag "set bayesfilter to false", class: "btn btn-default" -%>
+  <% end -%>
+</div>
+
 <br>
 
