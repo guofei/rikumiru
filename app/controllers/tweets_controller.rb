@@ -1,7 +1,7 @@
 class TweetsController < ApplicationController
   before_action :authenticate_user!
   before_action :admin_check
-  before_action :set_tweet, only: [:show, :edit, :update, :destroy]
+  before_action :set_tweet, only: [:show, :edit, :update, :destroy, :vote]
 
   # GET /tweets
   # GET /tweets.json
@@ -91,6 +91,7 @@ class TweetsController < ApplicationController
   # POST /tweets.json
   def create
     @tweet = Tweet.new(tweet_params)
+    @tweet.user_vote = 0
 
     respond_to do |format|
       if @tweet.save
@@ -98,6 +99,29 @@ class TweetsController < ApplicationController
         format.json { render :show, status: :created, location: @tweet }
       else
         format.html { render :new }
+        format.json { render json: @tweet.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def vote
+    @tweet.user_vote = 0 if @tweet.user_vote == nil
+    if params[:up]
+      @tweet.user_vote += 1
+    elsif
+      @tweet.user_vote -= 1
+    end
+    if @tweet.user_vote <= -3
+      @tweet.useful = false
+      @tweet.bayesfilter = false
+    end
+    respond_to do |format|
+      if @tweet.save
+        format.js
+        format.html { redirect_to tweets_url, notice: 'Tweet was successfully updated.' }
+        format.json { render :show, status: :ok, location: @tweet }
+      else
+        format.html { render :edit }
         format.json { render json: @tweet.errors, status: :unprocessable_entity }
       end
     end

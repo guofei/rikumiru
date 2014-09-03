@@ -39,14 +39,8 @@
       </div>
       <ul class="tweets list-group">
 	<% @tweets.each_with_index do |tweet, i| -%>
-	  <li class="list-group-item">
-	    <div class="media">
-	      <div class="media-body">
-		<div class="media-heading help-block"><%= link_to "@#{tweet.username}", "https://twitter.com/#{tweet.username}/status/#{tweet.id}" -%> <small><%= time_ago_in_words tweet.created_at %> <%= link_to tweet.company.name, company_path(tweet.company) -%></small></div>
-		<%= tweet.text -%>
-		<%= render partial: 'tweets/admin', locals: { tweet: tweet } -%>
-	      </div>
-	    </div>
+	  <li class="list-group-item <%= tweet.id %>">
+	    <%= render partial: 'tweets/tweet', locals: { tweet: tweet, show_company: true } -%>
 	  </li>
 	<% end -%>
       </ul>

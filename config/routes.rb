@@ -7,7 +7,9 @@ Rails.application.routes.draw do
 
   resources :comments
 
-  resources :tweets
+  resources :tweets do
+    put 'vote', on: :member
+  end
 
   resources :keywords, path: 'topics'
 

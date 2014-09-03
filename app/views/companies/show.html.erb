@@ -39,18 +39,10 @@
       </div>
       <div class="panel-body">
 	<% @tweets.includes(:keywords).each do |tweet| -%>
-	  <p class="<%= tweet.id %>">
-	    <%= link_to "@#{tweet.username}", "https://twitter.com/#{tweet.username}/status/#{tweet.id}" -%>
-	    <small>
-	      <%= time_ago_in_words tweet.created_at %>
-	      <% tweet.keywords.each do |k| -%>
-		<%= link_to k.name, keyword_path(k) -%>
-	      <% end -%>
-	    </small><br />
-	    <%= tweet.text -%>
-	    <%= render partial: 'tweets/admin', locals: { tweet: tweet } -%>
-	  </p>
-	  <hr class="hr-point" />
+	  <div class="<%= tweet.id %>">
+	    <%= render partial: 'tweets/tweet', locals: { tweet: tweet, show_company: false } -%>
+	    <hr class="hr-point" />
+	  </div>
 	<% end -%>
       </div>
     </div>

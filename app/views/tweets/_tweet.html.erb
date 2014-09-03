@@ -1,0 +1,20 @@
+<div class="media">
+  <div class="media-body">
+    <div class="media-heading">
+      <%= link_to "@#{tweet.username}", "https://twitter.com/#{tweet.username}/status/#{tweet.id}" -%> 
+      <small>
+	<%= time_ago_in_words tweet.created_at %>
+	<% if show_company -%>
+	  <%= link_to tweet.company.name, company_path(tweet.company) -%>
+	<% else -%>
+	  <% tweet.keywords.each do |k| -%>
+	    <%= link_to k.name, keyword_path(k) -%>
+	  <% end -%>
+	<% end -%>
+      </small>
+    </div>
+    <%= tweet.text -%>
+    <small><%= link_to "不適切報告", vote_tweet_path(tweet) + "?down=1", method: :put, remote: true -%></small>
+    <%= render partial: 'tweets/admin', locals: { tweet: tweet } -%>
+  </div>
+</div>
