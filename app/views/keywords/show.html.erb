@@ -28,12 +28,21 @@
 </div>
 <hr />
 
-<% @tweets.each do |tweet| -%>
-  <div class="<%= tweet.id %>">
-    <%= render partial: 'tweets/tweet', locals: { tweet: tweet, show_company: true } -%>
-    <hr class="hr-point" />
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      <%= fa_icon "twitter", text: "ツイート", right: true -%>
+    </h4>
   </div>
-<% end -%>
+  <div class="panel-body">
+    <% @tweets.each do |tweet| -%>
+      <div class="<%= tweet.id %>">
+	<%= render partial: 'tweets/tweet', locals: { tweet: tweet, show_company: true } -%>
+	<hr class="hr-point" />
+      </div>
+    <% end -%>
+  </div>
+</div>
 
 <%= paginate @tweets %>
 
