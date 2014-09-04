@@ -108,7 +108,7 @@ class TweetsController < ApplicationController
     tweet_ids = params[:tweets]
     tweet_ids.each do |tweet_id|
       tweet = Tweet.find(tweet_id)
-      next if tweet.bayesfilter == true || tweet.bayesfilter == nil
+      next if tweet.bayesfilter == false
       tweet.bayesfilter = false
       tweet.save
     end
