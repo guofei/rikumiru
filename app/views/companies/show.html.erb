@@ -73,7 +73,7 @@
 	<% end %>
 
 	<%= simple_form_for Comment.new do |f| -%>
-	  <%= f.input :comment, label: false %>
+	  <%= f.input :comment, label: false, :input_html => {:rows => 6} %>
 	  <%= f.input :commentable_type, as: :hidden, :input_html => { value: @company.class.to_s } %>
 	  <%= f.input :commentable_id, as: :hidden, :input_html => { value: @company.id } %>
 	  <%= f.button :submit, "書き込む" %>
