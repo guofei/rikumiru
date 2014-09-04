@@ -188,6 +188,8 @@ GEM
     redis-activesupport (4.0.0)
       activesupport (~> 4)
       redis-store (~> 1.1.0)
+    redis-objects (1.0.0)
+      redis (>= 3.0.2)
     redis-rack (1.5.0)
       rack (~> 1.5)
       redis-store (~> 1.1.0)
@@ -295,6 +297,7 @@ DEPENDENCIES
   rails-i18n (~> 4.0.2)
   rails_12factor
   ransack (~> 1.2.3)
+  redis-objects (~> 1.0.0)
   redis-rails
   redis-store
   rspec-rails (~> 3.0.2)

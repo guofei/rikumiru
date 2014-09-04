@@ -82,3 +82,5 @@ gem 'simple_form', '~> 3.1.0.rc2'
 
 gem 'redis-store'
 gem 'redis-rails'
+
+gem 'redis-objects', '~> 1.0.0'
