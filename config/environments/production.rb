@@ -52,7 +52,14 @@ Rails.application.configure do
 
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
-  config.cache_store = :redis_store, 'redis://localhost:6379/0/rikulibcache', { expires_in: 24.hours }
+  config.cache_store = :redis_store, {
+    :host => "localhost",
+    :port => 6379,
+    :db => 0,
+    :password => Rails.application.secrets.redis_password,
+    :namespace => "rikulibcache",
+    :expires_in => 24.hours
+  }
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.action_controller.asset_host = "http://assets.example.com"
