@@ -51,7 +51,7 @@ loadFacebookSDK = ->
 initializeFacebookSDK = ->
         FB.init
                 appId     : 1460230547587817
-                channelUrl: '//rikulib.com'
+                channelUrl: '//www.rikulib.com/channel.html'
                 status    : true
                 cookie    : true
                 xfbml     : true

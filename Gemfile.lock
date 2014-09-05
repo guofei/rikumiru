@@ -68,6 +68,8 @@ GEM
     factory_girl_rails (4.4.1)
       factory_girl (~> 4.4.0)
       railties (>= 3.0.0)
+    fb-channel-file (0.0.2)
+      rails (>= 3.0)
     ffi (1.9.3)
     font-awesome-rails (4.1.0.0)
       railties (>= 3.2, < 5.0)
@@ -283,6 +285,7 @@ DEPENDENCIES
   devise (~> 3.2.4)
   devise-i18n (~> 0.10.4)
   factory_girl_rails (~> 4.4.1)
+  fb-channel-file
   font-awesome-rails (~> 4.1.0.0)
   google-analytics-turbolinks
   guard

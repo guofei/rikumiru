@@ -73,6 +73,7 @@ gem 'devise-i18n', '~> 0.10.4'
 gem 'cancancan', '~> 1.9.2'
 
 gem 'google-analytics-turbolinks'
+gem 'fb-channel-file'
 
 gem 'ransack', '~> 1.2.3'
 
