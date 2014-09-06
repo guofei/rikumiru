@@ -60,7 +60,7 @@
 	  <div class="media">
 	    <div class="media-body">
 	      <div class="media-heading">
-		<%= i + 1 -%>. ID: <%= comment_id %>, <small><%= time_ago_in_words comment.created_at -%>
+		<%= i + 1 -%>. ID: <%= comment.comment_id %>, <small><%= time_ago_in_words comment.created_at -%>
 		  <% if can? :admin, current_user -%>
 		    <%= link_to 'Del', comment, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-default btn-xs" %>
 		  <% end  -%>

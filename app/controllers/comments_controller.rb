@@ -7,6 +7,7 @@ class CommentsController < ApplicationController
     commentable = params[:comment][:commentable_type].constantize.find(params[:comment][:commentable_id])
     comment.commentable = commentable
     comment.user = current_user
+    comment.ip = ip
     comment.save
     redirect_to commentable
   end
@@ -27,5 +28,9 @@ class CommentsController < ApplicationController
   private
   def comment_params
     params.require(:comment).permit!
+  end
+
+  def ip
+    request.remote_ip
   end
 end

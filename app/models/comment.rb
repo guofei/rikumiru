@@ -12,4 +12,8 @@ class Comment < ActiveRecord::Base
 
   # NOTE: Comments belong to a user
   belongs_to :user
+
+  def comment_id
+    Digest::MD5.hexdigest(ip.to_s).to_s[0..10]
+  end
 end
