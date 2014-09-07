@@ -3,7 +3,9 @@ Rails.application.routes.draw do
 
   resources :categories
 
-  resources :companies
+  resources :companies do
+    get 'chart_data', on: :member
+  end
 
   resources :comments
 

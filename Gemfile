@@ -61,7 +61,7 @@ end
 gem 'rails_12factor', group: :production
 
 gem 'bootstrap-sass', '~> 3.2.0.1'
-gem 'font-awesome-rails', '~> 4.1.0.0'
+gem 'font-awesome-rails', '~> 4.2.0.0'
 
 gem 'kaminari', '~> 0.16.1'
 gem 'kaminari-i18n', '~> 0.2.0'
@@ -86,3 +86,5 @@ gem 'redis-rails'
 gem 'redis-objects', '~> 1.0.0'
 
 gem 'high_voltage', '~> 2.2.1'
+
+gem 'chartkick', '~> 1.3.2'

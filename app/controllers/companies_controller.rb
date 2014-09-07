@@ -1,7 +1,7 @@
 class CompaniesController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit, :create, :update, :destroy]
   before_action :admin_check, only: [:new, :edit, :create, :update, :destroy]
-  before_action :set_company, only: [:show, :edit, :update, :destroy]
+  before_action :set_company, only: [:chart_data, :show, :edit, :update, :destroy]
 
   # GET /companies
   # GET /companies.json
@@ -19,6 +19,13 @@ class CompaniesController < ApplicationController
       @tweets = @company.tweets.where(useful: true).page params[:page]
     end
     @keywords = @company.keywords
+  end
+
+  def chart_data
+    @keywords = @company.keywords.sort {|a, b| b.tweets_count_with_company(@company) <=> a.tweets_count_with_company(@company) }
+    @chart_data = {}
+    @keywords[0..10].each {|k| @chart_data[k.name] = k.tweets_count_with_company(@company) }
+    render json: @chart_data
   end
 
   # GET /companies/new

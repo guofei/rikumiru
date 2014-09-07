@@ -52,7 +52,18 @@
     <div class="panel panel-primary">
       <div class="panel-heading">
 	<h4 class="panel-title">
-	  <%= fa_icon "comment", text: "コメント", right: true -%>
+	  <%= fa_icon "bar-chart", text: "話題分析" -%>
+	</h4>
+      </div>
+      <div class="panel-body">
+	<%= pie_chart chart_data_company_path(@company) %>
+      </div>
+    </div>
+
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+	<h4 class="panel-title">
+	  <%= fa_icon "comment", text: "コメント" -%>
 	</h4>
       </div>
       <div class="panel-body">

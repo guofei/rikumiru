@@ -18,3 +18,6 @@
 //= require jquery
 //= require bootstrap-sprockets
 //= require google-analytics-turbolinks
+
+//= require highcharts
+//= require chartkick
