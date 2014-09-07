@@ -31,13 +31,19 @@
   </div>
 
   <div class="col-xs-12 col-sm-6">
-    <div class="panel panel-primary">
+    <div class="panel panel-primary latest-tweet">
       <div class="panel-heading">
 	<h4 class="panel-title">
 	  <%= fa_icon "twitter", text: "最新ツイート", right: true -%>
+	  <div class="pull-right">
+	    <%= form_tag static_pages_update_path, html: {multipart: :true}, remote: true do -%>
+	      <%= hidden_field_tag(:offset, "10") %>
+	      <%= submit_tag "更新", class: "btn btn-default btn-xs" %>
+	    <% end -%>
+	  </div>
 	</h4>
       </div>
-      <ul class="tweets list-group">
+      <ul class="list-group">
 	<% @tweets.each_with_index do |tweet, i| -%>
 	  <li class="list-group-item <%= tweet.id %>">
 	    <%= render partial: 'tweets/tweet', locals: { tweet: tweet, show_company: true } -%>
