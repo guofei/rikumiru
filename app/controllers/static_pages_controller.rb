@@ -13,4 +13,8 @@ class StaticPagesController < ApplicationController
       format.js
     end
   end
+
+  def chart_data
+    render json: Tweet.period_count_array
+  end
 end

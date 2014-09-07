@@ -31,6 +31,17 @@
   </div>
 
   <div class="col-xs-12 col-sm-6">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+	<h4 class="panel-title">
+	  <%= fa_icon "bar-chart", text: "月間話題数", right: true -%>
+	</h4>
+      </div>
+      <div class="panel-body">
+	<%= line_chart static_pages_chart_data_path %>
+      </div>
+    </div>
+
     <div class="panel panel-primary latest-tweet">
       <div class="panel-heading">
 	<h4 class="panel-title">
