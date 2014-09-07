@@ -1,7 +1,7 @@
 class KeywordsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit, :create, :update, :destroy]
   before_action :admin_check, only: [:new, :edit, :create, :update, :destroy]
-  before_action :set_keyword, only: [:show, :edit, :update, :destroy]
+  before_action :set_keyword, only: [:chart_data, :show, :edit, :update, :destroy]
 
   # GET /keywords
   # GET /keywords.json
@@ -19,6 +19,16 @@ class KeywordsController < ApplicationController
       @tweets = @keyword.tweets.where(useful: true).includes(:company).page params[:page]
     end
     @companies = @keyword.companies.reorder("tweet_count desc").take(50)
+  end
+
+  def chart_data
+    # company_tweet_count is saved in redis
+    @chart_data = {}
+    @keyword.company_tweet_count.members(:with_scores => true).reverse[0..10].each do |arr|
+      name = Company.find(arr[0]).name
+      @chart_data[name] = arr[1]
+    end
+    render json: @chart_data
   end
 
   # GET /keywords/new

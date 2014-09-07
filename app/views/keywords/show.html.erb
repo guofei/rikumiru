@@ -28,19 +28,36 @@
 </div>
 <hr />
 
-<div class="panel panel-primary">
-  <div class="panel-heading">
-    <h4 class="panel-title">
-      <%= fa_icon "twitter", text: "ツイート", right: true -%>
-    </h4>
-  </div>
-  <div class="panel-body">
-    <% @tweets.each do |tweet| -%>
-      <div class="<%= tweet.id %>">
-	<%= render partial: 'tweets/tweet', locals: { tweet: tweet, show_company: true } -%>
-	<hr class="hr-point" />
+<div class="row">
+  <div class="col-xs-12 col-sm-7">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+	<h4 class="panel-title">
+	  <%= fa_icon "twitter", text: "ツイート", right: true -%>
+	</h4>
       </div>
-    <% end -%>
+      <div class="panel-body">
+	<% @tweets.each do |tweet| -%>
+	  <div class="<%= tweet.id %>">
+	    <%= render partial: 'tweets/tweet', locals: { tweet: tweet, show_company: true } -%>
+	    <hr class="hr-point" />
+	  </div>
+	<% end -%>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xs-12 col-sm-5">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+	<h4 class="panel-title">
+	  <%= fa_icon "bar-chart", text: "話題分析" -%>
+	</h4>
+      </div>
+      <div class="panel-body">
+	<%= pie_chart chart_data_keyword_path(@keyword) %>
+      </div>
+    </div>
   </div>
 </div>
 

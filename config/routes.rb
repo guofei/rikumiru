@@ -14,7 +14,9 @@ Rails.application.routes.draw do
     post 'bayesfilter', on: :collection
   end
 
-  resources :keywords, path: 'topics'
+  resources :keywords, path: 'topics' do
+    get 'chart_data', on: :member
+  end
 
   resources :searches, only: [:index], path: 'search'
 

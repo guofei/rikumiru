@@ -24,7 +24,7 @@ class CompaniesController < ApplicationController
   def chart_data
     @keywords = @company.keywords.sort {|a, b| b.tweets_count_with_company(@company) <=> a.tweets_count_with_company(@company) }
     @chart_data = {}
-    @keywords[0..10].each {|k| @chart_data[k.name] = k.tweets_count_with_company(@company) }
+    @keywords[0..20].each {|k| @chart_data[k.name] = k.tweets_count_with_company(@company) }
     render json: @chart_data
   end
 
