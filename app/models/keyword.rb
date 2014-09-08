@@ -10,15 +10,6 @@ class Keyword < ActiveRecord::Base
   before_destroy { tweets.clear }
   scope :rank, -> { order("tweet_count desc") }
 
-  def self.reset_company_tweet_count
-    self.all.each do |k|
-      Company.all.each do |c|
-        count = k.tweets.where(useful: true).where(company: c).count
-        k.company_tweet_count[c.id] = count
-      end
-    end
-  end
-
   def self.reset_tweet_count
     self.all.each do |k|
       count = k.tweets.where(useful: true).count

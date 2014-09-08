@@ -12,7 +12,7 @@ class Tweet < ActiveRecord::Base
 
   paginates_per 100
 
-  def self.period_count_array(from = (Date.today-1.month).beginning_of_day,to = Date.today.end_of_day)
+  def self.period_count_array(from = 31.days.ago.beginning_of_day, to = Date.yesterday.end_of_day)
     where(created_at: from..to).unscoped.group('date(created_at)').count
   end
 
