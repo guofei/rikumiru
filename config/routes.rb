@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users
 
+  get 'users/set_admin_cookie'
+
   resources :categories
 
   resources :companies do

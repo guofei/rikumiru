@@ -10,7 +10,7 @@
   <% @companies.each do |company| -%>
       <%= link_to "#{company.name} #{company.tweet_count}件", company_path(company), class: "btn btn-info" -%>
 
-    <% if can?(:admin, current_user) && params[:admin] == "1" -%>
+    <% if can?(:admin, current_user) && show_admin? -%>
       <%= link_to 'Edit', edit_company_path(company) %>
       <%= link_to 'Destroy', company, method: :delete, data: { confirm: 'Are you sure?' } %>
     <% end -%>
@@ -18,13 +18,7 @@
 </div>
 <%= paginate @companies %>
 
-<% if can?(:admin, current_user) && params[:admin] == "1" -%>
+<% if can?(:admin, current_user) && show_admin? -%>
   <br />
   <%= link_to 'New Company', new_company_path %>
-<% end -%>
-
-<% if can? :admin, current_user -%>
-  <br />
-  <%= link_to "Admin", companies_path + "?admin=1" -%>
-  <%= link_to "User", companies_path -%>
 <% end -%>

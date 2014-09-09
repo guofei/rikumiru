@@ -62,9 +62,3 @@
 </div>
 
 <%= paginate @tweets %>
-
-<% if can? :admin, current_user -%>
-  <br />
-  <%= link_to "Admin", keyword_path(@keyword) + "?admin=1" -%>
-  <%= link_to "User", keyword_path(@keyword) -%>
-<% end -%>

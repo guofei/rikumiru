@@ -89,8 +89,3 @@
     </div>
   </div>
 </div><!--/row-->
-
-<% if can? :admin, current_user -%>
-  <%= link_to "Admin", root_path + "?admin=1" -%>
-  <%= link_to "User", root_path -%>
-<% end -%>

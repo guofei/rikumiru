@@ -9,7 +9,7 @@
 <div class="link-buttons">
   <% @keywords.each do |keyword| -%>
     <%= link_to "#{keyword.name} #{keyword.tweet_count}件", keyword_path(keyword), class: "btn btn-info" -%>
-    <% if can?(:admin, current_user) && params[:admin] == "1" -%>
+    <% if can?(:admin, current_user) && show_admin? -%>
       <%= link_to 'Edit', edit_keyword_path(keyword) %>
       <%= link_to 'Destroy', keyword, method: :delete, data: { confirm: 'Are you sure?' } %>
     <% end -%>
@@ -17,13 +17,7 @@
 </div>
 <%= paginate @keywords %>
 
-<% if can?(:admin, current_user) && params[:admin] == "1" -%>
+<% if can?(:admin, current_user) && show_admin? -%>
   <br />
   <%= link_to 'New Keyword', new_keyword_path %>
-<% end -%>
-
-<% if can? :admin, current_user -%>
-  <br />
-  <%= link_to "Admin", keywords_path + "?admin=1" -%>
-  <%= link_to "User", keywords_path -%>
 <% end -%>
