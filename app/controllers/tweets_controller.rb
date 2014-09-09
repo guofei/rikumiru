@@ -14,8 +14,13 @@ class TweetsController < ApplicationController
     if(params[:useful] == "1")
       if params[:keyword]
         if params[:bayesfilter] == "1"
-          @tweets = Tweet.where(useful: true).where("text like '%#{params[:keyword]}%'").where(bayesfilter: true).reorder("updated_at desc").includes(:company).page params[:page]
-          @count = Tweet.where(useful: true).where("text like '%#{params[:keyword]}%'").where(bayesfilter: true).count
+          if params[:company]
+            @tweets = Tweet.where(useful: true).where("company_id < #{params[:company].to_i}").where("text like '%#{params[:keyword]}%'").where(bayesfilter: true).reorder("updated_at desc").includes(:company).page params[:page]
+            @count = Tweet.where(useful: true).where("company_id < #{params[:company].to_i}").where("text like '%#{params[:keyword]}%'").where(bayesfilter: true).count
+          else
+            @tweets = Tweet.where(useful: true).where("text like '%#{params[:keyword]}%'").where(bayesfilter: true).reorder("updated_at desc").includes(:company).page params[:page]
+            @count = Tweet.where(useful: true).where("text like '%#{params[:keyword]}%'").where(bayesfilter: true).count
+          end
         elsif params[:bayesfilter] == "0"
           @tweets = Tweet.where(useful: true).where("text like '%#{params[:keyword]}%'").where(bayesfilter: false).reorder("updated_at desc").includes(:company).page params[:page]
           @count = Tweet.where(useful: true).where("text like '%#{params[:keyword]}%'").where(bayesfilter: false).count
@@ -25,8 +30,13 @@ class TweetsController < ApplicationController
         end
       else
         if params[:bayesfilter] == "1"
-          @tweets = Tweet.where(useful: true).includes(:company).where(bayesfilter: true).reorder("updated_at desc").page params[:page]
-          @count = Tweet.where(useful: true).where(bayesfilter: true).count
+          if params[:company]
+            @tweets = Tweet.where(useful: true).where("company_id < #{params[:company].to_i}").includes(:company).where(bayesfilter: true).reorder("updated_at desc").page params[:page]
+            @count = Tweet.where(useful: true).where("company_id < #{params[:company].to_i}").where(bayesfilter: true).count
+          else
+            @tweets = Tweet.where(useful: true).includes(:company).where(bayesfilter: true).reorder("updated_at desc").page params[:page]
+            @count = Tweet.where(useful: true).where(bayesfilter: true).count
+          end
         elsif params[:bayesfilter] == "0"
           @tweets = Tweet.where(useful: true).includes(:company).where(bayesfilter: false).reorder("updated_at desc").page params[:page]
           @count = Tweet.where(useful: true).where(bayesfilter: false).count
