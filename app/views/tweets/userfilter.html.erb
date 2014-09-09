@@ -1,0 +1,51 @@
+count: <%= @count %>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Company<th>
+      <th>Text</th>
+      <th>user_vote</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tweets.each do |tweet| %>
+      <tr class="<%= tweet.id %>">
+        <td><%= tweet.company.name %></td>
+        <td><%= tweet.text %></td>
+        <td><%= tweet.user_vote %></td>
+	<td>
+	  <div class="<%= tweet.id %>-real">
+	    <% if tweet.useful == true %>
+	      Real
+	    <% else %>
+	      <%= form_for(tweet, html: {multipart: :true}, remote: true) do |f| %>
+		<%= f.hidden_field :useful, value: 1 %>
+		<%= f.hidden_field :bayesfilter, value: 0 %>
+		<%= f.submit "Useful", class: "btn btn-default btn-xs" %>
+	      <% end %>
+	    <% end %>
+	  </div>
+	</td>
+	<td>
+	  <div class="<%= tweet.id %>-spam">
+	    <% if tweet.useful == false %>
+	      Spam
+	    <% else %>
+	      <%= form_for(tweet, html: {multipart: :true}, remote: true) do |f| %>
+		<%= f.hidden_field :useful, value: 0 %>
+		<%= f.hidden_field :bayesfilter, value: 0 %>
+		<%= f.submit "Unuseful", class: "btn btn-default btn-xs" %>
+	      <% end %>
+	    <% end %>
+	  </div>
+	</td>
+        <td><%= link_to 'Del', tweet, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-default btn-xs", remote: true %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= paginate @tweets %>

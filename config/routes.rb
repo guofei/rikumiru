@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :tweets do
     put 'vote', on: :member
     post 'bayesfilter', on: :collection
+    get 'userfilter', on: :collection
   end
 
   resources :keywords, path: 'topics' do
