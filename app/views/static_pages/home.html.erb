@@ -15,6 +15,20 @@
 	</h4>
       </div>
 
+      <div class="panel-body">
+	<% @keywords.each do |keyword| -%>
+	  <p>
+	    <%= keyword.name -%>
+	    <strong>
+	      <%= link_to keyword.tweet_count, keyword_path(keyword), class: "pull-right" -%>
+	    </strong>
+	  </p>
+	<% end -%>
+	<p>
+	  <%= link_to "もっと見る", keywords_path -%>
+	</p>
+      </div>
+
       <ul class="list-group">
 	<li class="list-group-item">
 	  <div class="row">
@@ -34,19 +48,6 @@
 	</li>
       </ul>
 
-      <div class="panel-body">
-	<% @keywords.each do |keyword| -%>
-	  <p>
-	    <%= keyword.name -%>
-	    <strong>
-	      <%= link_to keyword.tweet_count, keyword_path(keyword), class: "pull-right" -%>
-	    </strong>
-	  </p>
-	<% end -%>
-	<p>
-	  <%= link_to "もっと見る", keywords_path -%>
-	</p>
-      </div>
     </div>
   </div>
 
@@ -57,6 +58,22 @@
 	  <%= fa_icon "bar-chart", text: "就職トレンド", right: true -%>
 	</h4>
       </div>
+
+      <ul class="list-group">
+	<li class="list-group-item">
+	  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+	  <!-- trend-ad -->
+	  <ins class="adsbygoogle"
+	       style="display:block"
+	       data-ad-client="ca-pub-8503004762159282"
+	       data-ad-slot="7873260253"
+	       data-ad-format="auto"></ins>
+	  <script>
+	    (adsbygoogle = window.adsbygoogle || []).push({});
+	  </script>
+	</li>
+      </ul>
+
       <div class="panel-body">
 	<%= line_chart static_pages_chart_data_path %>
       </div>
@@ -94,6 +111,20 @@
 	</h4>
       </div>
 
+      <div class="panel-body">
+	<% @companies.each do |c| -%>
+	  <p>
+	    <%= c.name -%>
+	    <strong>
+	      <%= link_to c.tweet_count, company_path(c), class: "pull-right" -%>
+	    </strong>
+	  </p>
+	<% end -%>
+	<p>
+	  <%= link_to "もっと見る", companies_path -%>
+	</p>
+      </div>
+
       <ul class="list-group">
 	<li class="list-group-item">
 	  <div class="row">
@@ -113,19 +144,6 @@
 	</li>
       </ul>
 
-      <div class="panel-body">
-	<% @companies.each do |c| -%>
-	  <p>
-	    <%= c.name -%>
-	    <strong>
-	      <%= link_to c.tweet_count, company_path(c), class: "pull-right" -%>
-	    </strong>
-	  </p>
-	<% end -%>
-	<p>
-	  <%= link_to "もっと見る", companies_path -%>
-	</p>
-      </div>
     </div>
   </div>
 </div><!--/row-->
