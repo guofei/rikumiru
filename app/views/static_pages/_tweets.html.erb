@@ -10,7 +10,19 @@
   </h4>
 </div>
 <ul class="list-group">
-  <% @tweets.each_with_index do |tweet, i| -%>
+  <li class="list-group-item">
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <!-- trend-ad -->
+    <ins class="adsbygoogle"
+	 style="display:block"
+	 data-ad-client="ca-pub-8503004762159282"
+	 data-ad-slot="7873260253"
+	 data-ad-format="auto"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </li>
+  <% tweets.each_with_index do |tweet, i| -%>
     <li class="list-group-item <%= tweet.id %>">
       <%= render partial: 'tweets/tweet', locals: { tweet: tweet, show_company: true } -%>
     </li>

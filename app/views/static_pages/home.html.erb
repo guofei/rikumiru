@@ -60,36 +60,7 @@
     </div>
 
     <div class="panel panel-primary latest-tweet">
-      <div class="panel-heading">
-	<h4 class="panel-title">
-	  <%= fa_icon "twitter", text: "最新ツイート", right: true -%>
-	  <div class="pull-right">
-	    <%= form_tag static_pages_update_path, html: {multipart: :true}, remote: true do -%>
-	      <%= hidden_field_tag(:offset, "10") %>
-	      <%= submit_tag "次の10件を表示", class: "btn btn-default btn-xs" %>
-	    <% end -%>
-	  </div>
-	</h4>
-      </div>
-      <ul class="list-group">
-	<li class="list-group-item">
-	  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-	  <!-- trend-ad -->
-	  <ins class="adsbygoogle"
-	       style="display:block"
-	       data-ad-client="ca-pub-8503004762159282"
-	       data-ad-slot="7873260253"
-	       data-ad-format="auto"></ins>
-	  <script>
-	    (adsbygoogle = window.adsbygoogle || []).push({});
-	  </script>
-	</li>
-	<% @tweets.each_with_index do |tweet, i| -%>
-	  <li class="list-group-item <%= tweet.id %>">
-	    <%= render partial: 'tweets/tweet', locals: { tweet: tweet, show_company: true } -%>
-	  </li>
-	<% end -%>
-      </ul>
+      <%= render 'tweets', tweets: @tweets, offset: "10" -%>
     </div>
   </div>
 
