@@ -1,17 +1,18 @@
-<h2>Sign in</h2>
+<div class="page-header">
+  <h2>ログイン</h2>
+</div>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email, autofocus: true %></div>
-
-  <div><%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "off" %></div>
-
+<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name),
+		    wrapper_mappings: { boolean: :vertical_boolean }) do |f| %>
+  <%= f.error_notification %>
+  <%= f.input :email, placeholder: 'Enter email' %>
+  <%= f.input :password, placeholder: 'Password' %>
   <% if devise_mapping.rememberable? -%>
-    <div><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
+    <%= f.input :remember_me, as: :boolean %>
   <% end -%>
-
-  <div><%= f.submit "Sign in" %></div>
+  <%= f.button :submit, "ログイン" %>
 <% end %>
+
+<br />
 
 <%= render "devise/shared/links" %>
