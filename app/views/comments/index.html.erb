@@ -1,0 +1,36 @@
+<div class="page-header">
+  <h2>
+    count: <%= @count %>
+  </h2>
+</div>
+
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      <%= fa_icon "comment", text: "コメント" -%>
+    </h4>
+  </div>
+  <div class="panel-body">
+    <% @comments.each do |comment| -%>
+      <div class="media">
+	<div class="media-body">
+	  <div class="media-heading">
+	    <% if comment.commentable_type == "Company" -%>
+	      <%= link_to comment.commentable.name, company_path(comment.commentable) -%>,
+	    <% end -%>
+	    IP: <%= comment.ip %>,
+	    <small><%= time_ago_in_words comment.created_at -%>
+	      <% if can? :admin, current_user -%>
+		<%= link_to 'Del', comment, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-default btn-xs" %>
+	      <% end  -%>
+	    </small>
+	  </div>
+	  <%= simple_format comment.comment -%>
+	</div>
+      </div>
+      <hr class="hr-point">
+    <% end %>
+  </div>
+</div>
+
+<%= paginate @comments %>

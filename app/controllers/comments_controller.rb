@@ -1,6 +1,11 @@
 class CommentsController < ApplicationController
-  before_action :authenticate_user!, only: [:destroy]
-  before_action :admin_check, only: [:destroy]
+  before_action :authenticate_user!, only: [:destroy, :index]
+  before_action :admin_check, only: [:destroy, :index]
+
+  def index
+    @comments = Comment.all.page(params[:page]).includes(:commentable)
+    @count = Comment.count
+  end
 
   def create
     comment = Comment.new comment_params
