@@ -98,6 +98,7 @@
 	  <%= f.input :comment, label: false, :input_html => {:rows => 6} %>
 	  <%= f.input :commentable_type, as: :hidden, :input_html => { value: @company.class.to_s } %>
 	  <%= f.input :commentable_id, as: :hidden, :input_html => { value: @company.id } %>
+	  <%= show_simple_captcha %>
 	  <%= f.button :submit, "書き込む" %>
 	<% end -%>
       </div>

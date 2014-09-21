@@ -233,6 +233,8 @@ GEM
     sdoc (0.4.0)
       json (~> 1.8)
       rdoc (~> 4.0, < 5.0)
+    simple_captcha2 (0.3.2)
+      rails (>= 4.1)
     simple_form (3.1.0.rc2)
       actionpack (~> 4.0)
       activemodel (~> 4.0)
@@ -308,6 +310,7 @@ DEPENDENCIES
   rspec-rails (~> 3.0.2)
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)
+  simple_captcha2
   simple_form (~> 3.1.0.rc2)
   spring
   sqlite3

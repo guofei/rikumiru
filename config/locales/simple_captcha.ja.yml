@@ -1,0 +1,8 @@
+ja:
+  simple_captcha:
+    placeholder: "画像の中の文字を入力"
+    label: "Enter the code in the box:"
+    refresh_button_text: "リセット"
+    message:
+      default: "Secret Code did not match with the Image"
+      user: "The secret Image and code were different"

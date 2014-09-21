@@ -1,4 +1,6 @@
+# -*- coding: utf-8 -*-
 class CommentsController < ApplicationController
+  include SimpleCaptcha::ControllerHelpers
   before_action :authenticate_user!, only: [:destroy, :index]
   before_action :admin_check, only: [:destroy, :index]
 
@@ -8,12 +10,16 @@ class CommentsController < ApplicationController
   end
 
   def create
-    comment = Comment.new comment_params
     commentable = params[:comment][:commentable_type].constantize.find(params[:comment][:commentable_id])
-    comment.commentable = commentable
-    comment.user = current_user
-    comment.ip = ip
-    comment.save
+    if simple_captcha_valid?
+      comment = Comment.new comment_params
+      comment.commentable = commentable
+      comment.user = current_user
+      comment.ip = ip
+      comment.save
+    else
+      flash[:alert] = "画像に表示された文字を再入力してください。"
+    end
     redirect_to commentable
   end
 
@@ -32,7 +38,7 @@ class CommentsController < ApplicationController
 
   private
   def comment_params
-    params.require(:comment).permit!
+    params.require(:comment).permit(:title, :comment, :captcha, :captcha_key)
   end
 
   def ip
