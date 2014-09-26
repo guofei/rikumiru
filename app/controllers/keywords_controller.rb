@@ -14,9 +14,9 @@ class KeywordsController < ApplicationController
   def show
     if params[:c]
       company = Company.find(params[:c])
-      @tweets = @keyword.tweets.where(useful: true).where(company: company).includes(:company).page params[:page]
+      @tweets = @keyword.tweets.where(useful: true).where(company: company).reorder("created_at").includes(:company).page params[:page]
     else
-      @tweets = @keyword.tweets.where(useful: true).includes(:company).page params[:page]
+      @tweets = @keyword.tweets.where(useful: true).reorder("created_at").includes(:company).page params[:page]
     end
     @companies = @keyword.companies.reorder("tweet_count desc").take(50)
   end
