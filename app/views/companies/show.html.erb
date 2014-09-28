@@ -7,26 +7,6 @@
   </h2>
 </div>
 
-<div class="small-link-buttons">
-  <% if params[:k] -%>
-    <%= link_to "全て", company_path(@company), class: "btn btn-info btn-sm" %>
-  <% else -%>
-    <%= link_to "全て", company_path(@company), class: "btn btn-info btn-sm active" %>
-  <% end -%>
-
-  <% @keywords.each do |keyword| -%>
-    <% count = keyword.tweets_count_with_company(@company) -%>
-    <% if count > 0 -%>
-      <% if params[:k].to_i == keyword.id -%>
-	<%= link_to "#{keyword.name}(#{count}件)", company_path(@company) + "?k=#{keyword.id}", class: "btn btn-info btn-sm active" -%>
-      <% else -%>
-	<%= link_to "#{keyword.name}(#{count}件)", company_path(@company) + "?k=#{keyword.id}", class: "btn btn-info btn-sm" -%>
-      <% end -%>
-    <% end -%>
-  <% end -%>
-</div>
-<hr />
-
 <div class="row">
   <div class="col-xs-12 col-sm-7">
     <div class="panel panel-primary">
@@ -60,6 +40,33 @@
   </div>
 
   <div class="col-xs-12 col-sm-5">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+	<h4 class="panel-title">
+	  <%= fa_icon "rocket", text: "話題" -%>
+	</h4>
+      </div>
+      <div class="panel-body">
+	<div class="small-link-buttons">
+	  <% if params[:k] -%>
+	    <%= link_to "全て", company_path(@company), class: "btn btn-info btn-sm" %>
+	  <% else -%>
+	    <%= link_to "全て", company_path(@company), class: "btn btn-info btn-sm active" %>
+	  <% end -%>
+	  <% @keywords.each do |keyword| -%>
+	    <% count = keyword.tweets_count_with_company(@company) -%>
+	    <% if count > 0 -%>
+	      <% if params[:k].to_i == keyword.id -%>
+		<%= link_to "#{keyword.name}(#{count}件)", company_path(@company) + "?k=#{keyword.id}", class: "btn btn-info btn-sm active" -%>
+	      <% else -%>
+		<%= link_to "#{keyword.name}(#{count}件)", company_path(@company) + "?k=#{keyword.id}", class: "btn btn-info btn-sm" -%>
+	      <% end -%>
+	    <% end -%>
+	  <% end -%>
+	</div>
+      </div>
+    </div>
+
     <div class="panel panel-primary">
       <div class="panel-heading">
 	<h4 class="panel-title">
