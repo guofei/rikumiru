@@ -2,6 +2,11 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 $ ->
-        $('.progress').hide()
+        $('.unuseful-p').hide()
+        $('.bayes-p').hide()
         $('.bayes').submit ->
-                $('.progress').show()
+                $('.bayes-p').show()
+                $('.unuseful').hide()
+        $('.unuseful').submit ->
+                $('.unuseful-p').show()
+                $('.bayes').hide()

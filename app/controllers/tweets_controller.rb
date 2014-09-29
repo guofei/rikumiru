@@ -119,6 +119,19 @@ class TweetsController < ApplicationController
     end
   end
 
+  def unuseful
+    tweet_ids = params[:tweets]
+    tweet_ids.each do |tweet_id|
+      tweet = Tweet.find(tweet_id)
+      next if tweet.useful == false
+      tweet.useful = false
+      tweet.save
+    end
+    respond_to do |format|
+      format.js
+    end
+  end
+
   def bayesfilter
     tweet_ids = params[:tweets]
     tweet_ids.each do |tweet_id|
