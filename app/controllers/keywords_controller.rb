@@ -14,9 +14,11 @@ class KeywordsController < ApplicationController
   def show
     if params[:c]
       company = Company.find(params[:c])
-      @tweets = @keyword.tweets.where(useful: true).where(company: company).reorder("created_at").includes(:company).page params[:page]
+      page = params[:page] ? params[:page] : @keyword.tweets.where(useful: true).where(company: company).page.num_pages
+      @tweets = @keyword.tweets.where(useful: true).where(company: company).reorder("created_at").includes(:company).page page
     else
-      @tweets = @keyword.tweets.where(useful: true).reorder("created_at").includes(:company).page params[:page]
+      page = params[:page] ? params[:page] : @keyword.tweets.where(useful: true).reorder("created_at").page.num_pages
+      @tweets = @keyword.tweets.where(useful: true).reorder("created_at").includes(:company).page page
     end
     @companies = @keyword.companies.reorder("tweet_count desc").take(50)
   end
