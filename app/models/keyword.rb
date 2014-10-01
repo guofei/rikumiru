@@ -27,6 +27,7 @@ class Keyword < ActiveRecord::Base
     if company_tweet_count[company.id] > 0
       company_tweet_count[company.id].to_i
     else
+      return 0 if company.tweet_count == 0
       count = tweets.where(useful: true).where(company: company).count
       company_tweet_count[company.id] = count
       count
