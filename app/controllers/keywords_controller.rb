@@ -15,10 +15,10 @@ class KeywordsController < ApplicationController
     if params[:c]
       company = Company.find(params[:c])
       page = params[:page] ? params[:page] : @keyword.tweets.where(useful: true).where(company: company).page.num_pages
-      @tweets = @keyword.tweets.where(useful: true).where(company: company).reorder("created_at").includes(:company).page page
+      @tweets = @keyword.tweets.where(useful: true).where(company: company).reorder("created_at").page page
     else
       page = params[:page] ? params[:page] : @keyword.tweets.where(useful: true).reorder("created_at").page.num_pages
-      @tweets = @keyword.tweets.where(useful: true).reorder("created_at").includes(:company).page page
+      @tweets = @keyword.tweets.where(useful: true).reorder("created_at").page page
     end
     @companies = @keyword.companies.reorder("tweet_count desc").take(50)
   end
