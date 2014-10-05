@@ -1,22 +1,28 @@
 <% title "#{@company.name} - リクリブ" -%>
 
-<div class="page-header">
-  <h2>
-    <%= @company.name %>
-    <small><%= t('title') %> - 話題数: <%= @company.tweet_count %>件</small>
-  </h2>
+<div class="col-xs-12">
+  <div class="page-header">
+    <h2>
+      <%= @company.name %>
+      <small><%= t('title') %> - 話題数: <%= @company.tweet_count %>件</small>
+    </h2>
+  </div>
 </div>
 
-<div class="row">
-  <div class="col-xs-12 col-sm-7">
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-	<h4 class="panel-title">
-	  <%= fa_icon "twitter", text: "ツイート", right: true -%>
-	</h4>
-      </div>
-      <ul class="list-group">
-	<li class="list-group-item">
+<div class="col-xs-12 col-sm-7">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+	<%= fa_icon "twitter", text: "ツイート", right: true -%>
+      </h4>
+    </div>
+    <div class="panel-body">
+      <% @tweets.includes(:keywords).each_with_index do |tweet, index| -%>
+	<div class="<%= tweet.id %>">
+	  <%= render partial: 'tweets/tweet', locals: { tweet: tweet, show_company: false } -%>
+	  <hr class="hr-point" />
+	</div>
+	<% if index == 2 || index == 50 -%>
 	  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 	  <ins class="adsbygoogle"
 	       style="display:block"
@@ -26,90 +32,84 @@
 	  <script>
 	    (adsbygoogle = window.adsbygoogle || []).push({});
 	  </script>
-	</li>
-      </ul>
-      <div class="panel-body">
-	<% @tweets.includes(:keywords).each do |tweet| -%>
-	  <div class="<%= tweet.id %>">
-	    <%= render partial: 'tweets/tweet', locals: { tweet: tweet, show_company: false } -%>
-	    <hr class="hr-point" />
-	  </div>
+	  <hr class="hr-point" />
 	<% end -%>
-	<%= paginate @tweets %>
-      </div>
-    </div>
-  </div>
-
-  <div class="col-xs-12 col-sm-5">
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-	<h4 class="panel-title">
-	  <%= fa_icon "rocket", text: "話題" -%>
-	</h4>
-      </div>
-      <div class="panel-body">
-	<div class="small-link-buttons">
-	  <% if params[:k] -%>
-	    <%= link_to "全て", company_path(@company), class: "btn btn-info btn-sm" %>
-	  <% else -%>
-	    <%= link_to "全て", company_path(@company), class: "btn btn-info btn-sm active" %>
-	  <% end -%>
-	  <% @keywords.each do |keyword| -%>
-	    <% count = keyword.tweets_count_with_company(@company) -%>
-	    <% if count > 0 -%>
-	      <% if params[:k].to_i == keyword.id -%>
-		<%= link_to "#{keyword.name}(#{count}件)", company_path(@company) + "?k=#{keyword.id}", class: "btn btn-info btn-sm active" -%>
-	      <% else -%>
-		<%= link_to "#{keyword.name}(#{count}件)", company_path(@company) + "?k=#{keyword.id}", class: "btn btn-info btn-sm" -%>
-	      <% end -%>
-	    <% end -%>
-	  <% end -%>
-	</div>
-      </div>
-    </div>
-
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-	<h4 class="panel-title">
-	  <%= fa_icon "bar-chart", text: "話題分析" -%>
-	</h4>
-      </div>
-      <div class="panel-body">
-	<%= pie_chart chart_data_company_path(@company) %>
-      </div>
-    </div>
-
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-	<h4 class="panel-title">
-	  <%= fa_icon "comment", text: "コメント" -%>
-	</h4>
-      </div>
-      <div class="panel-body">
-	<% @company.comments.take(100).each_with_index do |comment, i| -%>
-	  <div class="media">
-	    <div class="media-body">
-	      <div class="media-heading">
-		<%= i + 1 -%>. ID: <%= comment.comment_id %>, <small><%= time_ago_in_words comment.created_at -%>
-		  <% if can? :admin, current_user -%>
-		    <%= link_to 'Del', comment, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-default btn-xs" %>
-		  <% end  -%>
-		</small>
-	      </div>
-	      <%= simple_format comment.comment -%>
-	    </div>
-	  </div>
-	  <hr class="hr-point">
-	<% end %>
-
-	<%= simple_form_for Comment.new do |f| -%>
-	  <%= f.input :comment, label: false, :input_html => {:rows => 6} %>
-	  <%= f.input :commentable_type, as: :hidden, :input_html => { value: @company.class.to_s } %>
-	  <%= f.input :commentable_id, as: :hidden, :input_html => { value: @company.id } %>
-	  <%= show_simple_captcha %>
-	  <%= f.button :submit, "書き込む" %>
-	<% end -%>
-      </div>
+      <% end -%>
+      <%= paginate @tweets %>
     </div>
   </div>
 </div>
+
+<div class="col-xs-12 col-sm-5">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+	<%= fa_icon "rocket", text: "話題" -%>
+      </h4>
+    </div>
+    <div class="panel-body">
+      <div class="small-link-buttons">
+	<% if params[:k] -%>
+	  <%= link_to "全て", company_path(@company), class: "btn btn-info btn-sm" %>
+	<% else -%>
+	  <%= link_to "全て", company_path(@company), class: "btn btn-info btn-sm active" %>
+	<% end -%>
+	<% @keywords.each do |keyword| -%>
+	  <% count = keyword.tweets_count_with_company(@company) -%>
+	  <% if count > 0 -%>
+	    <% if params[:k].to_i == keyword.id -%>
+	      <%= link_to "#{keyword.name}(#{count}件)", company_path(@company) + "?k=#{keyword.id}", class: "btn btn-info btn-sm active" -%>
+	    <% else -%>
+	      <%= link_to "#{keyword.name}(#{count}件)", company_path(@company) + "?k=#{keyword.id}", class: "btn btn-info btn-sm" -%>
+	    <% end -%>
+	  <% end -%>
+	<% end -%>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+	<%= fa_icon "bar-chart", text: "話題分析" -%>
+      </h4>
+    </div>
+    <div class="panel-body">
+      <%= pie_chart chart_data_company_path(@company) %>
+    </div>
+  </div>
+
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+	<%= fa_icon "comment", text: "コメント" -%>
+      </h4>
+    </div>
+    <div class="panel-body">
+      <% @company.comments.take(100).each_with_index do |comment, i| -%>
+	<div class="media">
+	  <div class="media-body">
+	    <div class="media-heading">
+	      <%= i + 1 -%>. ID: <%= comment.comment_id %>, <small><%= time_ago_in_words comment.created_at -%>
+		<% if can? :admin, current_user -%>
+		  <%= link_to 'Del', comment, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-default btn-xs" %>
+		<% end  -%>
+	      </small>
+	    </div>
+	    <%= simple_format comment.comment -%>
+	  </div>
+	</div>
+	<hr class="hr-point">
+      <% end %>
+
+      <%= simple_form_for Comment.new do |f| -%>
+	<%= f.input :comment, label: false, :input_html => {:rows => 6} %>
+	<%= f.input :commentable_type, as: :hidden, :input_html => { value: @company.class.to_s } %>
+	<%= f.input :commentable_id, as: :hidden, :input_html => { value: @company.id } %>
+	<%= show_simple_captcha %>
+	<%= f.button :submit, "書き込む" %>
+      <% end -%>
+    </div>
+  </div>
+</div>
+

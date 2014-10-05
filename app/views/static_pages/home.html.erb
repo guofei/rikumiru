@@ -1,91 +1,92 @@
-<div class="page-header">
-  <h2>
-    <div class="pull-right"><small>就職話題数: <%= Tweet.count %>件</small></div>
-    <%= t('title') -%>
-  </h2>
+<div class="col-xs-12">
+  <div class="page-header">
+    <h2>
+      <div class="pull-right"><small>就職話題数: <%= Tweet.count %>件</small></div>
+      <%= t('title') -%>
+    </h2>
+  </div>
 </div>
-<div class="row">
-  <div class="col-xs-12 col-sm-3">
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-	<h4 class="panel-title">
-	  <%= link_to keywords_path do -%>
-	    <%= fa_icon "external-link", text: "就職の話題（件）" -%>
-	  <% end -%>
-	</h4>
-      </div>
-
-      <div class="panel-body">
-	<% @keywords.each do |keyword| -%>
-	  <p>
-	    <%= keyword.name -%>
-	    <strong>
-	      <%= link_to keyword.tweet_count, keyword_path(keyword), class: "pull-right" -%>
-	    </strong>
-	  </p>
+<div class="col-xs-12 col-sm-3">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+	<%= link_to keywords_path do -%>
+	  <%= fa_icon "external-link", text: "就職の話題（件）" -%>
 	<% end -%>
+      </h4>
+    </div>
+
+    <div class="panel-body">
+      <% @keywords.each do |keyword| -%>
 	<p>
-	  <%= link_to "もっと見る", keywords_path -%>
+	  <%= keyword.name -%>
+	  <strong>
+	    <%= link_to keyword.tweet_count, keyword_path(keyword), class: "pull-right" -%>
+	  </strong>
 	</p>
-      </div>
+      <% end -%>
+      <p>
+	<%= link_to "もっと見る", keywords_path -%>
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="col-xs-12 col-sm-6">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+	<%= fa_icon "bar-chart", text: "就職トレンド", right: true -%>
+      </h4>
+    </div>
+
+    <ul class="list-group">
+      <li class="list-group-item">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+	<ins class="adsbygoogle"
+	     style="display:block"
+	     data-ad-client="ca-pub-8503004762159282"
+	     data-ad-slot="6102149052"
+	     data-ad-format="auto"></ins>
+	<script>
+	  (adsbygoogle = window.adsbygoogle || []).push({});
+	</script>
+      </li>
+    </ul>
+
+    <div class="panel-body">
+      <%= line_chart static_pages_chart_data_path %>
     </div>
   </div>
 
-  <div class="col-xs-12 col-sm-6">
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-	<h4 class="panel-title">
-	  <%= fa_icon "bar-chart", text: "就職トレンド", right: true -%>
-	</h4>
-      </div>
-
-      <ul class="list-group">
-	<li class="list-group-item">
-	  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-	  <ins class="adsbygoogle"
-	       style="display:block"
-	       data-ad-client="ca-pub-8503004762159282"
-	       data-ad-slot="6102149052"
-	       data-ad-format="auto"></ins>
-	  <script>
-	    (adsbygoogle = window.adsbygoogle || []).push({});
-	  </script>
-	</li>
-      </ul>
-
-      <div class="panel-body">
-	<%= line_chart static_pages_chart_data_path %>
-      </div>
-    </div>
-
-    <div class="panel panel-primary latest-tweet">
-      <%= render 'tweets', tweets: @tweets, offset: "10" -%>
-    </div>
+  <div class="panel panel-primary latest-tweet">
+    <%= render 'tweets', tweets: @tweets, offset: "10" -%>
   </div>
+</div>
 
-  <div class="col-xs-12 col-sm-3">
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-	<h4 class="panel-title">
-	  <%= link_to companies_path do -%>
-	    <%= fa_icon "external-link", text: "企業（話題数）" -%>
-	  <% end -%>
-	</h4>
-      </div>
-
-      <div class="panel-body">
-	<% @companies.each do |c| -%>
-	  <p>
-	    <%= c.name -%>
-	    <strong>
-	      <%= link_to c.tweet_count, company_path(c), class: "pull-right" -%>
-	    </strong>
-	  </p>
+<div class="col-xs-12 col-sm-3">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+	<%= link_to companies_path do -%>
+	  <%= fa_icon "external-link", text: "企業（話題数）" -%>
 	<% end -%>
+      </h4>
+    </div>
+
+    <div class="panel-body">
+      <% @companies.each do |c| -%>
 	<p>
-	  <%= link_to "もっと見る", companies_path -%>
+	  <%= c.name -%>
+	  <strong>
+	    <%= link_to c.tweet_count, company_path(c), class: "pull-right" -%>
+	  </strong>
 	</p>
-      </div>
+      <% end -%>
+      <p>
+	<%= link_to "もっと見る", companies_path -%>
+      </p>
     </div>
   </div>
-</div><!--/row-->
+</div>
+

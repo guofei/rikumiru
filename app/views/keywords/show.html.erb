@@ -1,22 +1,27 @@
 <% title "#{@keyword.name} - リクリブ" -%>
 
-<div class="page-header">
-  <h2>
-    <%= @keyword.name %>
-    <small><%= t('title') %> - 話題数: <%= @keyword.tweet_count %>件</small>
-  </h2>
+<div class="col-xs-12">
+  <div class="page-header">
+    <h2>
+      <%= @keyword.name %>
+      <small><%= t('title') %> - 話題数: <%= @keyword.tweet_count %>件</small>
+    </h2>
+  </div>
 </div>
-
-<div class="row">
-  <div class="col-xs-12 col-sm-7">
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-	<h4 class="panel-title">
-	  <%= fa_icon "twitter", text: "ツイート", right: true -%>
-	</h4>
-      </div>
-      <ul class="list-group">
-	<li class="list-group-item">
+<div class="col-xs-12 col-sm-7">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+	<%= fa_icon "twitter", text: "ツイート", right: true -%>
+      </h4>
+    </div>
+    <div class="panel-body">
+      <% @tweets.includes(:company).each_with_index do |tweet, index| -%>
+	<div class="<%= tweet.id %>">
+	  <%= render partial: 'tweets/tweet', locals: { tweet: tweet, show_company: true } -%>
+	  <hr class="hr-point" />
+	</div>
+	<% if index == 2 || index == 50 -%>
 	  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 	  <ins class="adsbygoogle"
 	       style="display:block"
@@ -26,57 +31,51 @@
 	  <script>
 	    (adsbygoogle = window.adsbygoogle || []).push({});
 	  </script>
-	</li>
-      </ul>
-      <div class="panel-body">
-	<% @tweets.includes(:company).each do |tweet| -%>
-	  <div class="<%= tweet.id %>">
-	    <%= render partial: 'tweets/tweet', locals: { tweet: tweet, show_company: true } -%>
-	    <hr class="hr-point" />
-	  </div>
+	  <hr class="hr-point" />
 	<% end -%>
-	<%= paginate @tweets %>
-      </div>
-    </div>
-  </div>
-
-  <div class="col-xs-12 col-sm-5">
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-	<h4 class="panel-title">
-	  <%= fa_icon "building", text: "企業" -%>
-	</h4>
-      </div>
-      <div class="panel-body">
-	<div class="small-link-buttons">
-	  <% if params[:c] -%>
-	    <%= link_to "全て", keyword_path(@keyword), class: "btn btn-info btn-sm" %>
-	  <% else -%>
-	    <%= link_to "全て", keyword_path(@keyword), class: "btn btn-info btn-sm active" %>
-	  <% end -%>
-	  <% @companies.each do |c| -%>
-	    <% n = @keyword.tweets_count_with_company(c) -%>
-	    <% if n > 0 -%>
-	      <% if params[:c].to_i == c.id -%>
-		<%= link_to "#{c.name}(#{n}件)", keyword_path(@keyword) + "?c=#{c.id}", class: "btn btn-info btn-sm active" -%>
-	      <% else -%>
-		<%= link_to "#{c.name}(#{n}件)", keyword_path(@keyword) + "?c=#{c.id}", class: "btn btn-info btn-sm" -%>
-	      <% end -%>
-	    <% end -%>
-	  <% end -%>
-	</div>
-      </div>
-    </div>
-
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-	<h4 class="panel-title">
-	  <%= fa_icon "bar-chart", text: "話題分析" -%>
-	</h4>
-      </div>
-      <div class="panel-body">
-	<%= bar_chart chart_data_keyword_path(@keyword) %>
-      </div>
+      <% end -%>
+      <%= paginate @tweets %>
     </div>
   </div>
 </div>
+
+<div class="col-xs-12 col-sm-5">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+	<%= fa_icon "building", text: "企業" -%>
+      </h4>
+    </div>
+    <div class="panel-body">
+      <div class="small-link-buttons">
+	<% if params[:c] -%>
+	  <%= link_to "全て", keyword_path(@keyword), class: "btn btn-info btn-sm" %>
+	<% else -%>
+	  <%= link_to "全て", keyword_path(@keyword), class: "btn btn-info btn-sm active" %>
+	<% end -%>
+	<% @companies.each do |c| -%>
+	  <% n = @keyword.tweets_count_with_company(c) -%>
+	  <% if n > 0 -%>
+	    <% if params[:c].to_i == c.id -%>
+	      <%= link_to "#{c.name}(#{n}件)", keyword_path(@keyword) + "?c=#{c.id}", class: "btn btn-info btn-sm active" -%>
+	    <% else -%>
+	      <%= link_to "#{c.name}(#{n}件)", keyword_path(@keyword) + "?c=#{c.id}", class: "btn btn-info btn-sm" -%>
+	    <% end -%>
+	  <% end -%>
+	<% end -%>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+	<%= fa_icon "bar-chart", text: "話題分析" -%>
+      </h4>
+    </div>
+    <div class="panel-body">
+      <%= bar_chart chart_data_keyword_path(@keyword) %>
+    </div>
+  </div>
+</div>
+

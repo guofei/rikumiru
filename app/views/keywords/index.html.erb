@@ -1,23 +1,28 @@
 <% title "話題一覧 - リクリブ" -%>
 
-<div class="page-header">
-  <h2>
-    話題一覧
-    <small><%= t('title') %></small>
-  </h2>
+<div class="col-xs-12">
+  <div class="page-header">
+    <h2>
+      話題一覧
+      <small><%= t('title') %></small>
+    </h2>
+  </div>
 </div>
-<div class="link-buttons">
-  <% @keywords.each do |keyword| -%>
-    <%= link_to "#{keyword.name} #{keyword.tweet_count}件", keyword_path(keyword), class: "btn btn-info" -%>
-    <% if can?(:admin, current_user) && show_admin? -%>
-      <%= link_to 'Edit', edit_keyword_path(keyword) %>
-      <%= link_to 'Destroy', keyword, method: :delete, data: { confirm: 'Are you sure?' } %>
+<div class="col-xs-12">
+  <div class="link-buttons">
+    <% @keywords.each do |keyword| -%>
+      <%= link_to "#{keyword.name} #{keyword.tweet_count}件", keyword_path(keyword), class: "btn btn-info" -%>
+      <% if can?(:admin, current_user) && show_admin? -%>
+	<%= link_to 'Edit', edit_keyword_path(keyword) %>
+	<%= link_to 'Destroy', keyword, method: :delete, data: { confirm: 'Are you sure?' } %>
+      <% end -%>
     <% end -%>
+  </div>
+  <%= paginate @keywords %>
+
+  <% if can?(:admin, current_user) && show_admin? -%>
+    <br />
+    <%= link_to 'New Keyword', new_keyword_path %>
   <% end -%>
 </div>
-<%= paginate @keywords %>
 
-<% if can?(:admin, current_user) && show_admin? -%>
-  <br />
-  <%= link_to 'New Keyword', new_keyword_path %>
-<% end -%>

@@ -63,13 +63,11 @@
     </div>
 
     <div class="container">
+      <div class="row">
 
-      <div class="pull-right">
 	<%= render 'shared/sns' -%>
-      </div>
 
-      <% if notice || alert %>
-	<div class="row">
+	<% if notice || alert %>
 	  <div class="col-xs-12">
 	    <% if notice -%>
 	      <p class="alert alert-info"><%= notice %></p>
@@ -77,10 +75,11 @@
 	      <p class="alert alert-danger"><%= alert %></p>
 	    <% end -%>
 	  </div>
-	</div>
-      <% end %>
+	<% end %>
 
-      <%= yield %>
+	<%= yield %>
+
+      </div><!--/row-->
 
       <hr>
       <footer>
