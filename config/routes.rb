@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     put 'vote', on: :member
     post 'bayesfilter', on: :collection
     post 'unuseful', on: :collection
+    post 'removeall', on: :collection
     get 'userfilter', on: :collection
   end
 

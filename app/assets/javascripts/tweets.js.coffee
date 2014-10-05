@@ -4,9 +4,16 @@
 $ ->
         $('.unuseful-p').hide()
         $('.bayes-p').hide()
+        $('.remove-p').hide()
         $('.bayes').submit ->
                 $('.bayes-p').show()
                 $('.unuseful').hide()
+                $('.remove').hide()
         $('.unuseful').submit ->
                 $('.unuseful-p').show()
                 $('.bayes').hide()
+                $('.remove').hide()
+        $('.remove').submit ->
+                $('.remove-p').show()
+                $('.bayes').hide()
+                $('.unuseful').hide()
