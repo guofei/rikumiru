@@ -14,4 +14,12 @@ class Company < ActiveRecord::Base
       c.update_attributes(:tweet_count => count)
     end
   end
+
+  def hot_keywords
+    hash = {}
+    keywords.reorder("tweet_count desc").take(200).each do |k|
+      hash[k] = k.tweets_count_with_company self
+    end
+    hash.sort{ |(k1, v1), (k2, v2)| v2 <=> v1 }.take(40).to_h.delete_if {|key, val| val <= 0 }
+  end
 end

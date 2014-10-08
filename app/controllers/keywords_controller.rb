@@ -20,7 +20,6 @@ class KeywordsController < ApplicationController
       page = params[:page] ? params[:page] : @keyword.tweets.where(useful: true).reorder("created_at").page.num_pages
       @tweets = @keyword.tweets.where(useful: true).reorder("created_at").page page
     end
-    @companies = @keyword.companies.reorder("tweet_count desc").take(50)
   end
 
   def chart_data

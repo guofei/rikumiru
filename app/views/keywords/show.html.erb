@@ -53,14 +53,11 @@
 	<% else -%>
 	  <%= link_to "全て", keyword_path(@keyword), class: "btn btn-info btn-sm active" %>
 	<% end -%>
-	<% @companies.each do |c| -%>
-	  <% n = @keyword.tweets_count_with_company(c) -%>
-	  <% if n > 0 -%>
-	    <% if params[:c].to_i == c.id -%>
-	      <%= link_to "#{c.name}(#{n}件)", keyword_path(@keyword) + "?c=#{c.id}", class: "btn btn-info btn-sm active" -%>
-	    <% else -%>
-	      <%= link_to "#{c.name}(#{n}件)", keyword_path(@keyword) + "?c=#{c.id}", class: "btn btn-info btn-sm" -%>
-	    <% end -%>
+	<% @keyword.hot_companies.each do |c, n| -%>
+	  <% if params[:c].to_i == c.id -%>
+	    <%= link_to "#{c.name}(#{n}件)", keyword_path(@keyword) + "?c=#{c.id}", class: "btn btn-info btn-sm active" -%>
+	  <% else -%>
+	    <%= link_to "#{c.name}(#{n}件)", keyword_path(@keyword) + "?c=#{c.id}", class: "btn btn-info btn-sm" -%>
 	  <% end -%>
 	<% end -%>
       </div>
