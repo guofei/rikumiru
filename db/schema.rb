@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140921003324) do
+ActiveRecord::Schema.define(version: 20141009122203) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,17 @@ ActiveRecord::Schema.define(version: 20140921003324) do
     t.datetime "updated_at"
     t.integer  "tweet_count"
   end
+
+  create_table "hot_keywords", force: true do |t|
+    t.integer  "company_id"
+    t.string   "name"
+    t.boolean  "useful",     default: true
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "recent_day"
+  end
+
+  add_index "hot_keywords", ["company_id"], name: "index_hot_keywords_on_company_id", using: :btree
 
   create_table "keywords", force: true do |t|
     t.string   "name"

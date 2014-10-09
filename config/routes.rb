@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get 'users/set_admin_cookie'
 
   resources :categories
+  resources :hot_keywords
 
   resources :companies do
     get 'chart_data', on: :member

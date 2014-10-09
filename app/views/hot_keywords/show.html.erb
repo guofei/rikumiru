@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Company:</strong>
+  <%= @hot_keyword.company.name %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @hot_keyword.name %>
+</p>
+
+<%= link_to 'Edit', edit_hot_keyword_path(@hot_keyword) %> |
+<%= link_to 'Back', hot_keywords_path %>

@@ -1,6 +1,7 @@
 class Company < ActiveRecord::Base
   acts_as_commentable
   has_many :tweets
+  has_many :hot_keywords
   has_many :keywords, -> { uniq }, through: :tweets
 
   paginates_per 100
@@ -15,7 +16,7 @@ class Company < ActiveRecord::Base
     end
   end
 
-  def hot_keywords
+  def keywords_rank
     hash = {}
     keywords.reorder("tweet_count desc").take(200).each do |k|
       hash[k] = k.tweets_count_with_company self

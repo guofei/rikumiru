@@ -1,0 +1,28 @@
+<h1>Listing hot_keywords</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Company</th>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @hot_keywords.each do |hot_keyword| %>
+      <tr>
+        <td><%= hot_keyword.company.name %></td>
+        <td><%= hot_keyword.name %></td>
+        <td><%= link_to 'Show', hot_keyword %></td>
+        <td><%= link_to 'Edit', edit_hot_keyword_path(hot_keyword) %></td>
+        <td><%= link_to 'Destroy', hot_keyword, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= paginate @hot_keywords %>
+
+<br>
+
+<%= link_to 'New Hot keyword', new_hot_keyword_path %>

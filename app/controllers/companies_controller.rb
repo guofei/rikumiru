@@ -16,10 +16,15 @@ class CompaniesController < ApplicationController
       keyword = Keyword.find(params[:k])
       page = params[:page] ? params[:page] : keyword.tweets.where(useful: true).where(company: @company).page.num_pages
       @tweets = keyword.tweets.where(useful: true).where(company: @company).reorder("created_at").page page
+    elsif params[:keyword]
+      page = params[:page] ? params[:page] : @company.tweets.where(useful: true).where("text like '%" + params[:keyword] + "%'").page.num_pages
+      @tweets = @company.tweets.where(useful: true).where("text like '%" + params[:keyword] + "%'").reorder("created_at").page page
     else
       page = params[:page] ? params[:page] : @company.tweets.where(useful: true).page.num_pages
       @tweets = @company.tweets.where(useful: true).reorder("created_at").page page
     end
+    @hotkeywords_month = @company.hot_keywords.where(useful: true).where(recent_day: 30).limit 50
+    @hotkeywords_week = @company.hot_keywords.where(useful: true).where(recent_day: 7).limit 50
   end
 
   def chart_data
