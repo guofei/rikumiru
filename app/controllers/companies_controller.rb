@@ -23,8 +23,8 @@ class CompaniesController < ApplicationController
       page = params[:page] ? params[:page] : @company.tweets.where(useful: true).page.num_pages
       @tweets = @company.tweets.where(useful: true).reorder("created_at").page page
     end
-    @hotkeywords_month = @company.hot_keywords.where(useful: true).where(recent_day: 30).limit 20
-    @hotkeywords_week = @company.hot_keywords.where(useful: true).where(recent_day: 7).limit 20
+    @hotkeywords_month = @company.hot_keywords.where(useful: true).where(recent_day: 30).limit 50
+    @hotkeywords_week = @company.hot_keywords.where(useful: true).where(recent_day: 7).limit 50
   end
 
   def chart_data
