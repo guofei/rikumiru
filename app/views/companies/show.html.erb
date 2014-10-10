@@ -50,6 +50,11 @@
       </div>
       <div class="panel-body">
 	<div class="small-link-buttons">
+	  <% if params[:keyword] -%>
+	    <%= link_to "全て", company_path(@company), class: "btn btn-info btn-sm" %>
+	  <% else -%>
+	    <%= link_to "全て", company_path(@company), class: "btn btn-info btn-sm active" %>
+	  <% end -%>
 	  <% @hotkeywords_week.each do |keyword| -%>
 	    <% if keyword.useful -%>
 	      <% if params[:keyword].to_s == keyword.name -%>
@@ -73,6 +78,11 @@
       </div>
       <div class="panel-body">
 	<div class="small-link-buttons">
+	  <% if params[:keyword] -%>
+	    <%= link_to "全て", company_path(@company), class: "btn btn-info btn-sm" %>
+	  <% else -%>
+	    <%= link_to "全て", company_path(@company), class: "btn btn-info btn-sm active" %>
+	  <% end -%>
 	  <% @hotkeywords_month.each do |keyword| -%>
 	    <% if keyword.useful -%>
 	      <% if params[:keyword].to_s == keyword.name -%>
