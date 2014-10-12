@@ -90,3 +90,5 @@ gem 'redis-objects', '~> 1.0.0'
 gem 'high_voltage', '~> 2.2.1'
 
 gem 'chartkick', '~> 1.3.2'
+
+gem 'tf-idf-similarity'
