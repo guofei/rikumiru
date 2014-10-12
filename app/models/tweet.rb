@@ -20,7 +20,7 @@ class Tweet < ActiveRecord::Base
     keywords.each do |k|
       if useful == true
         k.increment!(:tweet_count)
-        k.company_tweet_count.increment [company.id] if k.company_tweet_count[company.id] > 0
+        k.company_tweet_count.increment [company.id] if k.company_tweet_count.member? company.id
       end
     end
     if useful == true
@@ -33,10 +33,10 @@ class Tweet < ActiveRecord::Base
       if useful_changed?
         if useful == true
           k.increment!(:tweet_count)
-          k.company_tweet_count.increment [company.id] if k.company_tweet_count[company.id] > 0
+          k.company_tweet_count.increment [company.id] if k.company_tweet_count.member? company.id
         elsif useful != true && useful_was == true
           k.decrement!(:tweet_count)
-          k.company_tweet_count.decrement [company.id] if k.company_tweet_count[company.id] > 0
+          k.company_tweet_count.decrement [company.id] if k.company_tweet_count.member? company.id
         end
       end
     end
@@ -53,7 +53,7 @@ class Tweet < ActiveRecord::Base
     keywords.each do |k|
       if useful == true
         k.decrement!(:tweet_count)
-        k.company_tweet_count.decrement [company.id] if k.company_tweet_count[company.id] > 0
+        k.company_tweet_count.decrement [company.id] if k.company_tweet_count.member? company.id
       end
     end
     if useful == true
