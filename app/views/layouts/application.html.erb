@@ -66,6 +66,11 @@
       <div class="row">
 
 	<%= render 'shared/sns' -%>
+	<div class="col-xs-12 visible-xs-block">
+	  <%= form_tag searches_path, class: "navbar-form navbar-right", method: "get" do -%>
+	    <%= text_field_tag "company", "", class: "form-control", placeholder: "検索.." -%>
+	  <% end -%>
+	</div>
 
 	<% if notice || alert %>
 	  <div class="col-xs-12">
