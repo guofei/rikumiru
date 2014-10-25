@@ -5,7 +5,7 @@ count: <%= @count %>
     <tr>
       <th>Company<th>
       <th>Text</th>
-      <th>updated</th>
+      <th>create</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -15,7 +15,7 @@ count: <%= @count %>
       <tr class="<%= tweet.id %>">
         <td><%= tweet.company.name %></td>
         <td><%= tweet.text %></td>
-        <td><%= tweet.updated_at %></td>
+        <td><%= tweet.created_at %></td>
 	<td>
 	  <div class="<%= tweet.id %>-real">
 	    <% if tweet.useful == true %>
