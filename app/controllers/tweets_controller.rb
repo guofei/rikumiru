@@ -17,6 +17,8 @@ class TweetsController < ApplicationController
     @tweets = @tweets.where(useful: nil) if params[:useful] == "null"
     @tweets = @tweets.where(bayesfilter: true) if params[:bayesfilter] == "1"
     @tweets = @tweets.where(bayesfilter: false) if params[:bayesfilter] == "0"
+    @tweets = @tweets.where("created_at <= ?", params[:day].to_i.days.ago) if params[:day]
+    @tweets = @tweets.where("created_at <= ?", params[:month].to_i.month.ago) if params[:month]
     @tweets = @tweets.where("company_id=#{params[:company].to_i}") if params[:company]
     @tweets = @tweets.where("text like '%#{params[:keyword]}%'") if params[:keyword]
 
