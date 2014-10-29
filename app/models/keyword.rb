@@ -34,10 +34,12 @@ class Keyword < ActiveRecord::Base
   end
 
   def hot_companies
-    hash = {}
-    companies.reorder("tweet_count desc").take(200).each do |com|
-      hash[com] = tweets_count_with_company com
+    Rails.cache.fetch("kw/#{id}/htcp") do
+      hash = {}
+      companies.reorder("tweet_count desc").take(200).each do |com|
+        hash[com] = tweets_count_with_company com
+      end
+      hash.sort{ |(k1, v1), (k2, v2)| v2 <=> v1 }.take(40).to_h.delete_if {|key, val| val <= 0 }
     end
-    hash.sort{ |(k1, v1), (k2, v2)| v2 <=> v1 }.take(40).to_h.delete_if {|key, val| val <= 0 }
   end
 end

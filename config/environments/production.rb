@@ -57,8 +57,8 @@ Rails.application.configure do
     :port => 6379,
     :db => 0,
     :password => Rails.application.secrets.redis_password,
-    :namespace => "rikulibcache",
-    :expires_in => 24.hours
+    :namespace => "rlcc",
+    :expires_in => 3.days
   }
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
