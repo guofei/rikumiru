@@ -15,6 +15,5 @@
     </div>
     <%= tweet.text -%>
     <small><%= link_to "不適切報告", vote_tweet_path(tweet) + "?down=1", method: :put, remote: true, data: { confirm: 'このツイートは就職と無関係ですか?' } -%></small>
-    <%= render partial: 'tweets/admin', locals: { tweet: tweet } -%>
   </div>
 </div>
