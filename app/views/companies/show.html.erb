@@ -44,6 +44,18 @@
 </div>
 
 <div class="col-xs-12 col-sm-5">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+	<%= fa_icon "bar-chart", text: "企業感情分析" -%>
+      </h4>
+    </div>
+    <div class="panel-body">
+      <%= pie_chart emotion_chart_company_path(@company) %>
+    </div>
+  </div>
+
+
   <% if @hotkeywords_week.count > 0 -%>
     <div class="panel panel-primary">
       <div class="panel-heading">
