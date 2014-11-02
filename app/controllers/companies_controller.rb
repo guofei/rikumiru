@@ -19,8 +19,8 @@ class CompaniesController < ApplicationController
     else
       @tweets = Tweet.where(useful: true).where(company: @company).reorder("created_at")
     end
-    @tweets = @tweets.where("emotion_score > 0.5") if params[:good] == "1"
-    @tweets = @tweets.where("emotion_score < -0.5") if params[:bad] == "1"
+    @tweets = @tweets.where("emotion_score > 0.6") if params[:good] == "1"
+    @tweets = @tweets.where("emotion_score < -0.6") if params[:bad] == "1"
     @tweets = @tweets.where("text like '%" + params[:keyword] + "%'") if params[:keyword]
     page = params[:page] ? params[:page] : @tweets.page.num_pages
     @tweets = @tweets.page page
@@ -107,8 +107,8 @@ class CompaniesController < ApplicationController
     end
 
     def set_emotion
-      @emotion_plus = @company.tweets.where(useful: true).where("emotion_score > 0.5").count
+      @emotion_plus = @company.tweets.where(useful: true).where("emotion_score > 0.3").count
       @emotion_minus = @company.tweets.where(useful: true).where("emotion_score < -0.5").count
-      @emotion_other = @company.tweets.where(useful: true).where("emotion_score > -0.5 and emotion_score < 0.5").count
+      @emotion_other = @company.tweets.where(useful: true).where("emotion_score > -0.5 and emotion_score < 0.3").count
     end
 end
