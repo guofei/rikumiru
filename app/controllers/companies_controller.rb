@@ -39,9 +39,9 @@ class CompaniesController < ApplicationController
   def emotion_chart
     @chart_data = {}
 
-    @chart_data["Good (#{1.0 * @emotion_plus / (@emotion_minus + @emotion_plus + @emotion_other + 1)}%)"] = @emotion_plus
-    @chart_data["Bad (#{1.0 * @emotion_minus / (@emotion_minus + @emotion_plus + @emotion_other + 1)}%)"] = @emotion_minus
-    @chart_data["Other (#{1.0 * @emotion_other / (@emotion_minus + @emotion_plus + @emotion_other + 1)}%)"] = @emotion_other
+    @chart_data["Good (#{@emotion_good_percent}%)"] = @emotion_plus
+    @chart_data["Bad (#{@emotion_bad_percent}%)"] = @emotion_minus
+    @chart_data["Other (#{@emotion_other_percent}%)"] = @emotion_other
     render json: @chart_data
   end
 
@@ -110,5 +110,8 @@ class CompaniesController < ApplicationController
       @emotion_plus = @company.tweets.where(useful: true).where("emotion_score > 0.3").count
       @emotion_minus = @company.tweets.where(useful: true).where("emotion_score < -0.5").count
       @emotion_other = @company.tweets.where(useful: true).where("emotion_score > -0.5 and emotion_score < 0.3").count
+      @emotion_good_percent = (100.0 * @emotion_plus / (@emotion_minus + @emotion_plus + @emotion_other + 1)).to_i
+      @emotion_bad_percent = (100.0 * @emotion_minus / (@emotion_minus + @emotion_plus + @emotion_other + 1)).to_i
+      @emotion_other_percent = (100.0 * @emotion_other / (@emotion_minus + @emotion_plus + @emotion_other + 1)).to_i
     end
 end

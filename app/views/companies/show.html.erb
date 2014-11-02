@@ -44,6 +44,8 @@
 </div>
 
 <div class="col-xs-12 col-sm-5">
+  <% if @emotion_good_percent != 0 || @emotion_bad_percent != 0 -%>
+
   <div class="panel panel-primary">
     <div class="panel-heading">
       <h4 class="panel-title">
@@ -52,10 +54,10 @@
     </div>
     <div class="panel-body">
       <%= link_to company_path(@company) + "?good=1" do -%>
-	<% fa_icon "smile-o 2x", text: "#{1.0 * @emotion_plus / (@emotion_minus + @emotion_plus + @emotion_other + 1)}%" -%>
+	<% fa_icon "smile-o 2x", text: "#{@emotion_good_percent}%" -%>
       <% end -%>
       <%= link_to company_path(@company) + "?bad=1", class: "pull-right" do -%>
-	<% fa_icon "frown-o 2x", text: "#{1.0 * @emotion_minus / (@emotion_minus + @emotion_plus + @emotion_other + 1)}%" -%>
+	<% fa_icon "frown-o 2x", text: "#{@emotion_bad_percent}%" -%>
       <% end -%>
       <%= pie_chart emotion_chart_company_path(@company) %>
     </div>
