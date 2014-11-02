@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141027043131) do
+ActiveRecord::Schema.define(version: 20141102054334) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -84,6 +84,7 @@ ActiveRecord::Schema.define(version: 20141027043131) do
     t.integer  "category_id"
     t.boolean  "bayesfilter"
     t.integer  "user_vote"
+    t.float    "emotion_score"
   end
 
   add_index "tweets", ["company_id"], name: "index_tweets_on_company_id", using: :btree
