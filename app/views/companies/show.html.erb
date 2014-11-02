@@ -52,13 +52,13 @@
 	</h4>
       </div>
       <div class="panel-body">
-	<%= link_to company_path(@company) + "?good=1" do -%>
+	<%= pie_chart emotion_chart_company_path(@company) %>
+	<%= link_to company_path(@company) + "?good=1", class: "btn btn-info#{" active" if params[:good]}" do -%>
 	  <% fa_icon "smile-o 2x", text: "#{@emotion_good_percent}%" -%>
 	<% end -%>
-	<%= link_to company_path(@company) + "?bad=1", class: "pull-right" do -%>
+	<%= link_to company_path(@company) + "?bad=1", class: "btn btn-info#{" active" if params[:bad]} pull-right" do -%>
 	  <% fa_icon "frown-o 2x", text: "#{@emotion_bad_percent}%" -%>
 	<% end -%>
-	<%= pie_chart emotion_chart_company_path(@company) %>
       </div>
     </div>
   <% end -%>
