@@ -1,0 +1,19 @@
+<% if good_percent != 0 || bad_percent != 0 -%>
+  <div class="panel panel-primary ">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+	<%= fa_icon "bar-chart", text: "企業感情分析" -%>
+      </h4>
+    </div>
+    <div class="panel-body">
+      <%= link_to company_path(company) + "?good=1", class: "btn btn-info#{" active" if params[:good]}" do -%>
+	<% fa_icon "smile-o 2x", text: "#{emotion_good_percent}%" -%>
+      <% end -%>
+      <%= link_to company_path(company) + "?bad=1", class: "btn btn-info#{" active" if params[:bad]}" do -%>
+	<% fa_icon "frown-o 2x", text: "#{emotion_bad_percent}%" -%>
+      <% end -%>
+      <%= link_to "全て", company_path(company), class: "btn btn-info#{" active" unless params[:bad] && params[:good]} pull-right" -%>
+      <%= pie_chart emotion_chart_company_path(company) %>
+    </div>
+  </div>
+<% end -%>
