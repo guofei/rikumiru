@@ -3,6 +3,7 @@ class CompaniesController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit, :create, :update, :destroy]
   before_action :admin_check, only: [:new, :edit, :create, :update, :destroy]
   before_action :set_company, only: [:chart_data, :emotion_chart, :show, :edit, :update, :destroy]
+  before_action :set_emotion, only: [:emotion_chart, :show]
 
   # GET /companies
   # GET /companies.json
@@ -14,16 +15,16 @@ class CompaniesController < ApplicationController
   # GET /companies/1.json
   def show
     if params[:k]
-      keyword = Keyword.find(params[:k])
-      page = params[:page] ? params[:page] : keyword.tweets.where(useful: true).where(company: @company).page.num_pages
-      @tweets = keyword.tweets.where(useful: true).where(company: @company).reorder("created_at").page page
-    elsif params[:keyword]
-      page = params[:page] ? params[:page] : @company.tweets.where(useful: true).where("text like '%" + params[:keyword] + "%'").page.num_pages
-      @tweets = @company.tweets.where(useful: true).where("text like '%" + params[:keyword] + "%'").reorder("created_at").page page
+      @tweets = Keyword.find(params[:k]).tweets.where(useful: true).where(company: @company).reorder("created_at")
     else
-      page = params[:page] ? params[:page] : @company.tweets.where(useful: true).page.num_pages
-      @tweets = @company.tweets.where(useful: true).reorder("created_at").page page
+      @tweets = Tweet.where(useful: true).where(company: @company).reorder("created_at")
     end
+    @tweets = @tweets.where("emotion_score > 0.5") if params[:good] == "1"
+    @tweets = @tweets.where("emotion_score < -0.5") if params[:bad] == "1"
+    @tweets = @tweets.where("text like '%" + params[:keyword] + "%'") if params[:keyword]
+    page = params[:page] ? params[:page] : @tweets.page.num_pages
+    @tweets = @tweets.page page
+
     @hotkeywords_month = @company.hot_keywords.where(useful: true).where(recent_day: 30).limit 30
     @hotkeywords_week = @company.hot_keywords.where(useful: true).where(recent_day: 7).limit 15
   end
@@ -37,12 +38,10 @@ class CompaniesController < ApplicationController
 
   def emotion_chart
     @chart_data = {}
-    emotion_plus = @company.tweets.where(useful: true).where("emotion_score > -0.4").count
-    emotion_minus = @company.tweets.where(useful: true).where("emotion_score < -0.5").count
-    emotion_other = @company.tweets.where(useful: true).where("emotion_score > -0.5 and emotion_score < -0.4").count
-    @chart_data["Plus"] = emotion_plus
-    @chart_data["Minus"] = emotion_minus
-    @chart_data["Other"] = emotion_other
+
+    @chart_data["Good (#{1.0 * @emotion_plus / (@emotion_minus + @emotion_plus + @emotion_other + 1)}%)"] = @emotion_plus
+    @chart_data["Bad (#{1.0 * @emotion_minus / (@emotion_minus + @emotion_plus + @emotion_other + 1)}%)"] = @emotion_minus
+    @chart_data["Other (#{1.0 * @emotion_other / (@emotion_minus + @emotion_plus + @emotion_other + 1)}%)"] = @emotion_other
     render json: @chart_data
   end
 
@@ -105,5 +104,11 @@ class CompaniesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def company_params
       params.require(:company).permit(:name, :alice_name, :tweet_id)
+    end
+
+    def set_emotion
+      @emotion_plus = @company.tweets.where(useful: true).where("emotion_score > 0.5").count
+      @emotion_minus = @company.tweets.where(useful: true).where("emotion_score < -0.5").count
+      @emotion_other = @company.tweets.where(useful: true).where("emotion_score > -0.5 and emotion_score < 0.5").count
     end
 end
