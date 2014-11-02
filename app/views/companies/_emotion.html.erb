@@ -12,7 +12,7 @@
       <%= link_to company_path(company) + "?bad=1", class: "btn btn-info#{" active" if params[:bad]}" do -%>
 	<% fa_icon "frown-o 2x", text: "#{bad_percent}%" -%>
       <% end -%>
-      <%= link_to company_path(company), class: "btn btn-info#{" active" unless params[:bad] && params[:good]} pull-right}" do -%>
+      <%= link_to company_path(company), class: "btn btn-info#{" active" unless params[:bad] && params[:good]} pull-right" do -%>
 	<% fa_icon "meh-o 2x", text: "全て" -%>
       <% end -%>
       <%= pie_chart emotion_chart_company_path(company) %>
