@@ -7,10 +7,10 @@
     </div>
     <div class="panel-body">
       <%= link_to company_path(company) + "?good=1", class: "btn btn-info#{" active" if params[:good]}" do -%>
-	<% fa_icon "smile-o 2x", text: "#{emotion_good_percent}%" -%>
+	<% fa_icon "smile-o 2x", text: "#{good_percent}%" -%>
       <% end -%>
       <%= link_to company_path(company) + "?bad=1", class: "btn btn-info#{" active" if params[:bad]}" do -%>
-	<% fa_icon "frown-o 2x", text: "#{emotion_bad_percent}%" -%>
+	<% fa_icon "frown-o 2x", text: "#{bad_percent}%" -%>
       <% end -%>
       <%= link_to "全て", company_path(company), class: "btn btn-info#{" active" unless params[:bad] && params[:good]} pull-right" -%>
       <%= pie_chart emotion_chart_company_path(company) %>
