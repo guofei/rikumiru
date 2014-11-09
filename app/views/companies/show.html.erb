@@ -52,61 +52,9 @@
     <%= render 'emotion', company: @company, good_percent: @emotion_good_percent, bad_percent: @emotion_bad_percent -%>
   </div>
 
-  <% if @hotkeywords_week.count > 0 -%>
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-	<h4 class="panel-title">
-	  <%= fa_icon "rocket", text: "今週の人気キーワード" -%>
-	</h4>
-      </div>
-      <div class="panel-body">
-	<div class="small-link-buttons">
-	  <% if params[:keyword] -%>
-	    <%= link_to "全て", company_path(@company), class: "btn btn-info btn-sm" %>
-	  <% else -%>
-	    <%= link_to "全て", company_path(@company), class: "btn btn-info btn-sm active" %>
-	  <% end -%>
-	  <% @hotkeywords_week.each do |keyword| -%>
-	    <% if keyword.useful -%>
-	      <% if params[:keyword].to_s == keyword.name -%>
-		<%= link_to keyword.name, company_path(@company) + "?keyword=#{keyword.name}", class: "btn btn-info btn-sm active" -%>
-	      <% else -%>
-		<%= link_to keyword.name, company_path(@company) + "?keyword=#{keyword.name}", class: "btn btn-info btn-sm" -%>
-	      <% end -%>
-	    <% end -%>
-	  <% end -%>
-	</div>
-      </div>
-    </div>
-  <% end -%>
-
-  <% if @hotkeywords_month.count > 0 -%>
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-	<h4 class="panel-title">
-	  <%= fa_icon "rocket", text: "今月の人気キーワード" -%>
-	</h4>
-      </div>
-      <div class="panel-body">
-	<div class="small-link-buttons">
-	  <% if params[:keyword] -%>
-	    <%= link_to "全て", company_path(@company), class: "btn btn-info btn-sm" %>
-	  <% else -%>
-	    <%= link_to "全て", company_path(@company), class: "btn btn-info btn-sm active" %>
-	  <% end -%>
-	  <% @hotkeywords_month.each do |keyword| -%>
-	    <% if keyword.useful -%>
-	      <% if params[:keyword].to_s == keyword.name -%>
-		<%= link_to keyword.name, company_path(@company) + "?keyword=#{keyword.name}", class: "btn btn-info btn-sm active" -%>
-	      <% else -%>
-		<%= link_to keyword.name, company_path(@company) + "?keyword=#{keyword.name}", class: "btn btn-info btn-sm" -%>
-	      <% end -%>
-	    <% end -%>
-	  <% end -%>
-	</div>
-      </div>
-    </div>
-  <% end -%>
+  <div class="topword">
+    <%= render 'topword', company: @company, hotkeywords_week: @hotkeywords_week, hotkeywords_month: @hotkeywords_month -%>
+  </div>
 
   <div class="panel panel-primary">
     <div class="panel-heading">

@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :companies do
     get 'chart_data', on: :member
     get 'emotion_chart', on: :member
+    post 'topword', on: :member
   end
 
   resources :comments

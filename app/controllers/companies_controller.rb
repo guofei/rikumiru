@@ -2,7 +2,7 @@
 class CompaniesController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit, :create, :update, :destroy]
   before_action :admin_check, only: [:new, :edit, :create, :update, :destroy]
-  before_action :set_company, only: [:chart_data, :emotion_chart, :show, :edit, :update, :destroy]
+  before_action :set_company, only: [:topword, :chart_data, :emotion_chart, :show, :edit, :update, :destroy]
   before_action :set_emotion, only: [:emotion_chart, :show]
 
   # GET /companies
@@ -25,8 +25,18 @@ class CompaniesController < ApplicationController
     page = params[:page] ? params[:page] : @tweets.page.num_pages
     @tweets = @tweets.page page
 
-    @hotkeywords_month = @company.hot_keywords.where(useful: true).where(recent_day: 30).limit 30
     @hotkeywords_week = @company.hot_keywords.where(useful: true).where(recent_day: 7).limit 15
+  end
+
+  def topword
+    if params[:month] == "1"
+      @hotkeywords_month = @company.hot_keywords.where(useful: true).where(recent_day: 30).limit 30
+    else
+      @hotkeywords_week = @company.hot_keywords.where(useful: true).where(recent_day: 7).limit 15
+    end
+    respond_to do |format|
+      format.js
+    end
   end
 
   def chart_data
