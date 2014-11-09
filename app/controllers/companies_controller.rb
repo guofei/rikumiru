@@ -49,9 +49,9 @@ class CompaniesController < ApplicationController
   def emotion_chart
     @chart_data = {}
 
-    @chart_data["Good (#{@emotion_good_percent}%)"] = @emotion_plus
-    @chart_data["Bad (#{@emotion_bad_percent}%)"] = @emotion_minus
-    @chart_data["Other (#{@emotion_other_percent}%)"] = @emotion_other
+    @chart_data["好き (#{@emotion_good_percent}%)"] = @emotion_plus
+    @chart_data["嫌い (#{@emotion_bad_percent}%)"] = @emotion_minus
+    @chart_data["その他 (#{@emotion_other_percent}%)"] = @emotion_other
     render json: @chart_data
   end
 
