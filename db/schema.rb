@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141103094139) do
+ActiveRecord::Schema.define(version: 20141117144800) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -86,9 +86,11 @@ ActiveRecord::Schema.define(version: 20141103094139) do
     t.integer  "user_vote"
     t.float    "emotion_score"
     t.string   "profile_img"
+    t.integer  "keyword_id"
   end
 
   add_index "tweets", ["company_id"], name: "index_tweets_on_company_id", using: :btree
+  add_index "tweets", ["keyword_id"], name: "index_tweets_on_keyword_id", using: :btree
 
   create_table "tweets_keywords", id: false, force: true do |t|
     t.integer "tweet_id",   limit: 8
