@@ -10,8 +10,8 @@
 	<% if show_company -%>
 	  <%= link_to tweet.company.name, company_path(tweet.company) -%>
 	<% else -%>
-	  <% tweet.keywords.each do |k| -%>
-	    <%= link_to k.name, keyword_path(k) -%>
+	  <% if tweet.keyword -%>
+	    <%= link_to tweet.keyword.name, keyword_path(tweet.keyword) -%>
 	  <% end -%>
 	<% end -%>
       </small>
