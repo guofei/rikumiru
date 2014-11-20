@@ -5,7 +5,6 @@ class Tweet < ActiveRecord::Base
 
   before_destroy do
     change_tweet_count_before_destroy
-    keywords.clear
   end
   before_create :change_tweet_count_before_create
   before_update :change_tweet_count_before_update
