@@ -94,3 +94,5 @@ gem 'chartkick', '~> 1.3.2'
 gem 'tf-idf-similarity'
 
 gem 'newrelic_rpm'
+
+gem 'validates_email_format_of'

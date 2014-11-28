@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   resources :categories
   resources :hot_keywords
+  resources :mailmagas
 
   resources :companies do
     get 'chart_data', on: :member
