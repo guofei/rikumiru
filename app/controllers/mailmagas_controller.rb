@@ -28,7 +28,7 @@ class MailmagasController < ApplicationController
 
     respond_to do |format|
       if @mailmaga.save
-        format.html { redirect_to @mailmaga, notice: 'Mailmaga was successfully created.' }
+        format.html { redirect_to maga_path, notice: 'Mailmaga was successfully created.' }
         format.json { render :show, status: :created, location: @mailmaga }
       else
         format.html { render :new }
@@ -69,6 +69,13 @@ class MailmagasController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def mailmaga_params
-      params.require(:mailmaga).permit(:email)
+      params.require(:mailmaga).permit(:email, :company_id, :keyword_id)
+    end
+
+    def maga_path
+      value = @mailmaga
+      value = @mailmaga.company if @mailmaga.company
+      value = @mailmaga.keyword if @mailmaga.keyword
+      value
     end
 end

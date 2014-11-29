@@ -102,9 +102,10 @@
       <div class="panel-body">
 	<p>週に一度、更新情報やオトクな情報をメルマガ形式で配信しています。
 	  ご希望の方は、下記のフォームより登録して下さい。</p>
-	<%= simple_form_for(Mailmaga.new, as: 'user_inline', wrapper: :inline_form, html: { class: 'form-inline' }) do |f| %>
+	<%= simple_form_for(Mailmaga.new, wrapper: :inline_form, html: { class: 'form-inline' }) do |f| %>
 	  <%= f.input :email, placeholder: 'Enter email' %>
-	  <%= f.button :submit %>
+	  <%= f.input :company_id, as: 'hidden', input_html: { value: @company.id } %>
+	  <%= f.button :submit, class: "btn btn-info" %>
 	<% end %>
       </div>
     </div>
