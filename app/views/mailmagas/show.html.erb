@@ -1,9 +1,18 @@
-<p id="notice"><%= notice %></p>
+<div class="col-xs-12">
+  <div class="header">
+    <h2>
+      メールマガ
+    </h2>
+  </div>
+</div>
+<div class="col-xs-12">
+  <p>
+    <strong>Email:</strong>
+    <%= @mailmaga.email %>
+  </p>
 
-<p>
-  <strong>Email:</strong>
-  <%= @mailmaga.email %>
-</p>
-
-<%= link_to 'Edit', edit_mailmaga_path(@mailmaga) %> |
-<%= link_to 'Back', mailmagas_path %>
+  <% if can?(:admin, current_user) && show_admin? -%>
+    <%= link_to 'Edit', edit_mailmaga_path(@mailmaga) %> |
+    <%= link_to 'Back', mailmagas_path %>
+  <% end -%>
+</div>
