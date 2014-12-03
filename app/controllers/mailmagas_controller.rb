@@ -75,9 +75,9 @@ class MailmagasController < ApplicationController
     end
 
     def maga_path
-      value = @mailmaga
-      value = @mailmaga.company if @mailmaga.company
-      value = @mailmaga.keyword if @mailmaga.keyword
-      value
+      path = root_path
+      path = @mailmaga.company if @mailmaga.company
+      path = @mailmaga.keyword if @mailmaga.keyword
+      path
     end
 end

@@ -6,10 +6,12 @@
   </div>
 </div>
 <div class="col-xs-12">
-  <table>
+  <table class="table">
     <thead>
       <tr>
 	<th>Email</th>
+	<th>Company</th>
+	<th>Keyword</th>
 	<th colspan="3"></th>
       </tr>
     </thead>
@@ -17,6 +19,8 @@
       <% @mailmagas.each do |mailmaga| %>
 	<tr>
           <td><%= mailmaga.email %></td>
+	  <td><%= mailmaga.company.name if mailmaga.company %></td>
+	  <td><%= mailmaga.keyword.name if mailmaga.keyword %></td>
           <td><%= link_to 'Show', mailmaga %></td>
           <td><%= link_to 'Edit', edit_mailmaga_path(mailmaga) %></td>
           <td><%= link_to 'Destroy', mailmaga, method: :delete, data: { confirm: 'Are you sure?' } %></td>

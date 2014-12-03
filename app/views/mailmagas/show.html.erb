@@ -10,6 +10,12 @@
     <strong>Email:</strong>
     <%= @mailmaga.email %>
   </p>
+  <p>
+    Company:<%= @mailmaga.company.name if @mailmaga.company %>
+  </p>
+  <p>
+    Keyword:<%= @mailmaga.keyword.name if @mailmaga.keyword %>
+  </p>
 
   <% if can?(:admin, current_user) && show_admin? -%>
     <%= link_to 'Edit', edit_mailmaga_path(@mailmaga) %> |
