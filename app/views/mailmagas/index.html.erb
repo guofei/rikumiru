@@ -16,7 +16,7 @@
       </tr>
     </thead>
     <tbody>
-      <% @mailmagas.each do |mailmaga| %>
+      <% @mailmagas.includes(:company).includes(:keyword).each do |mailmaga| %>
 	<tr>
           <td><%= mailmaga.email %></td>
 	  <td><%= mailmaga.company.name if mailmaga.company %></td>
@@ -28,6 +28,7 @@
       <% end %>
     </tbody>
   </table>
+  <%= paginate @mailmagas %>
 </div>
 
 

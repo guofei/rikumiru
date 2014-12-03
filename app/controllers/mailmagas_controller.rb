@@ -6,7 +6,7 @@ class MailmagasController < ApplicationController
   # GET /mailmagas
   # GET /mailmagas.json
   def index
-    @mailmagas = Mailmaga.all
+    @mailmagas = Mailmaga.page params[:page]
   end
 
   # GET /mailmagas/1
