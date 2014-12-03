@@ -1,4 +1,6 @@
 class MailmagasController < ApplicationController
+  before_action :authenticate_user!, only: [:index, :show, :new, :edit, :update, :destroy]
+  before_action :admin_check, only: [:index, :show, :new, :edit, :update, :destroy]
   before_action :set_mailmaga, only: [:show, :edit, :update, :destroy]
 
   # GET /mailmagas
