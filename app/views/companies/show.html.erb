@@ -30,15 +30,7 @@
 	  <hr class="hr-point" />
 	</div>
 	<% if index == 2 || index == 40 || index == 80 -%>
-	  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-	  <ins class="adsbygoogle"
-	       style="display:block"
-	       data-ad-client="ca-pub-8503004762159282"
-	       data-ad-slot="6102149052"
-	       data-ad-format="auto"></ins>
-	  <script>
-	    (adsbygoogle = window.adsbygoogle || []).push({});
-	  </script>
+	  <%= render 'shared/ads' -%>
 	  <hr class="hr-point" />
 	<% end -%>
       <% end -%>
@@ -50,6 +42,7 @@
 <div class="col-xs-12 col-sm-5">
   <div class="hidden-xs">
     <%= render 'emotion', company: @company, good_percent: @emotion_good_percent, bad_percent: @emotion_bad_percent -%>
+    <%= render 'shared/ads' -%>
   </div>
 
   <div class="topword">
