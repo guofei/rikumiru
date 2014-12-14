@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141214121710) do
+ActiveRecord::Schema.define(version: 20141214123152) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,6 +76,12 @@ ActiveRecord::Schema.define(version: 20141214121710) do
 
   add_index "mailmagas", ["company_id"], name: "index_mailmagas_on_company_id", using: :btree
   add_index "mailmagas", ["keyword_id"], name: "index_mailmagas_on_keyword_id", using: :btree
+
+  create_table "main_indices", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "simple_captcha_data", force: true do |t|
     t.string   "key",        limit: 40
