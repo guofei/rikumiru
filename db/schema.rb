@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141215041438) do
+ActiveRecord::Schema.define(version: 20141215064647) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,12 +41,15 @@ ActiveRecord::Schema.define(version: 20141215041438) do
   create_table "companies", force: true do |t|
     t.string   "name"
     t.string   "alice_name"
-    t.integer  "tweet_id",    limit: 8
+    t.integer  "tweet_id",     limit: 8
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "tweet_count"
     t.text     "description"
+    t.integer  "sub_index_id"
   end
+
+  add_index "companies", ["sub_index_id"], name: "index_companies_on_sub_index_id", using: :btree
 
   create_table "hot_keywords", force: true do |t|
     t.integer  "company_id"

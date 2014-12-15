@@ -1,4 +1,6 @@
 # coding: utf-8
+require 'csv'
+
 namespace :indices do
   desc "TODO"
   indices = {
@@ -19,4 +21,49 @@ namespace :indices do
     end
   end
 
+  task reset: :environment do
+    cph = {}
+    CSV.foreach(Rails.root.join('config', 'company.csv')) do |row|
+      indexname = row[1].split("／")[0]
+      indexname = "総合商社" if indexname == "商社（総合）"
+      indexname = "建材・エクステリア" if indexname == "鉱"
+      indexname = "安全・セキュリティ産業" if indexname == "安全・セキュリティ産"
+      indexname = "重電・産業用電気機器" if indexname == "重電・産用電気機器"
+      indexname = "人材関連（派遣・職業紹介・業務請負）" if indexname == "人材関連（派遣・職紹介・務請負）"
+      indexname = "メンテナンス・清掃事業" if indexname == "メンテナンス・清掃事"
+      indexname = indexname.split("専門店（")[1].delete("）") if indexname.include?("専門店（")
+      indexname = indexname.split("商社（")[1].delete("）") if indexname.include?("商社（")
+      indexname = "各種ビジネスサービス" if indexname == "各ビジネスサービス"
+      indexname = "その他商社" if indexname == "商社（建材・エクステリア）"
+      indexname = "メガネ・コンタクト・医療関連" if indexname == "商社（医療機器）"
+      subindex = SubIndex.find_by(name: indexname)
+      if subindex.nil?
+        byebug
+      end
+      cph[row[0]] = subindex
+    end
+    count = 0
+    Company.all.each do |company|
+      cph.each do |k, v|
+        if company.name.include?(k) || k.include?(company.name)
+          company.sub_index = v
+          count += 1
+          puts "#{company.id}, #{v.name}"
+          company.save
+          break
+        end
+        if company.alice_name
+          name = company.alice_name
+          if name.include?(k) || k.include?(name)
+            company.sub_index = v
+            count += 1
+            puts "#{company.id}, #{v.name}"
+            company.save
+            break
+          end
+        end
+      end
+    end
+    puts count
+  end
 end

@@ -3,6 +3,8 @@ class Company < ActiveRecord::Base
   has_many :tweets
   has_many :hot_keywords
   has_many :keywords, -> { uniq }, through: :tweets
+  belongs_to :sub_index
+  delegate :main_index, to: :sub_index
 
   paginates_per 100
 
