@@ -113,7 +113,7 @@ class CompaniesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def company_params
-      params.require(:company).permit(:name, :alice_name, :tweet_id)
+      params.require(:company).permit(:name, :alice_name, :tweet_id, :sub_index_id)
     end
 
     def set_emotion

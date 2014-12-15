@@ -1,29 +1,6 @@
-<%= form_for(@company) do |f| %>
-  <% if @company.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@company.errors.count, "error") %> prohibited this company from being saved:</h2>
-
-      <ul>
-      <% @company.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :alice_name %><br>
-    <%= f.text_field :alice_name %>
-  </div>
-  <div class="field">
-    <%= f.label :tweet_id %><br>
-    <%= f.number_field :tweet_id %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+<%= simple_form_for(@company) do |f| %>
+  <%= f.input :name %>
+  <%= f.input :alice_name %>
+  <%= f.association :sub_index -%>
+  <%= f.button :submit %>
 <% end %>

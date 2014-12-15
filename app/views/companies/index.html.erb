@@ -12,11 +12,16 @@
 <div class="col-xs-12">
   <div class="link-buttons">
     <% @companies.each do |company| -%>
-      <%= link_to "#{company.name} #{company.tweet_count}件", company_path(company), class: "btn btn-info" -%>
-
       <% if can?(:admin, current_user) && show_admin? -%>
+	<%= link_to "#{company.name} #{company.tweet_count}件", company_path(company), class: "btn btn-info" -%>
+	<% if company.sub_index -%>
+	  <%= company.sub_index.name %>
+	<% end -%>
 	<%= link_to 'Edit', edit_company_path(company) %>
 	<%= link_to 'Destroy', company, method: :delete, data: { confirm: 'Are you sure?' } %>
+	<br />
+      <% else -%>
+	<%= link_to "#{company.name} #{company.tweet_count}件", company_path(company), class: "btn btn-info" -%>
       <% end -%>
     <% end -%>
   </div>
