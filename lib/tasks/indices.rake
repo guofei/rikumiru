@@ -37,9 +37,6 @@ namespace :indices do
       indexname = "その他商社" if indexname == "商社（建材・エクステリア）"
       indexname = "メガネ・コンタクト・医療関連" if indexname == "商社（医療機器）"
       subindex = SubIndex.find_by(name: indexname)
-      if subindex.nil?
-        byebug
-      end
       cph[row[0]] = subindex
     end
     count = 0
@@ -52,7 +49,7 @@ namespace :indices do
           company.save
           break
         end
-        if company.alice_name
+        if company.alice_name && company.alice_name.length > 0
           name = company.alice_name
           if name.include?(k) || k.include?(name)
             company.sub_index = v
