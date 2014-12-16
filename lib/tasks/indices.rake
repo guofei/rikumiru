@@ -21,6 +21,17 @@ namespace :indices do
     end
   end
 
+  task fix: :environment do
+    count = 0
+    Company.all.each do |company|
+      if company.sub_index.name == "各種ビジネスサービス"
+        count += 1
+        puts company.id
+      end
+    end
+    puts count
+  end
+
   task reset: :environment do
     cph = {}
     CSV.foreach(Rails.root.join('config', 'company.csv')) do |row|
