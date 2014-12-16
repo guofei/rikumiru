@@ -26,8 +26,9 @@ namespace :indices do
     Company.all.each do |company|
       next if company.sub_index.nil?
       if company.sub_index.name == "各種ビジネスサービス"
+        company.sub_index = nil
+        company.save
         count += 1
-        puts company.id
       end
     end
     puts count
@@ -53,6 +54,7 @@ namespace :indices do
     end
     count = 0
     Company.all.each do |company|
+      next if company.sub_index
       cph.each do |k, v|
         if company.name.include?(k) || k.include?(company.name)
           company.sub_index = v
