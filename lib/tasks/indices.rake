@@ -24,6 +24,7 @@ namespace :indices do
   task fix: :environment do
     count = 0
     Company.all.each do |company|
+      next if company.sub_index.nil?
       if company.sub_index.name == "各種ビジネスサービス"
         count += 1
         puts company.id
