@@ -8,7 +8,11 @@ class CompaniesController < ApplicationController
   # GET /companies
   # GET /companies.json
   def index
-    @companies = Company.rank.where("tweet_count > 0").page params[:page]
+    if can?(:admin, current_user)
+      @companies = Company.rank.page params[:page]
+    else
+      @companies = Company.rank.where("tweet_count > 0").page params[:page]
+    end
   end
 
   # GET /companies/1
