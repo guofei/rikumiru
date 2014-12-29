@@ -102,38 +102,5 @@
       <% end %>
     </div>
   </div>
-
-  <div class="panel panel-primary">
-    <div class="panel-heading">
-      <h4 class="panel-title">
-	<%= fa_icon "comment", text: "コメント" -%>
-      </h4>
-    </div>
-    <div class="panel-body">
-      <% @company.comments.take(100).each_with_index do |comment, i| -%>
-	<div class="media">
-	  <div class="media-body">
-	    <div class="media-heading">
-	      <%= i + 1 -%>. ID: <%= comment.comment_id %>, <small><%= time_ago_in_words comment.created_at -%>
-		<% if can? :admin, current_user -%>
-		  <%= link_to 'Del', comment, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-default btn-xs" %>
-		<% end  -%>
-	      </small>
-	    </div>
-	    <%= simple_format comment.comment -%>
-	  </div>
-	</div>
-	<hr class="hr-point">
-      <% end %>
-
-      <%= simple_form_for Comment.new do |f| -%>
-	<%= f.input :comment, label: false, :input_html => {:rows => 6} %>
-	<%= f.input :commentable_type, as: :hidden, :input_html => { value: @company.class.to_s } %>
-	<%= f.input :commentable_id, as: :hidden, :input_html => { value: @company.id } %>
-	<%= show_simple_captcha %>
-	<%= f.button :submit, "書き込む" %>
-      <% end -%>
-    </div>
-  </div>
 </div>
 
