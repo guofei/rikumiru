@@ -3,6 +3,7 @@ class StaticPagesController < ApplicationController
     @tweets = Tweet.where(useful: true).limit(10).includes(:company)
     @keywords = Keyword.rank.take(20)
     @companies = Company.rank.take(20)
+    @main_indices = MainIndex.all
   end
 
   def update

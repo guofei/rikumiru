@@ -54,23 +54,21 @@
     <div class="panel-heading">
       <h4 class="panel-title">
 	<%= link_to companies_path do -%>
-	  <%= fa_icon "external-link", text: "企業（話題数）" -%>
+	  <%= fa_icon "external-link", text: "企業" -%>
 	<% end -%>
       </h4>
     </div>
 
     <div class="panel-body">
-      <% @companies.each do |c| -%>
+      <% @main_indices.each do |main| -%>
 	<p>
-	  <%= c.name -%>
-	  <strong>
-	    <%= link_to c.tweet_count, company_path(c), class: "pull-right" -%>
-	  </strong>
+	  <%= main.name -%><br />
+	  <% main.sub_indices.take(5).each do |sub| -%>
+	    <%= link_to sub.name, index_path(sub) -%> |
+	  <% end -%>
+	  <%= link_to "もっと見る", companies_path -%>
 	</p>
       <% end -%>
-      <p>
-	<%= link_to "もっと見る", companies_path -%>
-      </p>
     </div>
   </div>
 </div>
