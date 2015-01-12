@@ -3,8 +3,13 @@
 <div class="col-xs-12">
   <div class="header">
     <h2>
-      企業一覧
-      <small><%= t('title') %> - 会社数：<%= Company.count %></small>
+      <% if @sub_index -%>
+	<%= @sub_index.name -%>
+	<small><%= t('title') %> - 会社数：<%= @sub_index.companies.count %></small>
+      <% else -%>
+	全ての企業
+	<small><%= t('title') %> - 会社数：<%= Company.count %></small>
+      <% end -%>
     </h2>
   </div>
 </div>
@@ -61,11 +66,11 @@
       </h4>
     </div>
     <div class="panel-body">
-      <% @main_indices.each do |main| -%>
+      <% @main_indices.includes(:sub_indices).each do |main| -%>
 	<p>
 	<%= main.name -%><br />
 	<% main.sub_indices.each do |sub| -%>
-	  <%= link_to sub.name, "#" -%> |
+	  <%= link_to sub.name, index_path(sub) -%> |
 	<% end -%>
 	</p>
       <% end -%>
