@@ -43,9 +43,9 @@
 	  <%= company.tweet_count -%>件
 	</td>
 	<td>
-	  <% if company.keywords_rank.first -%>
-	    <% keyword = company.keywords_rank.first[0] -%>
-	    <%= link_to keyword.name, company_path(company) + "?k=#{keyword.id}" %>
+	  <% keyword = company.keywords_rank(1)[0] -%>
+	  <% if keyword -%>
+	    <%= link_to keyword[0].name, company_path(company) + "?k=#{keyword[0].id}" %>
 	  <% end -%>
 	</td>
       </tr>

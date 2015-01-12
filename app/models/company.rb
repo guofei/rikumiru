@@ -18,11 +18,14 @@ class Company < ActiveRecord::Base
     end
   end
 
-  def keywords_rank
-    hash = {}
-    keywords.reorder("tweet_count desc").take(200).each do |k|
-      hash[k] = k.tweets_count_with_company self
-    end
-    hash.sort{ |(k1, v1), (k2, v2)| v2 <=> v1 }.take(40).to_h.delete_if {|key, val| val <= 0 }
+  def keywords_rank(n = 40)
+    keywords.reorder("tweet_count desc").take(200).inject({}) do |hash, k|
+      count = k.tweets_count_with_company self
+      if count > 0
+        hash.merge(k => count)
+      else
+        hash
+      end
+    end.sort{ |(k1, v1), (k2, v2)| v2 <=> v1 }.take(n)
   end
 end
