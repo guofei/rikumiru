@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     get 'chart_data', on: :member
     get 'emotion_chart', on: :member
     post 'topword', on: :member
+    resources :sub_indices, only: [:show]
   end
 
   resources :comments

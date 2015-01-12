@@ -9,22 +9,42 @@
   </div>
 </div>
 
-<div class="col-xs-12">
-  <div class="link-buttons">
-    <% @companies.each do |company| -%>
-      <% if can?(:admin, current_user) && show_admin? -%>
-	<%= link_to "#{company.name} #{company.tweet_count}件", company_path(company), class: "btn btn-info" -%>
-	<% if company.sub_index -%>
-	  <%= company.sub_index.name %>
-	<% end -%>
-	<%= link_to 'Edit', edit_company_path(company) %>
-	<%= link_to 'Destroy', company, method: :delete, data: { confirm: 'Are you sure?' } %>
-	<br />
-      <% else -%>
-	<%= link_to "#{company.name} #{company.tweet_count}件", company_path(company), class: "btn btn-info" -%>
+<div class="col-xs-12 col-sm-7">
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+	<th>
+	  企業名
+	</th>
+	<th>
+	  話題数
+	</th>
+	<th>
+	  人気話題
+	</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @companies.each do |company| -%>
+      <tr>
+	<td>
+	  <%= link_to company.name, company_path(company) -%>
+	  <% if can?(:admin, current_user) && show_admin? -%>
+	    <%= link_to 'Edit', edit_company_path(company) %>
+	    <%= link_to 'Destroy', company, method: :delete, data: { confirm: 'Are you sure?' } %>
+	  <% end -%>
+	</td>
+	<td>
+	  <%= company.tweet_count -%>件
+	</td>
+	<td>
+	  <% keyword = company.keywords_rank.first[0] -%>
+	  <%= link_to keyword.name, company_path(company) + "?k=#{keyword.id}" %>
+	</td>
+      </tr>
       <% end -%>
-    <% end -%>
-  </div>
+    </tbody>
+  </table>
   <%= paginate @companies %>
 
   <% if can?(:admin, current_user) && show_admin? -%>
@@ -33,3 +53,22 @@
   <% end -%>
 </div>
 
+<div class="col-xs-12 col-sm-5">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+	<%= fa_icon "list-alt", text: "業界 Index" -%>
+      </h4>
+    </div>
+    <div class="panel-body">
+      <% @main_indices.each do |main| -%>
+	<p>
+	<%= main.name -%><br />
+	<% main.sub_indices.each do |sub| -%>
+	  <%= link_to sub.name, "#" -%> |
+	<% end -%>
+	</p>
+      <% end -%>
+    </div>
+  </div>
+</div>
