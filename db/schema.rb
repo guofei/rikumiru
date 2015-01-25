@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150125062441) do
+ActiveRecord::Schema.define(version: 20150125063353) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -73,7 +73,10 @@ ActiveRecord::Schema.define(version: 20150125062441) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "tweet_count"
+    t.integer  "keyword_index_id"
   end
+
+  add_index "keywords", ["keyword_index_id"], name: "index_keywords_on_keyword_index_id", using: :btree
 
   create_table "mailmagas", force: true do |t|
     t.string   "email"
