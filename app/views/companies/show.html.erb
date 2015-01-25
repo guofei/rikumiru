@@ -45,7 +45,9 @@
     <%= render 'shared/mynaviagent', company: @company -%>
   </div>
 
-  <%= render 'shared/ads' -%>
+  <div class="panel panel-primary">
+    <%= render 'shared/ads' -%>
+  </div>
 
   <div class="hidden-xs">
     <%= render 'emotion', company: @company, good_percent: @emotion_good_percent, bad_percent: @emotion_bad_percent -%>
