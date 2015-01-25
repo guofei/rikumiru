@@ -4,6 +4,7 @@ class StaticPagesController < ApplicationController
     @keywords = Keyword.rank.take(20)
     @companies = Company.rank.take(20)
     @main_indices = MainIndex.all
+    @keyword_indices = KeywordIndex.all
   end
 
   def update

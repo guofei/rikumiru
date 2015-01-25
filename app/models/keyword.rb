@@ -2,6 +2,7 @@ class Keyword < ActiveRecord::Base
   include Redis::Objects
   sorted_set :company_tweet_count
 
+  belongs_to :keyword_index
   has_many :tweets
   has_many :companies, -> { uniq }, through: :tweets
 

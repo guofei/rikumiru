@@ -17,17 +17,21 @@
     </div>
 
     <div class="panel-body">
-      <% @keywords.each do |keyword| -%>
+      <% @keyword_indices.each do |index| -%>
 	<p>
-	  <%= keyword.name -%>
-	  <strong>
-	    <%= link_to keyword.tweet_count, keyword_path(keyword), class: "pull-right" -%>
-	  </strong>
+	  <%= index.name -%><br />
+	  <% index.keywords.each_with_index do |k, i| -%>
+	    <%= link_to keyword_path(k) do -%>
+	      <%= k.name -%> <small><span class="text-muted"><%= k.tweet_count -%></span></small>
+	    <% end -%>
+	    <% if i.odd? -%>
+	      <br/>
+	    <% else -%>
+	      &nbsp;&nbsp;
+	    <% end -%>
+	  <% end -%>
 	</p>
       <% end -%>
-      <p>
-	<%= link_to "もっと見る", keywords_path -%>
-      </p>
     </div>
   </div>
 </div>
