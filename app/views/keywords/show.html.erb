@@ -35,6 +35,8 @@
 </div>
 
 <div class="col-xs-12 col-sm-5">
+  <%= render 'shared/ads' -%>
+
   <div class="panel panel-primary">
     <div class="panel-heading">
       <h4 class="panel-title">
@@ -70,9 +72,8 @@
     </div>
   </div>
 
-  <div class="panel panel-primary">
-    <%= render 'shared/ads' -%>
-    <% if false -%>
+  <% if false -%>
+    <div class="panel panel-primary">
       <div class="panel-heading">
 	<h4 class="panel-title">
 	  <%= fa_icon "send", text: "メルマガ" -%>
@@ -88,7 +89,7 @@
 	  <%= f.button :submit, class: "btn btn-primary" %>
 	<% end %>
       </div>
-    <% end -%>
-  </div>
+    </div>
+  <% end -%>
 </div>
 
