@@ -18,8 +18,8 @@
 
     <div class="panel-body">
       <% @keyword_indices.each do |index| -%>
+	<h4><%= index.name -%></h4>
 	<p>
-	  <%= index.name -%><br />
 	  <% index.keywords.each_with_index do |k, i| -%>
 	    <%= link_to keyword_path(k) do -%>
 	      <%= k.name -%> <small><span class="text-muted"><%= k.tweet_count -%></span></small>
@@ -27,7 +27,7 @@
 	    <% if i.odd? -%>
 	      <br/>
 	    <% else -%>
-	      &nbsp;&nbsp;
+	      &nbsp;&nbsp;&nbsp;
 	    <% end -%>
 	  <% end -%>
 	</p>
