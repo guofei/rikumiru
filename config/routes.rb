@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :keyword_indices
+
   devise_for :users
 
   get 'users/set_admin_cookie'
