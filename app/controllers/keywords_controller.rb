@@ -7,6 +7,7 @@ class KeywordsController < ApplicationController
   # GET /keywords.json
   def index
     @keywords = Keyword.rank.page params[:page]
+    @keyword_indices = KeywordIndex.all
   end
 
   # GET /keywords/1

@@ -34,7 +34,7 @@ class Keyword < ActiveRecord::Base
     end
   end
 
-  def hot_companies
+  def hot_companies()
     Rails.cache.fetch("kw/#{id}/htcp") do
       hash = {}
       companies.reorder("tweet_count desc").take(200).each do |com|
