@@ -14,7 +14,7 @@
       <tr>
 	<th>話題キーワード</th>
 	<th>話題数</th>
-	<th>人気企業</th>
+	<th>話題の企業</th>
       </tr>
     </thead>
     <tbody>
@@ -31,9 +31,9 @@
 	    <%= keyword.tweet_count -%>件
 	  </td>
 	  <td>
-	    <% company = keyword.hot_companies[0] -%>
+	    <% company = keyword.hot_companies.first.to_a[0] -%>
 	    <% if company -%>
-	      <%= link_to company[0].name, keyword_path(keyword) + "?c=#{company[0].id}" %>
+	      <%= link_to company.name, keyword_path(keyword) + "?c=#{company.id}" %>
 	    <% end -%>
 	  </td>
 	</tr>
