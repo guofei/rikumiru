@@ -6,7 +6,7 @@ class Keyword < ActiveRecord::Base
   has_many :tweets
   has_many :companies, -> { uniq }, through: :tweets
 
-  paginates_per 100
+  paginates_per 30
 
   before_destroy { tweets.clear }
   scope :rank, -> { order("tweet_count desc") }
