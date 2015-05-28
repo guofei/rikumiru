@@ -19,6 +19,7 @@
     <thead>
       <tr>
 	<th>企業名</th>
+	<th>業界</th>
 	<th>話題数</th>
 	<th>人気話題</th>
       </tr>
@@ -28,6 +29,11 @@
 	<tr>
 	  <td>
 	    <%= link_to company.name, company_path(company) -%>
+	    <% if company.sub_index.exists? -%>
+	      <%= link_to company.sub_index.name, index_path(company.sub_index) -%>
+	    <% else -%>
+	      -
+	    <% end -%>
 	    <% if can?(:admin, current_user) && show_admin? -%>
 	      <%= link_to 'Edit', edit_company_path(company) %>
 	      <%= link_to 'Destroy', company, method: :delete, data: { confirm: 'Are you sure?' } %>
