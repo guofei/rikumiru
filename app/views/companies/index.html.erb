@@ -29,10 +29,10 @@
 	<tr>
 	  <td>
 	    <%= link_to company.name, company_path(company) -%>
-	    <% if company.sub_index.exists? -%>
-	      <%= link_to company.sub_index.name, index_path(company.sub_index) -%>
-	    <% else -%>
+	    <% if company.sub_index.nil? -%>
 	      -
+	    <% else -%>
+	      <%= link_to company.sub_index.name, index_path(company.sub_index) -%>
 	    <% end -%>
 	    <% if can?(:admin, current_user) && show_admin? -%>
 	      <%= link_to 'Edit', edit_company_path(company) %>
