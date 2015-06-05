@@ -1,7 +1,5 @@
 <div class="media">
-  <% if tweet.profile_img -%>
-    <%= image_tag tweet.profile_img, class: "thumbnail pull-left col-xs-2 col-sm-1" -%>
-  <% end -%>
+  <%= image_tag img_url(tweet), class: "thumbnail pull-left col-xs-2 col-sm-1", onerror: "this.src='#{asset_path('default_profile.png')}';" -%>
   <div class="media-body">
     <div class="media-heading">
       <%= link_to "@#{tweet.username}", "https://twitter.com/#{tweet.username}/status/#{tweet.id}" -%> 
