@@ -21,6 +21,7 @@ class TweetsController < ApplicationController
     @tweets = @tweets.where("company_id <= #{params[:company].to_i}") if params[:company]
     @tweets = @tweets.where("text like '%#{params[:keyword]}%'") if params[:keyword]
     @tweets = @tweets.where("length(text) < ?", params[:maxlen].to_i) if params[:maxlen]
+    @tweets = @tweets.where("length(text) >= ?", params[:minlen].to_i) if params[:minlen]
 
     @count = @tweets.count
     @tweets = @tweets.includes(:company).page params[:page]
