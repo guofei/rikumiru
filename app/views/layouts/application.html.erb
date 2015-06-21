@@ -33,6 +33,7 @@
             <li class="active"><%= link_to root_path do fa_icon "home", text: "Home" end %></li>
             <li><%= link_to keywords_path do fa_icon "rocket", text: "話題" end -%></li>
             <li><%= link_to companies_path do fa_icon "building", text: "企業" end -%></li>
+	    <li><%= link_to page_path('ads') do fa_icon "star", text: "転職サイト比較(New!)" end -%></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
 	    <% if user_signed_in? -%>
