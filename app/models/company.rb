@@ -19,6 +19,7 @@ class Company < ActiveRecord::Base
   end
 
   def keywords_rank(n = 40)
+    # slow!
     keywords.reorder("tweet_count desc").take(200).inject({}) do |hash, k|
       count = k.tweets_count_with_company self
       if count > 0

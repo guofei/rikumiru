@@ -28,7 +28,7 @@ class Keyword < ActiveRecord::Base
     if company_tweet_count.member? company.id
       company_tweet_count[company.id].to_i
     else
-      count = tweets.where(useful: true).where(company: company).count
+      count = tweets.where(useful: true).where(company: company).select("id").count
       company_tweet_count[company.id] = count
       count
     end

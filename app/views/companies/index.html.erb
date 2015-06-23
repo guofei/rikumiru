@@ -5,10 +5,10 @@
     <h2>
       <% if @sub_index -%>
 	<%= @sub_index.name -%>
-	<small><%= t('title') %> - 会社数：<%= @sub_index.companies.count %></small>
+	<small><%= t('title') %> - 会社数：<%= @sub_index.companies.select("id").count %></small>
       <% else -%>
 	全ての企業
-	<small><%= t('title') %> - 会社数：<%= Company.count %></small>
+	<small><%= t('title') %> - 会社数：<%= Company.select("id").count %></small>
       <% end -%>
     </h2>
   </div>
@@ -25,7 +25,7 @@
       </tr>
     </thead>
     <tbody>
-      <% @companies.each do |company| -%>
+      <% @companies.includes(:sub_index).each do |company| -%>
 	<tr>
 	  <td>
 	    <%= link_to company.name, company_path(company) -%>
