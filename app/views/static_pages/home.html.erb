@@ -17,7 +17,7 @@
     </div>
 
     <div class="panel-body">
-      <% @keyword_indices.each do |index| -%>
+      <% @keyword_indices.includes(:keywords).each do |index| -%>
 	<h4><%= index.name -%></h4>
 	<p>
 	  <% index.keywords.each_with_index do |k, i| -%>
