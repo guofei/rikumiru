@@ -68,7 +68,7 @@ gem 'font-awesome-rails', '~> 4.2.0.0'
 gem 'kaminari', '~> 0.16.1'
 gem 'kaminari-i18n', '~> 0.2.0'
 
-gem 'rails-i18n', '~> 4.0.2'
+gem 'rails-i18n', '~> 4.0.4'
 
 gem 'devise', '~> 3.2.4'
 gem 'devise-i18n', '~> 0.10.4'
