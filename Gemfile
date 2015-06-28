@@ -80,7 +80,7 @@ gem 'fb-channel-file'
 gem 'ransack', '~> 1.2.3'
 
 gem 'acts_as_commentable'
-gem 'simple_captcha2', require: 'simple_captcha'
+gem 'simple_captcha2', '~> 0.3.4'
 
 gem 'simple_form', '~> 3.1.0.rc2'
 
