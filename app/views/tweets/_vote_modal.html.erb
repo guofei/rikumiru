@@ -1,0 +1,25 @@
+<% if tweet -%>
+  <div class="modal fade voteModal" tabindex="-1" role="dialog" aria-labelledby="userVoteModal">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">ご協力お願いします</h4>
+        </div>
+        <div class="modal-body">
+          <p>ツイート内容：
+            <br/>
+            <%= tweet.text %>
+          </p>
+          <br/>
+          このツイートは就職と関係ありますか？
+          <%= link_to "Yes", vote_tweet_path(tweet) + "?up=1", method: :put, remote: true, class: "btn btn-primary", 'data-dismiss' => "modal" -%>
+          <%= link_to "No", vote_tweet_path(tweet) + "?down=1", method: :put, remote: true, class: "btn btn-primary", 'data-dismiss' => "modal" -%>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end -%>

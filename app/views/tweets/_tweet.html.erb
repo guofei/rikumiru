@@ -2,16 +2,16 @@
   <%= image_tag img_url(tweet), class: "thumbnail pull-left col-xs-2 col-sm-1", onerror: "this.src='#{asset_path('default_profile.png')}';" -%>
   <div class="media-body">
     <div class="media-heading">
-      <%= link_to "@#{tweet.username}", "https://twitter.com/#{tweet.username}/status/#{tweet.id}" -%> 
+      <%= link_to "@#{tweet.username}", "https://twitter.com/#{tweet.username}/status/#{tweet.id}" -%>
       <small>
-	<%= time_ago_in_words tweet.created_at %>
-	<% if show_company -%>
-	  <%= link_to tweet.company.name, company_path(tweet.company) -%>
-	<% else -%>
-	  <% if tweet.keyword -%>
-	    <%= link_to tweet.keyword.name, keyword_path(tweet.keyword) -%>
-	  <% end -%>
-	<% end -%>
+        <%= time_ago_in_words tweet.created_at %>
+        <% if show_company -%>
+          <%= link_to tweet.company.name, company_path(tweet.company) -%>
+        <% else -%>
+          <% if tweet.keyword -%>
+            <%= link_to tweet.keyword.name, keyword_path(tweet.keyword) -%>
+          <% end -%>
+        <% end -%>
       </small>
     </div>
     <%= tweet.text -%>

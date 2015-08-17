@@ -11,8 +11,10 @@ class Tweet < ActiveRecord::Base
 
   paginates_per 100
 
-  def self.period_count_array(from = 31.days.ago.beginning_of_day, to = Date.yesterday.end_of_day)
-    unscoped.where(useful: true).where(created_at: from..to).group('date(created_at)').count
+  class << self
+    def period_count_array(from = 31.days.ago.beginning_of_day, to = Date.yesterday.end_of_day)
+      unscoped.where(useful: true).where(created_at: from..to).group('date(created_at)').count
+    end
   end
 
   def change_tweet_count_before_create

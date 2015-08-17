@@ -17,3 +17,5 @@ $ ->
                 $('.remove-p').show()
                 $('.bayes').hide()
                 $('.unuseful').hide()
+
+        $('.voteModal').modal('toggle')

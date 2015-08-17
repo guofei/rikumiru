@@ -6,8 +6,8 @@ class TweetsController < ApplicationController
   # GET /tweets
   # GET /tweets.json
   def userfilter
-    @tweets = Tweet.where(useful: true).where("user_vote < 0").includes(:company).page params[:page]
-    @count = Tweet.where(useful: true).where("user_vote < 0").count
+    @tweets = Tweet.where("user_vote < 0").includes(:company).page params[:page]
+    @count = Tweet.where("user_vote < 0").count
   end
 
   def index

@@ -9,6 +9,8 @@
   </div>
 </div>
 
+<%= render partial: 'tweets/vote_modal', locals: { tweet: need_vote(@tweets) } -%>
+
 <div class="col-xs-12 col-sm-7">
   <div class="visible-xs-block">
     <%= render 'emotion_mobile', company: @company, good_percent: @emotion_good_percent, bad_percent: @emotion_bad_percent -%>
@@ -18,22 +20,22 @@
   <div class="panel panel-primary">
     <div class="panel-heading">
       <h4 class="panel-title">
-	<%= fa_icon "twitter", text: "ツイート", right: true -%>
+	    <%= fa_icon "twitter", text: "ツイート", right: true -%>
       </h4>
     </div>
     <div class="panel-body">
       <% prev_text = "" -%>
       <% @tweets.includes(:keyword).each_with_index do |tweet, index| -%>
-	<% next if similarity?(prev_text, tweet.text) -%>
-	<% prev_text = tweet.text -%>
-	<div class="<%= tweet.id %>">
-	  <%= render partial: 'tweets/tweet', locals: { tweet: tweet, show_company: false } -%>
-	  <hr class="hr-point" />
-	</div>
-	<% if index == 2 || index == 40 -%>
-	  <%= render 'shared/ads' -%>
-	  <hr class="hr-point" />
-	<% end -%>
+	    <% next if similarity?(prev_text, tweet.text) -%>
+	    <% prev_text = tweet.text -%>
+	    <div class="<%= tweet.id %>">
+	      <%= render partial: 'tweets/tweet', locals: { tweet: tweet, show_company: false } -%>
+	      <hr class="hr-point" />
+	    </div>
+	    <% if index == 2 || index == 40 -%>
+	      <%= render 'shared/ads' -%>
+	      <hr class="hr-point" />
+	    <% end -%>
       <% end -%>
       <%= paginate @tweets %>
     </div>
