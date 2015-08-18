@@ -13,6 +13,7 @@
           </p>
           <br/>
           このツイートは就職と関係ありますか？
+          <br/>
           <%= link_to "Yes", vote_tweet_path(tweet) + "?up=1", method: :put, remote: true, class: "btn btn-primary", 'data-dismiss' => "modal" -%>
           <%= link_to "No", vote_tweet_path(tweet) + "?down=1", method: :put, remote: true, class: "btn btn-primary", 'data-dismiss' => "modal" -%>
         </div>
